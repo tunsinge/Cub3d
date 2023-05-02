@@ -6,7 +6,7 @@
 #    By: mdoumi <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/02 15:33:23 by mdoumi            #+#    #+#              #
-#    Updated: 2023/05/02 16:48:33 by mdoumi           ###   ########.fr        #
+#    Updated: 2023/05/02 18:57:11 by mdoumi           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,7 +19,9 @@ SRCS =	./src/main.c \
 		./src/error.c \
 		./src/parsing.c \
 		./src/GNL/get_next_line_bonus.c \
-		./src/GNL/get_next_line_utils_bonus.c
+		./src/GNL/get_next_line_utils_bonus.c \
+		./src/check_map.c \
+		./src/quit.c
 INC = -I ./include
 OBJS = ${SRCS:.c=.o}
 FLAGS = -Wall -Wextra -Werror -g3
