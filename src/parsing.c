@@ -16,20 +16,34 @@ char	**map_to_tab(char *path)
 {
 	int		fd;
 	char	*buff;
-	char	**map = NULL;
+	char	**map;
 
 	fd = open(path, O_RDWR);
 	if (fd == -1)
 		return (error(OPEN_ERROR));
-
+	map = malloc(sizeof(char *));
+	map[0] = NULL;
 	buff = get_next_line(fd);
 	while (buff != NULL)
 	{
-		printf("%s", buff);
+		map = append_to_map(buff, map);
 		free(buff);
 		buff = get_next_line(fd);
 	}
-	free(buff);
-
 	return (map);
+}
+
+char	**append_to_map(char *line, char **map)
+{
+	char	**map_tmp;
+	int		i;
+
+	map_tmp = malloc(sizeof(map) + (2 * sizeof(char *)));
+	i = -1;
+	while (map[++i])
+		map_tmp = map;
+	map_tmp[i] = ft_substr(line, 0, ft_strlen(line) - 1);
+	map_tmp[i][ft_strlen(map_tmp[i])] = '\0';
+	map_tmp[++i] = NULL;
+	return (map_tmp);
 }

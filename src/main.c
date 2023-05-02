@@ -35,11 +35,18 @@ mlx_image_t	*fill(mlx_t *mlx, int w, int h, uint32_t color)
 
 int	main(int ac, char **av)
 {
+	char **map;
+
 	if (ac != 2)
 		return ((printf("Error\nArguments are not valid.\n"), 0));
 	check_map(av);
+	map = map_to_tab("./map.cub");
 
-	map_to_tab("./map.cub");
+	for (int i = 0; map[i]; i++) {
+		for (int j = 0; map[i][j]; j++)
+			printf("%c", map[i][j]);
+		printf("\n");
+	}
 
 	//mlx_t	*mlx;
 
