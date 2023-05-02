@@ -6,6 +6,7 @@
 *.ko
 *.obj
 *.elf
+cub3D
 
 # Linker output
 *.ilk
