@@ -8,6 +8,9 @@
 *.elf
 cub3D
 
+# Maps
+*.cub
+
 # Linker output
 *.ilk
 *.map
