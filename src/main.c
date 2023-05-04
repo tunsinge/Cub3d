@@ -6,7 +6,7 @@
 /*   By: mdoumi <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/01 22:57:56 by mdoumi            #+#    #+#             */
-/*   Updated: 2023/05/04 10:51:32 by mdoumi           ###   ########.fr       */
+/*   Updated: 2023/05/04 11:05:33 by mdoumi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,33 @@ void	init_(t_cub3d *uwu, char **av)
 	check_map(uwu->map);
 
 	uwu->tab = tab_to_struct(uwu);
+	uwu->case_size = 64;
 	uwu->mlx = mlx_init(1080, 720, "cub3d", true);
+}
+
+mlx_image_t	*color_chart(t_cub3d *uwu, char value)
+{
+	int	size;
+
+	size = uwu->case_size - 4;
+	if (value == '1')
+		return (fill(uwu->mlx, size, size, CYA));
+	if (value == '0')
+		return (fill(uwu->mlx, size, size, WHI));
+	if (value == 'N')
+		return (fill(uwu->mlx, size, size, BLU));
+	if (value == 'S')
+		return (fill(uwu->mlx, size, size, GRE));
+	if (value == 'E')
+		return (fill(uwu->mlx, size, size, RED));
+	if (value == 'W')
+		return (fill(uwu->mlx, size, size, PIN));
+	return (NULL);
+}
+
+int get_rgba(int r, int g, int b, int a)
+{
+    return (r << 24 | g << 16 | b << 8 | a);
 }
 
 void	render(t_cub3d *uwu)
@@ -88,11 +114,8 @@ void	render(t_cub3d *uwu)
 		j = 0;
 		while (uwu->tab[i][j])
 		{
-			if (uwu->tab[i][j]->value == '1')
-				uwu->tab[i][j]->img = fill(uwu->mlx, 60, 60, RED);
-			else
-				uwu->tab[i][j]->img = fill(uwu->mlx, 60, 60, WHI);
-			mlx_image_to_window(uwu->mlx, uwu->tab[i][j]->img, j*64, i*64);
+			uwu->tab[i][j]->img = color_chart(uwu, uwu->tab[i][j]->value);
+			mlx_image_to_window(uwu->mlx, uwu->tab[i][j]->img, j*uwu->case_size, i*uwu->case_size);
 			j++;
 		}
 		i++;
