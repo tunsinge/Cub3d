@@ -25,6 +25,7 @@
 # define ETRANGER_ERROR "Error\nInvalid character in map.\n"
 
 int		ft_strlen(char *str);
+int		ft_strrlen(char **str);
 void	check_map(char **map);
 char	*ft_substr(char *s, int start, int len);
 int		ft_strcmp(char *s1, char *s2);
