@@ -21,3 +21,13 @@ int	ft_strlen(char *str)
 		i++;
 	return (i);
 }
+
+int	ft_strrlen(char **str)
+{
+	int	i;
+
+	i = 0;
+	while (str[i])
+		i++;
+	return (i);
+}
