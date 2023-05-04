@@ -6,7 +6,7 @@
 /*   By: mdoumi <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/02 16:33:53 by mdoumi            #+#    #+#             */
-/*   Updated: 2023/05/04 09:52:05 by mdoumi           ###   ########.fr       */
+/*   Updated: 2023/05/04 11:12:25 by mdoumi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ char	**append_to_map(char *line, char **map)
 
 void	parse_textures(t_cub3d *uwu, int fd)
 {
+	(void)uwu;
 	char	*line;
 	char	**fields;
 	int		nb_parsed;
