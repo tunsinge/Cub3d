@@ -32,11 +32,16 @@ void	key_hook(mlx_key_data_t keydata, void *param)
 
 void	init_(t_cub3d *uwu, char **av)
 {
+	uwu->textures = malloc(sizeof(t_textures));
+	uwu->textures->texture_no = NULL;
+	uwu->textures->texture_so = NULL;
+	uwu->textures->texture_we = NULL;
+	uwu->textures->texture_ea = NULL;
+	uwu->textures->color_fl = 0;
+	uwu->textures->color_ce = 0;
 	check_map_path(av);
-
 	uwu->map = parse_map(uwu, av[1]);
 	check_map(uwu->map);
-
 	uwu->tab = tab_to_struct(uwu);
 	uwu->case_size = 64;
 	get_pp(uwu);

@@ -59,33 +59,34 @@ typedef struct s_cub3d
 	int			case_size;
 	int			player_size;
 	char		**map;
-	t_textures	textures;
+	t_textures	*textures;
 	mlx_t		*mlx;
 	mlx_image_t	*player_img;
 	t_case		***tab;
 }	t_cub3d;
 
-typedef	struct
-
-int		ft_strlen(char *str);
-int		ft_strrlen(char **str);
-void	check_map(char **map);
-char	*ft_substr(char *s, int start, int len);
-int		ft_strcmp(char *s1, char *s2);
-char	**parse_map(t_cub3d *uwu, char *path);
-void	*error(char *code);
-char	**append_to_map(char *line, char **map);
-void	quit_program(void);
-void	parse_textures(t_cub3d *uwu, int fd);
-char	**ft_split(char const *str, char c);
-char	*ft_strdup(char *s1);
+int			ft_strlen(char *str);
+int			ft_strrlen(char **str);
+void		check_map(char **map);
+char		*ft_substr(char *s, int start, int len);
+int			ft_strcmp(char *s1, char *s2);
+char		**parse_map(t_cub3d *uwu, char *path);
+void		*error(char *code);
+char		**append_to_map(char *line, char **map);
+void		quit_program(void);
+void		parse_textures(t_cub3d *uwu, int fd);
+char		**ft_split(char const *str, char c);
+char		*ft_strdup(char *s1);
 mlx_image_t	*fill(mlx_t *mlx, int w, int h, uint32_t color);
-void	render(t_cub3d *uwu);
+void		render(t_cub3d *uwu);
 mlx_image_t	*color_chart(t_cub3d *uwu, char value);
-void	render_player(t_cub3d *uwu);
-int get_rgba(int r, int g, int b, int a);
-void	get_pp(t_cub3d *uwu);
-void	check_map_path(char **av);
-t_case	***tab_to_struct(t_cub3d *uwu);
+void		render_player(t_cub3d *uwu);
+int			get_rgba(int r, int g, int b, int a);
+void		get_pp(t_cub3d *uwu);
+void		check_map_path(char **av);
+t_case		***tab_to_struct(t_cub3d *uwu);
+int			ft_atoi(char *str);
+void		store_texture(t_cub3d *uwu, char **fields);
+char		*ft_strdupnonl(char *s1);
 
 #endif // CUB3D_H
