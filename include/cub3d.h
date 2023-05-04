@@ -6,7 +6,7 @@
 /*   By: mdoumi <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/02 17:01:31 by ^@^ Foxan ^       #+#    #+#             */
-/*   Updated: 2023/05/02 18:56:53 by mdoumi           ###   ########.fr       */
+/*   Updated: 2023/05/04 10:03:14 by mdoumi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,21 @@
 # define OPEN_ERROR "Error\nOpen failed.\n"
 # define INV_ARGS "Error\n1 Argument is required.\n"
 # define ETRANGER_ERROR "Error\nInvalid character in map.\n"
+
+typedef struct s_case
+{
+	char	value;
+}	t_case;
+
+typedef	struct s_cub3d
+{
+	int		i;
+	int		j;
+	char	**map;
+	mlx_t	*mlx;
+	t_case	***tab;
+}	t_cub3d;
+
 
 int		ft_strlen(char *str);
 int		ft_strrlen(char **str);

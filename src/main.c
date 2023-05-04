@@ -6,7 +6,7 @@
 /*   By: mdoumi <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/01 22:57:56 by mdoumi            #+#    #+#             */
-/*   Updated: 2023/05/02 18:56:06 by mdoumi           ###   ########.fr       */
+/*   Updated: 2023/05/04 10:05:25 by mdoumi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,38 +43,18 @@ void	key_hook(mlx_key_data_t keydata, void *param)
 
 int	main(int ac, char **av)
 {
-	int		i;
-	int		j;
-	mlx_t	*mlx;
-	mlx_image_t	*tmp;
-	char	**map;
+	t_cub3d	*uwu;
 
 	if (ac != 2)
 		return ((error(INV_ARGS), 1));
 	check_map_path(av);
 
+	uwu = malloc(sizeof(t_cub3d));
 	//Parser le debut
+	uwu->map = map_to_tab(av[1]);
+	check_map(uwu->map);
 
-	map = map_to_tab(av[1]);
-	check_map(map);
-
-	mlx = mlx_init(1080, 720, "cub3d", true);
-	i = 0;
-	while (map[i])
-	{
-		j = 0;
-		while (map[i][j])
-		{
-			if (map[i][j] == '1')
-				tmp = fill(mlx, 60, 60, 0x00FFFFFF);
-			else
-				tmp = fill(mlx, 60, 60, 0xFFFFFFFF);
-			mlx_image_to_window(mlx, tmp, j*64, i*64);
-			j++;
-		}
-		i++;
-	}
-
-	mlx_key_hook(mlx, &key_hook, NULL);
-	mlx_loop(mlx);
+	uwu->mlx = mlx_init(1080, 720, "cub3d", true);
+	mlx_key_hook(uwu->mlx, &key_hook, NULL);
+	mlx_loop(uwu->mlx);
 }

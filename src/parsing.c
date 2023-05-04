@@ -6,7 +6,7 @@
 /*   By: mdoumi <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/02 16:33:53 by mdoumi            #+#    #+#             */
-/*   Updated: 2023/05/04 09:47:46 by mdoumi           ###   ########.fr       */
+/*   Updated: 2023/05/04 09:52:05 by mdoumi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,13 +38,13 @@ char	**append_to_map(char *line, char **map)
 	char	**map_tmp;
 	int		i;
 
-	//Regler ce malloc
-	map_tmp = malloc(sizeof(char *) * (ft_strrlen(map) + 1));
+	map_tmp = malloc(sizeof(char *) * (ft_strrlen(map) + 2));
 	i = -1;
 	while (map[++i])
 		map_tmp[i] = map[i];
 	map_tmp[i] = ft_substr(line, 0, ft_strlen(line) - 1);
 	map_tmp[i][ft_strlen(map_tmp[i])] = '\0';
 	map_tmp[++i] = NULL;
+	free(map);
 	return (map_tmp);
 }
