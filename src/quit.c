@@ -12,7 +12,7 @@
 
 #include "cub3d.h"
 
-void	quit_program()
+void	quit_program(void)
 {
 	exit(0);
 }

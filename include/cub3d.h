@@ -30,6 +30,7 @@
 # define OPEN_ERROR "Error\nOpen failed.\n"
 # define INV_ARGS "Error\n1 Argument is required.\n"
 # define ETRANGER_ERROR "Error\nInvalid character in map.\n"
+# define INVALID_LINE "Error\nInvalid line in file"
 
 typedef struct s_case
 {
@@ -37,14 +38,25 @@ typedef struct s_case
 	mlx_image_t	*img;
 }	t_case;
 
-typedef	struct s_cub3d
+typedef struct s_textures
 {
-	int		i;
-	int		j;
+	char	*texture_no;
+	char	*texture_so;
+	char	*texture_ea;
+	char	*texture_we;
+	int		color_fl;
+	int		color_ce;
+}	t_textures;
+
+typedef struct s_cub3d
+{
+	int			i;
+	int			j;
+	char		**map;
+	t_textures	textures;
+	mlx_t		*mlx;
+	t_case		***tab;
 	int		case_size;
-	char	**map;
-	mlx_t	*mlx;
-	t_case	***tab;
 }	t_cub3d;
 
 
@@ -53,9 +65,12 @@ int		ft_strrlen(char **str);
 void	check_map(char **map);
 char	*ft_substr(char *s, int start, int len);
 int		ft_strcmp(char *s1, char *s2);
-char	**map_to_tab(char *path);
+char	**parse_map(t_cub3d *uwu, char *path);
 void	*error(char *code);
 char	**append_to_map(char *line, char **map);
-void	quit_program();
+void	quit_program(void);
+void	parse_textures(t_cub3d *uwu, int fd);
+char	**ft_split(char const *str, char c);
+char	*ft_strdup(char *s1);
 
 #endif // CUB3D_H

@@ -133,7 +133,6 @@ int	main(int ac, char **av)
 	init_(uwu, av);
 
 	render(uwu);
-
 	mlx_key_hook(uwu->mlx, &key_hook, NULL);
 	mlx_loop(uwu->mlx);
 }
