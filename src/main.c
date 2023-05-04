@@ -70,7 +70,7 @@ void	init_(t_cub3d *uwu, char **av)
 {
 	check_map_path(av);
 
-	uwu->map = map_to_tab(av[1]);
+	uwu->map = parse_map(av[1]);
 	check_map(uwu->map);
 
 	uwu->tab = tab_to_struct(uwu);
