@@ -21,7 +21,8 @@ SRCS =	./src/main.c \
 		./src/GNL/get_next_line_bonus.c \
 		./src/GNL/get_next_line_utils_bonus.c \
 		./src/check_map.c \
-		./src/quit.c
+		./src/quit.c \
+		./src/ft_split.c
 INC = -I ./include
 OBJS = ${SRCS:.c=.o}
 FLAGS = -Wall -Wextra -Werror -g3

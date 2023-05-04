@@ -48,12 +48,10 @@ int	main(int ac, char **av)
 	if (ac != 2)
 		return ((error(INV_ARGS), 1));
 	check_map_path(av);
-
 	uwu = malloc(sizeof(t_cub3d));
 	//Parser le debut
-	uwu->map = map_to_tab(av[1]);
+	uwu->map = parse_map(uwu, av[1]);
 	check_map(uwu->map);
-
 	uwu->mlx = mlx_init(1080, 720, "cub3d", true);
 	mlx_key_hook(uwu->mlx, &key_hook, NULL);
 	mlx_loop(uwu->mlx);
