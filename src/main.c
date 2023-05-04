@@ -6,7 +6,7 @@
 /*   By: mdoumi <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/01 22:57:56 by mdoumi            #+#    #+#             */
-/*   Updated: 2023/05/04 11:05:33 by mdoumi           ###   ########.fr       */
+/*   Updated: 2023/05/04 11:11:18 by mdoumi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ void	init_(t_cub3d *uwu, char **av)
 {
 	check_map_path(av);
 
-	uwu->map = map_to_tab(av[1]);
+	uwu->map = parse_map(uwu, av[1]);
 	check_map(uwu->map);
 
 	uwu->tab = tab_to_struct(uwu);
