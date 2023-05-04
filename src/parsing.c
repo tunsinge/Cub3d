@@ -25,6 +25,8 @@ char	**parse_map(t_cub3d *uwu, char *path)
 	parse_textures(uwu, fd);
 	map[0] = NULL;
 	buff = get_next_line(fd);
+	while (buff[0] == '\n')
+		buff = get_next_line(fd);
 	while (buff != NULL)
 	{
 		map = append_to_map(buff, map);
@@ -52,7 +54,6 @@ char	**append_to_map(char *line, char **map)
 
 void	parse_textures(t_cub3d *uwu, int fd)
 {
-	(void)uwu;
 	char	*line;
 	char	**fields;
 	int		nb_parsed;
@@ -66,22 +67,49 @@ void	parse_textures(t_cub3d *uwu, int fd)
 			fields = ft_split(line, ' ');
 			if (ft_strrlen(fields) != 2)
 				return ((void)error(INVALID_LINE), quit_program());
+			store_texture(uwu, fields);
 			nb_parsed++;
 		}
 		free(line);
 	}
 }
 
+void	store_color(t_cub3d *uwu, char **fields)
+{
+	char	**color;
+
+	if (ft_strcmp(fields[0], "F") == 0 && !uwu->textures->color_fl)
+	{
+		color = ft_split(fields[1], ',');
+		if (ft_strrlen(color) != 3)
+			return ((void)error(INVALID_LINE), quit_program());
+		uwu->textures->color_fl = get_rgba(ft_atoi(color[0]), ft_atoi(color[1]),
+				ft_atoi(color[2]), 255);
+	}
+	else if (ft_strcmp(fields[0], "C") == 0 && !uwu->textures->color_ce)
+	{
+		color = ft_split(fields[1], ',');
+		if (ft_strrlen(color) != 3)
+			return ((void)error(INVALID_LINE), quit_program());
+		uwu->textures->color_ce = get_rgba(ft_atoi(color[0]), ft_atoi(color[1]),
+				ft_atoi(color[2]), 255);
+	}
+	else
+		return ((void)error(INVALID_LINE), quit_program());
+}
+
 void	store_texture(t_cub3d *uwu, char **fields)
 {
-	if (ft_strcmp(fields[0], "NO") == 0)
-		uwu->textures.texture_no = ft_strdup(fields[0]);
-	if (ft_strcmp(fields[0], "SO") == 0)
-		uwu->textures.texture_so = ft_strdup(fields[0]);
-	if (ft_strcmp(fields[0], "EA") == 0)
-		uwu->textures.texture_ea = ft_strdup(fields[0]);
-	if (ft_strcmp(fields[0], "WE") == 0)
-		uwu->textures.texture_we = ft_strdup(fields[0]);
+	if (ft_strcmp(fields[0], "NO") == 0 && !uwu->textures->texture_no)
+		uwu->textures->texture_no = ft_strdupnonl(fields[1]);
+	else if (ft_strcmp(fields[0], "SO") == 0 && !uwu->textures->texture_so)
+		uwu->textures->texture_so = ft_strdupnonl(fields[1]);
+	else if (ft_strcmp(fields[0], "EA") == 0 && !uwu->textures->texture_ea)
+		uwu->textures->texture_ea = ft_strdupnonl(fields[1]);
+	else if (ft_strcmp(fields[0], "WE") == 0 && !uwu->textures->texture_we)
+		uwu->textures->texture_we = ft_strdupnonl(fields[1]);
+	else
+		store_color(uwu, fields);
 }
 
 t_case	***tab_to_struct(t_cub3d *uwu)
