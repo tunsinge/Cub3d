@@ -6,7 +6,7 @@
 /*   By: mdoumi <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/02 17:01:31 by ^@^ Foxan ^       #+#    #+#             */
-/*   Updated: 2023/05/04 12:36:33 by mdoumi           ###   ########.fr       */
+/*   Updated: 2023/05/04 14:57:14 by mdoumi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # include <stdlib.h>
 # include <fcntl.h>
 # include <unistd.h>
+# include <math.h>
 # include "get_next_line_bonus.h"
 # include "../MLX42/include/MLX42/MLX42.h"
 
@@ -65,7 +66,11 @@ typedef struct s_cub3d
 	t_case		***tab;
 }	t_cub3d;
 
-typedef	struct
+typedef	struct s_vector
+{
+	float	x;
+	float	y;
+}	t_vector;
 
 int		ft_strlen(char *str);
 int		ft_strrlen(char **str);

@@ -6,26 +6,27 @@
 #    By: mdoumi <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/02 15:33:23 by mdoumi            #+#    #+#              #
-#    Updated: 2023/05/04 12:19:41 by mdoumi           ###   ########.fr        #
+#    Updated: 2023/05/04 14:10:48 by mdoumi           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = cub3D
 
-SRCS =	./src/main.c \
-		./src/ft_strcmp.c \
-		./src/ft_strlen.c \
-		./src/ft_substr.c \
-		./src/error.c \
-		./src/parsing.c \
-		./src/GNL/get_next_line_bonus.c \
-		./src/GNL/get_next_line_utils_bonus.c \
-		./src/check_map.c \
-		./src/quit.c \
-		./src/ft_strdup.c \
-		./src/ft_split.c \
-		./src/render.c \
-		./src/utils.c
+SRCS = ./src/raycasting.c
+#		./src/main.c \
+#		//./src/ft_strcmp.c \
+#		//./src/ft_strlen.c \
+#		//./src/ft_substr.c \
+#		//./src/error.c \
+#		//./src/parsing.c \
+#		//./src/GNL/get_next_line_bonus.c \
+#		//./src/GNL/get_next_line_utils_bonus.c \
+#		//./src/check_map.c \
+#		//./src/quit.c \
+#		//./src/ft_strdup.c \
+#		//./src/ft_split.c \
+#		//./src/render.c \
+#		//./src/utils.c
 INC = -I ./include
 OBJS = ${SRCS:.c=.o}
 FLAGS = -Wall -Wextra -Werror -g3
