@@ -6,7 +6,7 @@
 /*   By: mdoumi <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/02 17:01:31 by ^@^ Foxan ^       #+#    #+#             */
-/*   Updated: 2023/05/04 11:03:12 by mdoumi           ###   ########.fr       */
+/*   Updated: 2023/05/04 12:36:33 by mdoumi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,16 +21,18 @@
 # include "../MLX42/include/MLX42/MLX42.h"
 
 # define WHI 0xFFFFFFFF
+# define BLA 0x000000FF
 # define RED 0xFF0000FF
 # define GRE 0x00FF00FF
 # define BLU 0x0000FFFF
 # define CYA 0x00FFFFFF
-# define PIN 0xFFFF00FF
+# define YEL 0xFFFF00FF
+# define PIN 0xFF00FFFF
 
 # define OPEN_ERROR "Error\nOpen failed.\n"
 # define INV_ARGS "Error\n1 Argument is required.\n"
 # define ETRANGER_ERROR "Error\nInvalid character in map.\n"
-# define INVALID_LINE "Error\nInvalid line in file"
+# define INVALID_LINE "Error\nInvalid line in file.\n"
 
 typedef struct s_case
 {
@@ -52,13 +54,18 @@ typedef struct s_cub3d
 {
 	int			i;
 	int			j;
+	int			p_x;
+	int			p_y;
+	int			case_size;
+	int			player_size;
 	char		**map;
 	t_textures	textures;
 	mlx_t		*mlx;
+	mlx_image_t	*player_img;
 	t_case		***tab;
-	int		case_size;
 }	t_cub3d;
 
+typedef	struct
 
 int		ft_strlen(char *str);
 int		ft_strrlen(char **str);
@@ -72,5 +79,13 @@ void	quit_program(void);
 void	parse_textures(t_cub3d *uwu, int fd);
 char	**ft_split(char const *str, char c);
 char	*ft_strdup(char *s1);
+mlx_image_t	*fill(mlx_t *mlx, int w, int h, uint32_t color);
+void	render(t_cub3d *uwu);
+mlx_image_t	*color_chart(t_cub3d *uwu, char value);
+void	render_player(t_cub3d *uwu);
+int get_rgba(int r, int g, int b, int a);
+void	get_pp(t_cub3d *uwu);
+void	check_map_path(char **av);
+t_case	***tab_to_struct(t_cub3d *uwu);
 
 #endif // CUB3D_H

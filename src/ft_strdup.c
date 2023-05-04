@@ -6,11 +6,11 @@
 /*   By: mdoumi <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/01 14:26:38 by ^@^ Foxan ^       #+#    #+#             */
-/*   Updated: 2023/04/13 15:11:45 by mdoumi           ###   ########.fr       */
+/*   Updated: 2023/05/04 11:15:41 by mdoumi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/minishell.h"
+#include "cub3d.h"
 
 char	*ft_strdup(char *s1)
 {

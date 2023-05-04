@@ -6,7 +6,7 @@
 /*   By: mdoumi <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/02 16:33:53 by mdoumi            #+#    #+#             */
-/*   Updated: 2023/05/04 09:52:05 by mdoumi           ###   ########.fr       */
+/*   Updated: 2023/05/04 12:18:12 by mdoumi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ char	**append_to_map(char *line, char **map)
 
 void	parse_textures(t_cub3d *uwu, int fd)
 {
+	(void)uwu;
 	char	*line;
 	char	**fields;
 	int		nb_parsed;
@@ -89,4 +90,29 @@ void	store_texture(t_cub3d *uwu, char **fields)
 		if (ft_strrlen(color) != 3)
 			return ((void)error(INVALID_LINE), quit_program());
 	}
+}
+
+t_case	***tab_to_struct(t_cub3d *uwu)
+{
+	int		i;
+	int		j;
+	t_case	***tab;
+
+	i = 0;
+	tab = malloc(sizeof(t_case **) * (ft_strrlen(uwu->map) + 2));
+	while (uwu->map[i])
+	{
+		j = 0;
+		tab[i] = malloc(sizeof(t_case *) * (ft_strlen(uwu->map[i]) + 1));
+		while (uwu->map[i][j])
+		{
+			tab[i][j] = malloc(sizeof(t_case));
+			tab[i][j]->value = uwu->map[i][j];
+			j++;
+		}
+		tab[i][j] = NULL;
+		i++;
+	}
+	tab[i] = NULL;
+	return (tab);
 }
