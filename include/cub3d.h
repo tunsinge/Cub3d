@@ -6,7 +6,7 @@
 /*   By: mdoumi <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/02 17:01:31 by ^@^ Foxan ^       #+#    #+#             */
-/*   Updated: 2023/05/04 10:03:14 by mdoumi           ###   ########.fr       */
+/*   Updated: 2023/05/04 11:03:12 by mdoumi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,13 @@
 # include "get_next_line_bonus.h"
 # include "../MLX42/include/MLX42/MLX42.h"
 
+# define WHI 0xFFFFFFFF
+# define RED 0xFF0000FF
+# define GRE 0x00FF00FF
+# define BLU 0x0000FFFF
+# define CYA 0x00FFFFFF
+# define PIN 0xFFFF00FF
+
 # define OPEN_ERROR "Error\nOpen failed.\n"
 # define INV_ARGS "Error\n1 Argument is required.\n"
 # define ETRANGER_ERROR "Error\nInvalid character in map.\n"
@@ -27,7 +34,8 @@
 
 typedef struct s_case
 {
-	char	value;
+	char		value;
+	mlx_image_t	*img;
 }	t_case;
 
 typedef struct s_textures
@@ -48,6 +56,7 @@ typedef struct s_cub3d
 	t_textures	textures;
 	mlx_t		*mlx;
 	t_case		***tab;
+	int		case_size;
 }	t_cub3d;
 
 
