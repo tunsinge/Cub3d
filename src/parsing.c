@@ -73,6 +73,8 @@ void	parse_textures(t_cub3d *uwu, int fd)
 
 void	store_texture(t_cub3d *uwu, char **fields)
 {
+	char	**color;
+
 	if (ft_strcmp(fields[0], "NO") == 0)
 		uwu->textures.texture_no = ft_strdup(fields[0]);
 	if (ft_strcmp(fields[0], "SO") == 0)
@@ -81,4 +83,10 @@ void	store_texture(t_cub3d *uwu, char **fields)
 		uwu->textures.texture_ea = ft_strdup(fields[0]);
 	if (ft_strcmp(fields[0], "WE") == 0)
 		uwu->textures.texture_we = ft_strdup(fields[0]);
+	if (ft_strcmp(fields[0], "F") == 0)
+	{
+		color = ft_split(fields[1], ',');
+		if (ft_strrlen(color) != 3)
+			return ((void)error(INVALID_LINE), quit_program());
+	}
 }
