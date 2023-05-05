@@ -1,12 +1,12 @@
 # **************************************************************************** #
 #                                                                              #
 #                                                         :::      ::::::::    #
-#    Makefile                                            :+:      :+:    :+:   #
+#    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: Foxan         <foxan57@gmail.com>          +#+  +:+       +#+         #
+#    By: mdoumi <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/03 10:23:53 by Foxan             #+#    #+#              #
-#    Updated: 2022/11/03 10:23:54 by Foxan            ###   ########.fr        #
+#    Updated: 2023/05/05 16:51:13 by mdoumi           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,24 +24,25 @@ RESET			:= \033[0m
 
 #//= Variables =//#
 CC				:= gcc
-NAME			:= minishell
-PROJECT_NAME	:= MINISHELL
-SRCS			:=	./src/main.c \
-					./src/check_map.c \
-					./src/error.c \
-					./src/ft_atoi.c \
-					./src/ft_split.c \
-					./src/ft_strdup.c \
-					./src/ft_strcmp.c \
-					./src/ft_strlen.c \
-					./src/ft_substr.c \
-					./src/parsing.c \
-					./src/quit.c \
-					./src/raycasting.c \
-					./src/render.c \
-					./src/utils.c \
-					./src/GNL/get_next_line_bonus.c \
-					./src/GNL/get_next_line_utils_bonus.c
+NAME			:= cub3d
+PROJECT_NAME	:= CUB3D
+SRCS = ./src/raycasting.c
+#SRCS			:=	./src/main.c \
+					#./src/check_map.c \
+					#./src/error.c \
+					#./src/ft_atoi.c \
+					#./src/ft_split.c \
+					#./src/ft_strdup.c \
+					#./src/ft_strcmp.c \
+					#./src/ft_strlen.c \
+					#./src/ft_substr.c \
+					#./src/parsing.c \
+					#./src/quit.c \
+					#./src/raycasting.c \
+					#./src/render.c \
+					#./src/utils.c \
+					#./src/GNL/get_next_line_bonus.c \
+					#./src/GNL/get_next_line_utils_bonus.c
 INCLUDES		:= -I ./include
 FLAGS			:= -Wall -Wextra -Werror -g -g3
 OBJS			:= ${SRCS:.c=.o}
