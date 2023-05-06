@@ -29,10 +29,12 @@
 # define YEL 0xFFFF00FF
 # define PIN 0xFF00FFFF
 
+# define INVALID_PATH "Error\nMap is not valid. It must end with .cub.\n"
 # define OPEN_ERROR "Error\nOpen failed.\n"
 # define INV_ARGS "Error\n1 Argument is required.\n"
 # define ETRANGER_ERROR "Error\nInvalid character in map.\n"
 # define INVALID_LINE "Error\nInvalid line in file.\n"
+# define NOT_CLOSED_MAP "Error\nMap is not closed\n"
 
 typedef struct s_case
 {
@@ -58,6 +60,8 @@ typedef struct s_cub3d
 	int			p_y;
 	int			case_size;
 	int			player_size;
+	int			map_size_x;
+	int			map_size_y;
 	char		**map;
 	t_textures	*textures;
 	mlx_t		*mlx;
@@ -88,5 +92,6 @@ t_case		***tab_to_struct(t_cub3d *uwu);
 int			ft_atoi(char *str);
 void		store_texture(t_cub3d *uwu, char **fields);
 char		*ft_strdupnonl(char *s1);
+void		check_map_closed(t_cub3d *uwu);
 
 #endif // CUB3D_H

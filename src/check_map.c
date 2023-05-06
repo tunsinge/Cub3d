@@ -40,10 +40,38 @@ void	check_map(char **map)
 
 void	check_map_path(char **av)
 {
-	char *s;
+	char	*s;
 
 	s = ft_substr(av[1], ft_strlen(av[1]) - 4, ft_strlen(av[1]));
 	if (ft_strcmp(s, ".cub") != 0)
-		printf("Error\nMap is not valid. It must end with .cub.\n");
+		error(INVALID_PATH);
 	free(s);
+}
+
+void	check_map_closed(t_cub3d *uwu)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	j = 0;
+	while (uwu->tab[i])
+	{
+		while (uwu->tab[i][j])
+		{
+			if (uwu->tab[i][j]->value == '0')
+			{
+				if (i + 1 < uwu->map_size_x && uwu->tab[i + 1][j]->value == ' ')
+					error(NOT_CLOSED_MAP);
+				if (i - 1 >= 0 && uwu->tab[i - 1][j]->value == ' ')
+					error(NOT_CLOSED_MAP);
+				if (j +1 < uwu->map_size_y && uwu->tab[i][j + 1]->value == ' ')
+					error(NOT_CLOSED_MAP);
+				if (j - 1 >= 0 && uwu->tab[i][j - 1]->value == ' ')
+					error(NOT_CLOSED_MAP);
+			}
+			j++;
+		}
+		i++;
+	}
 }
