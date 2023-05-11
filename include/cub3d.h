@@ -28,6 +28,7 @@
 # define CYA 0x00FFFFFF
 # define YEL 0xFFFF00FF
 # define PIN 0xFF00FFFF
+# define ALP 0x00000000
 
 # define INVALID_PATH "Error\nMap is not valid. It must end with .cub.\n"
 # define OPEN_ERROR "Error\nOpen failed.\n"
@@ -35,6 +36,9 @@
 # define ETRANGER_ERROR "Error\nInvalid character in map.\n"
 # define INVALID_LINE "Error\nInvalid line in file.\n"
 # define NOT_CLOSED_MAP "Error\nMap is not closed\n"
+# define INVALID_COLOR_FORMAT "Error\nInvalid color format in textures\n"
+# define INVALID_COLOR_RGB_VALUE "Error\nInvalid color RGB value in textures\n"
+# define INVALID_TEXTURES_CODE "Error\nInvalid or duplicate texture or color identifier in textures\n"
 
 typedef struct s_case
 {
@@ -60,8 +64,8 @@ typedef struct s_cub3d
 	int			p_y;
 	int			case_size;
 	int			player_size;
-	int			map_size_x;
-	int			map_size_y;
+	int			map_s_x;
+	int			map_s_y;
 	char		**map;
 	t_textures	*textures;
 	mlx_t		*mlx;
@@ -92,6 +96,8 @@ t_case		***tab_to_struct(t_cub3d *uwu);
 int			ft_atoi(char *str);
 void		store_texture(t_cub3d *uwu, char **fields);
 char		*ft_strdupnonl(char *s1);
-void		check_map_closed(t_cub3d *uwu);
+int			check_map_closed(t_cub3d *uwu);
+void		free_s(char **str);
+int			is_num(char *num);
 
 #endif // CUB3D_H

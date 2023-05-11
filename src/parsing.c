@@ -69,6 +69,7 @@ void	parse_textures(t_cub3d *uwu, int fd)
 				return ((void)error(INVALID_LINE), quit_program());
 			store_texture(uwu, fields);
 			nb_parsed++;
+			free_s(fields);
 		}
 		free(line);
 	}
@@ -78,24 +79,19 @@ void	store_color(t_cub3d *uwu, char **fields)
 {
 	char	**color;
 
+	color = ft_split(fields[1], ',');
+	if (ft_strrlen(color) != 3)
+		return ((void)error(INVALID_COLOR_FORMAT), quit_program());
+	if (!is_num(color[0]) || !is_num(color[1]) || !is_num(color[2]))
+		return ((void)error(INVALID_COLOR_RGB_VALUE), quit_program());
 	if (ft_strcmp(fields[0], "F") == 0 && !uwu->textures->color_fl)
-	{
-		color = ft_split(fields[1], ',');
-		if (ft_strrlen(color) != 3)
-			return ((void)error(INVALID_LINE), quit_program());
 		uwu->textures->color_fl = get_rgba(ft_atoi(color[0]), ft_atoi(color[1]),
 				ft_atoi(color[2]), 255);
-	}
 	else if (ft_strcmp(fields[0], "C") == 0 && !uwu->textures->color_ce)
-	{
-		color = ft_split(fields[1], ',');
-		if (ft_strrlen(color) != 3)
-			return ((void)error(INVALID_LINE), quit_program());
 		uwu->textures->color_ce = get_rgba(ft_atoi(color[0]), ft_atoi(color[1]),
 				ft_atoi(color[2]), 255);
-	}
 	else
-		return ((void)error(INVALID_LINE), quit_program());
+		return ((void)error(INVALID_TEXTURES_CODE), quit_program());
 }
 
 void	store_texture(t_cub3d *uwu, char **fields)

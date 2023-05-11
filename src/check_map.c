@@ -14,7 +14,8 @@
 
 int	is_etranger(char c)
 {
-	if (c == '1' || c == '0' || c == 'N' || c == 'S' || c == 'E' || c == 'W')
+	if (c == '1' || c == '0' || c == 'N' || c == 'S' || c == 'E' || c == 'W'
+		|| c == ' ')
 		return (0);
 	return (1);
 }
@@ -48,30 +49,29 @@ void	check_map_path(char **av)
 	free(s);
 }
 
-void	check_map_closed(t_cub3d *uwu)
+int	check_map_closed(t_cub3d *uwu)
 {
 	int	i;
 	int	j;
 
-	i = 0;
-	j = 0;
-	while (uwu->tab[i])
+	i = -1;
+	while (uwu->tab[++i])
 	{
+		j = 0;
 		while (uwu->tab[i][j])
 		{
 			if (uwu->tab[i][j]->value == '0')
 			{
-				if (i + 1 < uwu->map_size_x && uwu->tab[i + 1][j]->value == ' ')
-					error(NOT_CLOSED_MAP);
-				if (i - 1 >= 0 && uwu->tab[i - 1][j]->value == ' ')
-					error(NOT_CLOSED_MAP);
-				if (j +1 < uwu->map_size_y && uwu->tab[i][j + 1]->value == ' ')
-					error(NOT_CLOSED_MAP);
-				if (j - 1 >= 0 && uwu->tab[i][j - 1]->value == ' ')
-					error(NOT_CLOSED_MAP);
+				if (i - 1 < 0 || j - 1 < 0
+					|| i + 1 >= uwu->map_s_y || j + 1 >= uwu->map_s_x
+					|| uwu->tab[i + 1][j]->value == ' '
+					|| uwu->tab[i - 1][j]->value == ' '
+					|| uwu->tab[i][j + 1]->value == ' '
+					|| uwu->tab[i][j - 1]->value == ' ')
+					return (error(NOT_CLOSED_MAP), 0);
 			}
 			j++;
 		}
-		i++;
 	}
+	return (1);
 }

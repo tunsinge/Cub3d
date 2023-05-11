@@ -14,7 +14,9 @@
 
 void	render_player(t_cub3d *uwu)
 {
-	mlx_image_to_window(uwu->mlx, uwu->player_img, uwu->p_x * uwu->case_size + uwu->case_size * 3/8, uwu->p_y * uwu->case_size + uwu->case_size * 3/8);
+	mlx_image_to_window(uwu->mlx, uwu->player_img,
+		uwu->p_x * uwu->case_size + uwu->case_size * 3 / 8,
+		uwu->p_y * uwu->case_size + uwu->case_size * 3 / 8);
 }
 
 mlx_image_t	*color_chart(t_cub3d *uwu, char value)
@@ -34,6 +36,8 @@ mlx_image_t	*color_chart(t_cub3d *uwu, char value)
 		return (fill(uwu->mlx, size, size, RED));
 	if (value == 'W')
 		return (fill(uwu->mlx, size, size, PIN));
+	if (value == ' ')
+		return (fill(uwu->mlx, size, size, ALP));
 	return (NULL);
 }
 
@@ -49,7 +53,8 @@ void	render(t_cub3d *uwu)
 		while (uwu->tab[i][j])
 		{
 			uwu->tab[i][j]->img = color_chart(uwu, uwu->tab[i][j]->value);
-			mlx_image_to_window(uwu->mlx, uwu->tab[i][j]->img, j*uwu->case_size, i*uwu->case_size);
+			mlx_image_to_window(uwu->mlx, uwu->tab[i][j]->img,
+				j * uwu->case_size, i * uwu->case_size);
 			j++;
 		}
 		i++;
@@ -59,10 +64,20 @@ void	render(t_cub3d *uwu)
 mlx_image_t	*fill(mlx_t *mlx, int w, int h, uint32_t color)
 {
 	mlx_image_t	*image;
+	int			x;
+	int			y;
 
+	x = 0;
 	image = mlx_new_image(mlx, w, h);
-	for (int x = 0; x < (int)image->width; x++)
-		for(int y = 0; y < (int)image->height; y++)
+	while (x < (int)image->width)
+	{
+		y = 0;
+		while (y < (int) image->height)
+		{
 			mlx_put_pixel(image, x, y, color);
+			y++;
+		}
+		x++;
+	}
 	return (image);
 }
