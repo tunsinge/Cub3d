@@ -48,8 +48,8 @@ void	init_(t_cub3d *uwu, char **av)
 	uwu->mlx = mlx_init(1080, 720, "cub3d", true);
 	uwu->player_size = uwu->case_size / 4;
 	uwu->player_img = fill(uwu->mlx, uwu->player_size, uwu->player_size, BLA);
-	uwu->map_size_y = ft_strrlen(uwu->map);
-	uwu->map_size_x = ft_strlen(uwu->map[0]);
+	uwu->map_s_y = ft_strrlen(uwu->map);
+	uwu->map_s_x = ft_strlen(uwu->map[0]);
 }
 
 int	main(int ac, char **av)
@@ -58,10 +58,9 @@ int	main(int ac, char **av)
 
 	if (ac != 2)
 		return ((error(INV_ARGS), 1));
-
 	uwu = malloc(sizeof(t_cub3d));
 	init_(uwu, av);
-
+	printf("%d\n", check_map_closed(uwu));
 	render(uwu);
 	render_player(uwu);
 	mlx_key_hook(uwu->mlx, &key_hook, uwu);
