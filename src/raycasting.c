@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: mdoumi <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/04 12:58:49 by mdoumi            #+#    #+#             */
-/*   Updated: 2023/05/05 17:01:47by mdoumi           ###   ########.fr       */
+/*   Created: 2023/05/07 22:36:59 by mdoumi            #+#    #+#             */
+/*   Updated: 2023/05/10 14:18:06by mdoumi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 # define P3 3*PI/2
 # define DR 0.0174533
 
-void drawRays2D();
+void	drawRays2D();
 void	draw_line(int x0, int y0, int x1, int y1, int color);
 
 mlx_t	*mlx;
@@ -24,16 +24,16 @@ mlx_image_t	*plyr_img;
 mlx_image_t	*dir_img;
 float	px, py, pdx, pdy, pa;
 int	mapX=8, mapY=8, mapS=64;
-int	map[]=
+char map[][8]=
 {
-	1,1,1,1,1,1,1,1,
-	1,0,0,0,0,0,0,1,
-	1,0,0,0,0,0,0,1,
-	1,0,0,0,0,0,0,1,
-	1,0,0,0,0,0,0,1,
-	1,0,0,0,0,0,0,1,
-	1,0,0,0,0,0,0,1,
-	1,1,1,1,1,1,1,1,
+	{'1','1','1','1','1','1','0','0'},
+	{'1','0','1','0','0','1','1','1'},
+	{'1','0','1','0','0','0','0','1'},
+	{'1','0','1','0','0','0','0','1'},
+	{'1','0','0','0','0','0','1','1'},
+	{'1','0','0','0','0','0','1','1'},
+	{'1','0','0','0','0','0','0','1'},
+	{'1','1','1','1','1','1','1','1'}
 };
 
 int	ft_abs(int n)
@@ -58,6 +58,7 @@ float dist (float ax, float ay, float bx, float by)
 void drawRays2D ()
 {
 	int r,mx, my, mp, dof; float rx, ry, ra, xo, yo, disT;
+	//ra = pa-DR*30, 30 est le FOV en degre, et DR est la pour convertir en radiant
 	ra=pa-DR*30; if(ra<0){ ra+=2*PI;} if(ra>2*PI){ ra -=2*PI;}
 	for (r=0;r<60;r++)
 	{
@@ -72,7 +73,7 @@ void drawRays2D ()
 		while (dof<8)
 		{
 			mx = (int) (rx) >> 6; my= (int)(ry)>>6; mp=my*mapX+mx;
-			if (mp > 0 && mp<mapX*mapY && map[mp]==1){ hx=rx;hy=ry;disH=dist(px,py,hx,hy);dof=8; }//hit wall
+			if (mp > 0 && mp<mapX*mapY && map[my][mx]=='1'){ hx=rx;hy=ry;disH=dist(px,py,hx,hy);dof=8; }//hit wall
 			else{ rx+=xo; ry+=yo; dof+=1; }//next line
 		}
 
@@ -86,7 +87,7 @@ void drawRays2D ()
 		while (dof<8)
 		{
 			mx = (int) (rx) >> 6; my= (int)(ry)>>6; mp=my*mapX+mx;
-			if (mp > 0 && mp<mapX*mapY && map[mp]==1){vx=rx;vy=ry;disV=dist(px,py,vx,vy); dof=8; }//hit wall
+			if (mp > 0 && mp<mapX*mapY && map[my][mx]=='1'){vx=rx;vy=ry;disV=dist(px,py,vx,vy); dof=8; }//hit wall
 			else{ rx+=xo; ry+=yo; dof+=1; }//next line
 		}
 		if(disV<disH){rx=vx;ry=vy; disT=disV; if (ra > P2 && ra < P3) {color = BLU;} else {color = YEL;}} //Vertical lines
@@ -98,13 +99,13 @@ void drawRays2D ()
 		float lineO=160-lineH/2;
 		for (int z = 0; z < 8; z++)
 		{
-			draw_line(r*8+530+z, 0, r*8+530+z, lineO, CYA); // Plafond
+			//draw_line(r*8+530+z, 0, r*8+530+z, lineO, CYA); // Plafond
 			draw_line(r*8+530+z, lineO, r*8+530+z, lineH+lineO, color); // Mur
-			draw_line(r*8+530+z, lineH+lineO, r*8+530+z, 512, GRE); // Sol
+			//draw_line(r*8+530+z, lineH+lineO, r*8+530+z, 512, GRE); // Sol
 		}
 
 		draw_line(px + 4, py + 4, rx, ry, RED);
-		ra+=DR; if(ra<0){ ra+=2*PI;} if(ra>2*PI){ ra -=2*PI;}
+		ra+= DR; if(ra<0){ ra+=2*PI;} if(ra>2*PI){ ra -=2*PI;}
 	}
 }
 
@@ -114,7 +115,7 @@ void	draw_line(int x0, int y0, int x1, int y1, int color)
 	int dy = ft_abs(y1-y0), sy = y0<y1 ? 1 : -1;
 	int err = (dx>dy ? dx : -dy)/2, e2;
 
-	for(;;)
+	while (1)
 	{
 		if (x0 >= 0 && x0 <= 1024 && y0 >= 0 && y0 <= 512)
 			mlx_put_pixel(dir_img, x0, y0, color);
@@ -156,7 +157,7 @@ void	drawMap2D()
 	{
 		for (x = 0; x < mapX; x++)
 		{
-			if (map[y*mapX+x] == 0)
+			if (map[y][x] == '0')
 				color = BLA;
 			else
 				color = WHI;
