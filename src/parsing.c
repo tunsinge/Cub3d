@@ -6,7 +6,7 @@
 /*   By: mdoumi <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/02 16:33:53 by mdoumi            #+#    #+#             */
-/*   Updated: 2023/05/04 12:18:12 by mdoumi           ###   ########.fr       */
+/*   Updated: 2023/05/18 02:16:02 by mdoumi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,29 +110,4 @@ void	store_texture(t_cub3d *uwu, char **fields)
 		uwu->textures->texture_we = ft_strdupnonl(fields[1]);
 	else
 		store_color(uwu, fields);
-}
-
-t_case	***tab_to_struct(t_cub3d *uwu)
-{
-	int		i;
-	int		j;
-	t_case	***tab;
-
-	i = 0;
-	tab = malloc(sizeof(t_case **) * (ft_strrlen(uwu->map) + 2));
-	while (uwu->map[i])
-	{
-		j = 0;
-		tab[i] = malloc(sizeof(t_case *) * (ft_strlen(uwu->map[i]) + 1));
-		while (uwu->map[i][j])
-		{
-			tab[i][j] = malloc(sizeof(t_case));
-			tab[i][j]->value = uwu->map[i][j];
-			j++;
-		}
-		tab[i][j] = NULL;
-		i++;
-	}
-	tab[i] = NULL;
-	return (tab);
 }

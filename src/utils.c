@@ -6,11 +6,23 @@
 /*   By: mdoumi <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 12:18:28 by mdoumi            #+#    #+#             */
-/*   Updated: 2023/05/04 12:18:51 by mdoumi           ###   ########.fr       */
+/*   Updated: 2023/05/18 03:13:10 by mdoumi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+void	set_angle(t_cub3d *uwu, char c)
+{
+	if (c == 'N')
+		uwu->pa = P2;
+	if (c == 'S')
+		uwu->pa = P3;
+	if (c == 'E')
+		uwu->pa = 0;
+	if (c == 'W')
+		uwu->pa = PI;
+}
 
 void	get_pp(t_cub3d *uwu)
 {
@@ -23,6 +35,7 @@ void	get_pp(t_cub3d *uwu)
 		j = 0;
 		while (uwu->map[i][j])
 		{
+			set_angle(uwu, uwu->map[i][j]);
 			if (uwu->map[i][j] == 'N')
 			{
 				uwu->p_x = j;

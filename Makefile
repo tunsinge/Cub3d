@@ -6,7 +6,7 @@
 #    By: mdoumi <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/03 10:23:53 by Foxan             #+#    #+#              #
-#    Updated: 2023/05/05 16:51:13 by mdoumi           ###   ########.fr        #
+#    Updated: 2023/05/18 02:13:27 by mdoumi           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,25 +26,25 @@ RESET			:= \033[0m
 CC				:= gcc
 NAME			:= cub3d
 PROJECT_NAME	:= CUB3D
-SRCS = ./src/raycasting.c
-#SRCS			:=	./src/main.c \
-					#./src/check_map.c \
-					#./src/error.c \
-					#./src/ft_atoi.c \
-					#./src/ft_split.c \
-					#./src/ft_strdup.c \
-					#./src/ft_strcmp.c \
-					#./src/ft_strlen.c \
-					#./src/ft_substr.c \
-					#./src/parsing.c \
-					#./src/quit.c \
-					#./src/raycasting.c \
-					#./src/render.c \
-					#./src/utils.c \
-					#./src/GNL/get_next_line_bonus.c \
-					#./src/GNL/get_next_line_utils_bonus.c
+#SRCS = ./src/raycasting.c
+SRCS			:=	./src/main.c \
+					./src/check_map.c \
+					./src/error.c \
+					./src/ft_atoi.c \
+					./src/ft_split.c \
+					./src/ft_strdup.c \
+					./src/ft_strcmp.c \
+					./src/ft_strlen.c \
+					./src/ft_substr.c \
+					./src/parsing.c \
+					./src/quit.c \
+					./src/raycast.c \
+					./src/render.c \
+					./src/utils.c \
+					./src/GNL/get_next_line_bonus.c \
+					./src/GNL/get_next_line_utils_bonus.c
 INCLUDES		:= -I ./include
-FLAGS			:= -Wall -Wextra -Werror -g -g3
+FLAGS			:= -g -g3
 OBJS			:= ${SRCS:.c=.o}
 SOMETHING		:= 0
 LIBMLX			:= ./MLX42

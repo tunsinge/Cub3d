@@ -17,16 +17,40 @@ void	key_hook(mlx_key_data_t keydata, void *param)
 	t_cub3d	*uwu;
 
 	uwu = param;
-	if (keydata.key == MLX_KEY_ESCAPE && keydata.action == 1)
+	if (keydata.key == MLX_KEY_ESCAPE)
 		quit_program();
 	if (keydata.key == 'W')
-		uwu->player_img->instances[0].y -= 5;
+	{
+		uwu->p_x += uwu->ray->pdx;
+		uwu->p_y += uwu->ray->pdy;
+	}
 	if (keydata.key == 'S')
-		uwu->player_img->instances[0].y += 5;
+	{
+		uwu->p_x -= uwu->ray->pdx;
+		uwu->p_y -= uwu->ray->pdy;
+	}
 	if (keydata.key == 'A')
-		uwu->player_img->instances[0].x -= 5;
+	{
+		uwu->pa -= 0.1;
+		if (uwu->pa < 0)
+		{
+			uwu->pa += 2*PI;
+		}
+		uwu->ray->pdx = cosf(uwu->pa)*5;
+		uwu->ray->pdy = sinf(uwu->pa)*5;
+	}
 	if (keydata.key == 'D')
-		uwu->player_img->instances[0].x += 5;
+	{
+		uwu->pa += 0.1;
+		if (uwu->pa > 2*PI)
+		{
+			uwu->pa -= 2*PI;
+		}
+		uwu->ray->pdx = cosf(uwu->pa)*5;
+		uwu->ray->pdy = sinf(uwu->pa)*5;
+	}
+	mlx_delete_image(uwu->mlx, uwu->player_img);
+	render_player(uwu);
 }
 
 
@@ -42,12 +66,17 @@ void	init_(t_cub3d *uwu, char **av)
 	check_map_path(av);
 	uwu->map = parse_map(uwu, av[1]);
 	check_map(uwu->map);
-	uwu->tab = tab_to_struct(uwu);
-	uwu->case_size = 64;
+	uwu->m_size = 256 / ft_strlen(uwu->map[0]);
+	uwu->p_size = uwu->m_size / 4;
+	uwu->p_color = CYA;
 	get_pp(uwu);
+
+	uwu->ray = malloc(sizeof(t_ray));
+	printf("%f\n", uwu->pa);
+	uwu->ray->pdx = cosf(uwu->pa)*5;
+	uwu->ray->pdy = sinf(uwu->pa)*5;
+
 	uwu->mlx = mlx_init(1080, 720, "cub3d", true);
-	uwu->player_size = uwu->case_size / 4;
-	uwu->player_img = fill(uwu->mlx, uwu->player_size, uwu->player_size, BLA);
 }
 
 int	main(int ac, char **av)
@@ -60,8 +89,11 @@ int	main(int ac, char **av)
 	uwu = malloc(sizeof(t_cub3d));
 	init_(uwu, av);
 
-	render(uwu);
-	render_player(uwu);
+
+	init_player(uwu);
+	render_map(uwu);
+	//raycaster(uwu);
+
 	mlx_key_hook(uwu->mlx, &key_hook, uwu);
 	mlx_loop(uwu->mlx);
 }

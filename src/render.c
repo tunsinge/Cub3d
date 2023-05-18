@@ -6,7 +6,7 @@
 /*   By: mdoumi <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 12:16:49 by mdoumi            #+#    #+#             */
-/*   Updated: 2023/05/04 12:17:37 by mdoumi           ###   ########.fr       */
+/*   Updated: 2023/05/18 01:40:54by mdoumi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,42 +14,52 @@
 
 void	render_player(t_cub3d *uwu)
 {
-	mlx_image_to_window(uwu->mlx, uwu->player_img, uwu->p_x * uwu->case_size + uwu->case_size * 3/8, uwu->p_y * uwu->case_size + uwu->case_size * 3/8);
+	uwu->player_img = fill(uwu->mlx, uwu->p_size, uwu->p_size, uwu->p_color);
+	mlx_image_to_window(uwu->mlx, uwu->player_img, uwu->p_x, uwu->p_y);
+	printf("%f %f %f %f %f\n", uwu->p_x, uwu->p_y, uwu->ray->pdx, uwu->ray->pdy, uwu->pa);
+}
+
+void	init_player(t_cub3d *uwu)
+{
+	uwu->p_x = uwu->p_x * uwu->m_size + uwu->m_size * 3/8;
+	uwu->p_y = uwu->p_y * uwu->m_size + uwu->m_size * 3/8;
+	render_player(uwu);
 }
 
 mlx_image_t	*color_chart(t_cub3d *uwu, char value)
 {
 	int	size;
 
-	size = uwu->case_size;
+	size = uwu->m_size;
 	if (value == '1')
 		return (fill(uwu->mlx, size, size, BLA));
 	if (value == '0')
 		return (fill(uwu->mlx, size, size, WHI));
 	if (value == 'N')
-		return (fill(uwu->mlx, size, size, BLU));
+		return (fill(uwu->mlx, size, size, WHI));
 	if (value == 'S')
-		return (fill(uwu->mlx, size, size, GRE));
+		return (fill(uwu->mlx, size, size, WHI));
 	if (value == 'E')
-		return (fill(uwu->mlx, size, size, RED));
+		return (fill(uwu->mlx, size, size, WHI));
 	if (value == 'W')
-		return (fill(uwu->mlx, size, size, PIN));
+		return (fill(uwu->mlx, size, size, WHI));
 	return (NULL);
 }
 
-void	render(t_cub3d *uwu)
+void	render_map(t_cub3d *uwu)
 {
 	int	i;
 	int	j;
+	mlx_image_t	*tmp;
 
 	i = 0;
-	while (uwu->tab[i])
+	while (uwu->map[i])
 	{
 		j = 0;
-		while (uwu->tab[i][j])
+		while (uwu->map[i][j])
 		{
-			uwu->tab[i][j]->img = color_chart(uwu, uwu->tab[i][j]->value);
-			mlx_image_to_window(uwu->mlx, uwu->tab[i][j]->img, j*uwu->case_size, i*uwu->case_size);
+			tmp = color_chart(uwu, uwu->map[i][j]);
+			mlx_image_to_window(uwu->mlx, tmp, j*uwu->m_size, i*uwu->m_size);
 			j++;
 		}
 		i++;
