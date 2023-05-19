@@ -6,7 +6,7 @@
 /*   By: mdoumi <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/18 02:13:02 by mdoumi            #+#    #+#             */
-/*   Updated: 2023/05/19 20:01:11 by mdoumi           ###   ########.fr       */
+/*   Updated: 2023/05/19 20:25:42 by mdoumi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -316,7 +316,7 @@ void	raycaster(t_cub3d *uwu)
 			ry=hy;
 			disT = disH;
 		}
-		draw_line(uwu->ray_img, px, py, rx, ry, RED);
+		//draw_line(uwu->ray_img, px, py, rx, ry, RED);
 
 		//---Draw 3D Walls---
 		float ca=pa-ra; if(ca<0) {ca+=2*PI;} if(ca>2*PI) {ca-=2*PI;} disT=disT*cosf(ca);

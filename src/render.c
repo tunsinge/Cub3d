@@ -36,10 +36,8 @@ void	render_player(t_cub3d *uwu)
 	uwu->ray->pxx = uwu->ray->pdx*5 + uwu->px;
 	uwu->ray->pyy = uwu->ray->pdy*5 + uwu->py;
 
-	//ft_bzero(uwu->ray_img, sizeof(uwu->ray_img));
 	mlx_delete_image(uwu->mlx, uwu->ray_img);
 	uwu->ray_img = mlx_new_image(uwu->mlx, windowWidth, windowHeight);
-	//draw_line(uwu->ray_img, uwu->px+uwu->p_size/2, uwu->py+uwu->p_size/2, uwu->ray->pxx+uwu->p_size/2, uwu->ray->pyy+uwu->p_size/2, RED);
 	mlx_image_to_window(uwu->mlx, uwu->ray_img, 0, 0);
 }
 

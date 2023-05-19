@@ -61,8 +61,9 @@ void	key_hook(mlx_key_data_t keydata, void *param)
 		uwu->ray->pdx = cosf(uwu->pa)*5;
 		uwu->ray->pdy = sinf(uwu->pa)*5;
 	}
-	render_player(uwu);
 	raycaster(uwu);
+	render_player(uwu);
+	render_map(uwu);
 }
 
 
