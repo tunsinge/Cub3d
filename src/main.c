@@ -100,9 +100,9 @@ int	main(int ac, char **av)
 	init_(uwu, av);
 
 
-	render_map(uwu);
 	init_player(uwu);
 	raycaster(uwu);
+	render_map(uwu);
 
 	mlx_key_hook(uwu->mlx, &key_hook, uwu);
 	mlx_loop(uwu->mlx);
