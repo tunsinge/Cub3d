@@ -12,6 +12,13 @@
 
 #include "cub3d.h"
 
+int	roundc(float n)
+{
+	if (n - (int)n > 0.5)
+		return ((int)n + 1);
+	return ((int)n);
+}
+
 void	key_hook(mlx_key_data_t keydata, void *param)
 {
 	t_cub3d	*uwu;
@@ -21,13 +28,18 @@ void	key_hook(mlx_key_data_t keydata, void *param)
 		quit_program();
 	if (keydata.key == 'W')
 	{
-		uwu->p_x += uwu->ray->pdx;
-		uwu->p_y += uwu->ray->pdy;
+		//if (uwu->map[roundc(uwu->ray->pyy/uwu->m_size)][roundc(uwu->ray->pxx/uwu->m_size)] != '1')
+		//{
+			//uwu->px += uwu->ray->pdx;
+			//uwu->py += uwu->ray->pdy;
+		//}
+			uwu->px += uwu->ray->pdx;
+			uwu->py += uwu->ray->pdy;
 	}
 	if (keydata.key == 'S')
 	{
-		uwu->p_x -= uwu->ray->pdx;
-		uwu->p_y -= uwu->ray->pdy;
+		uwu->px -= uwu->ray->pdx;
+		uwu->py -= uwu->ray->pdy;
 	}
 	if (keydata.key == 'A')
 	{
@@ -49,8 +61,8 @@ void	key_hook(mlx_key_data_t keydata, void *param)
 		uwu->ray->pdx = cosf(uwu->pa)*5;
 		uwu->ray->pdy = sinf(uwu->pa)*5;
 	}
-	mlx_delete_image(uwu->mlx, uwu->player_img);
 	render_player(uwu);
+	raycaster(uwu);
 }
 
 
@@ -73,10 +85,8 @@ void	init_(t_cub3d *uwu, char **av)
 
 	uwu->ray = malloc(sizeof(t_ray));
 	printf("%f\n", uwu->pa);
-	uwu->ray->pdx = cosf(uwu->pa)*5;
-	uwu->ray->pdy = sinf(uwu->pa)*5;
 
-	uwu->mlx = mlx_init(1080, 720, "cub3d", true);
+	uwu->mlx = mlx_init(windowWidth, windowHeight, "cub3d", true);
 }
 
 int	main(int ac, char **av)
@@ -90,9 +100,9 @@ int	main(int ac, char **av)
 	init_(uwu, av);
 
 
-	init_player(uwu);
 	render_map(uwu);
-	//raycaster(uwu);
+	init_player(uwu);
+	raycaster(uwu);
 
 	mlx_key_hook(uwu->mlx, &key_hook, uwu);
 	mlx_loop(uwu->mlx);

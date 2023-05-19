@@ -6,7 +6,7 @@
 #    By: mdoumi <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/03 10:23:53 by Foxan             #+#    #+#              #
-#    Updated: 2023/05/18 02:13:27 by mdoumi           ###   ########.fr        #
+#    Updated: 2023/05/18 14:33:39 by mdoumi           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -49,7 +49,7 @@ OBJS			:= ${SRCS:.c=.o}
 SOMETHING		:= 0
 LIBMLX			:= ./MLX42
 LIBGLFW 		:= -L "/Users/$$USER/.brew/opt/glfw/lib/"
-LIBS			:= $(LIBMLX)/libmlx42.a -lglfw
+LIBS			:= $(LIBMLX)/libmlx42.a -lglfw -lm
 
 #//= Main compiling rules =//#
 

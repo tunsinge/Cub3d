@@ -6,7 +6,7 @@
 /*   By: mdoumi <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/02 17:01:31 by ^@^ Foxan ^       #+#    #+#             */
-/*   Updated: 2023/05/18 03:02:21 by mdoumi           ###   ########.fr       */
+/*   Updated: 2023/05/18 15:40:22 by mdoumi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,9 @@
 # define P3 3*PI/2
 # define DR 0.0174533
 
+# define windowWidth 1024
+# define windowHeight 512
+
 # define OPEN_ERROR "Error\nOpen failed.\n"
 # define INV_ARGS "Error\n1 Argument is required.\n"
 # define ETRANGER_ERROR "Error\nInvalid character in map.\n"
@@ -54,14 +57,17 @@ typedef struct s_ray
 {
 	float	pdx;
 	float	pdy;
+
+	float	pxx;
+	float	pyy;
 }	t_ray;
 
 typedef struct s_cub3d
 {
 	int			i;
 	int			j;
-	float		p_x;
-	float		p_y;
+	float		px;
+	float		py;
 	float		pa;
 	int			m_size;
 	int			p_size;
@@ -71,6 +77,7 @@ typedef struct s_cub3d
 	t_ray		*ray;
 	mlx_t		*mlx;
 	mlx_image_t	*player_img;
+	mlx_image_t	*ray_img;
 }	t_cub3d;
 
 void	init_player(t_cub3d *uwu);
@@ -83,6 +90,7 @@ int		ft_strcmp(char *s1, char *s2);
 char	**parse_map(t_cub3d *uwu, char *path);
 void	*error(char *code);
 char	**append_to_map(char *line, char **map);
+void	draw_line(mlx_image_t *img, int x0, int y0, int x1, int y1, int color);
 void	quit_program(void);
 void	parse_textures(t_cub3d *uwu, int fd);
 char	**ft_split(char const *str, char c);

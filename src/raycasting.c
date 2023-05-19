@@ -18,20 +18,6 @@
 # define windowHeight 512
 # define windowWidth 1024
 
-typedef	struct s_raycasting
-{
-	float	px;
-	float	py;
-	float	pdx;
-	float	pdy;
-	float	pa;
-
-	int	mapX;
-	int	mapY;
-	int	mapS;
-} t_ray;
-
-
 void	drawRays2D();
 void	draw_line(int x0, int y0, int x1, int y1, int color);
 
