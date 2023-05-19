@@ -6,7 +6,7 @@
 /*   By: mdoumi <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/18 02:13:02 by mdoumi            #+#    #+#             */
-/*   Updated: 2023/05/19 13:15:19 by mdoumi           ###   ########.fr       */
+/*   Updated: 2023/05/19 18:56:10 by mdoumi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,9 +44,11 @@ void	draw_line(mlx_image_t *img, int x0, int y0, int x1, int y1, int color)
 
 void	raycaster(t_cub3d *uwu)
 {
-	float	rx, ry, ra, xo, yo;
+	float	px, py, rx, ry, ra, xo, yo;
 	int		r,mx,my,mp,dof;
 
+	px = uwu->px + uwu->p_size / 2;
+	py = uwu->py + uwu->p_size / 2;
 	ra = uwu->pa;
 	for (r = 0; r < 1; r++)
 	{
@@ -54,29 +56,28 @@ void	raycaster(t_cub3d *uwu)
 		float aTan = -1/tan(ra);
 		if (ra > PI)
 		{
-			ry = (((int)uwu->py/uwu->m_size)*uwu->m_size)-0.0001;
-			rx = (uwu->py-ry)*aTan+uwu->px;
+			ry = (((int)py/uwu->m_size)*uwu->m_size)-0.0001;
+			rx = (py-ry)*aTan+px;
 			yo = -uwu->m_size;
 			xo = -yo*aTan;
 		}
 		if (ra < PI)
 		{
-			ry = (((int)uwu->py/uwu->m_size)*uwu->m_size) + uwu->m_size;
-			rx = (uwu->py-ry)*aTan+uwu->px;
+			ry = (((int)py/uwu->m_size)*uwu->m_size) + uwu->m_size;
+			rx = (py-ry)*aTan+px;
 			yo = uwu->m_size;
 			xo = -yo*aTan;
 		}
 		if (ra == 0 || ra == PI)
 		{
-			ry = uwu->py;
-			rx = uwu->px;
+			ry = py;
+			rx = px;
 			dof = 8;
 		}
 		while (dof < 8)
 		{
 			mx = (int)(rx)/uwu->m_size;
 			my = (int)(ry)/uwu->m_size;
-			printf("%d %d\n", mx, my);
 			if (mx+my*mapX > 0 && mx < mapX && my < mapY && uwu->map[my][mx] == '1')
 				dof = 8;
 			else
@@ -86,6 +87,45 @@ void	raycaster(t_cub3d *uwu)
 				dof++;
 			}
 		}
-		draw_line(uwu->ray_img, uwu->px+uwu->p_size/2, uwu->py+uwu->p_size/2, rx, ry, RED);
+		draw_line(uwu->ray_img, px, py, rx, ry, RED);
+
+		//HAHA
+
+		dof = 0;
+		float nTan = -tan(ra);
+		if (ra > P2 && ra < P3)
+		{
+			rx = (((int)px/uwu->m_size)*uwu->m_size)-0.0001;
+			ry = (px-rx)*nTan+py;
+			xo = -uwu->m_size;
+			yo = -xo*nTan;
+		}
+		if (ra < P2 || ra > P3)
+		{
+			rx = (((int)px/uwu->m_size)*uwu->m_size) + uwu->m_size;
+			ry = (px-rx)*nTan+py;
+			xo = uwu->m_size;
+			yo = -xo*nTan;
+		}
+		if (ra == 0 || ra == PI)
+		{
+			ry = py;
+			rx = px;
+			dof = 8;
+		}
+		while (dof < 8)
+		{
+			mx = (int)(rx)/uwu->m_size;
+			my = (int)(ry)/uwu->m_size;
+			if (mx+my*mapX > 0 && mx < mapX && my < mapY && uwu->map[my][mx] == '1')
+				dof = 8;
+			else
+			{
+				rx += xo;
+				ry += yo;
+				dof++;
+			}
+		}
+		draw_line(uwu->ray_img, px, py, rx, ry, GRE);
 	}
 }
