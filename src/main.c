@@ -100,10 +100,30 @@ int	main(int ac, char **av)
 	uwu = malloc(sizeof(t_cub3d));
 	init_(uwu, av);
 
-
 	init_img(uwu);
 	render(uwu);
 
+	//mlx_texture_t *text = mlx_load_png("./imaa.png");
+	//mlx_image_t *caca = mlx_new_image(uwu->mlx, 32, 32);
+
+	//uint8_t* pixelx;
+	//uint8_t* pixeli;
+	//const int32_t xy[] = {0, 0};
+	//const uint32_t wh[] = {64, 64};
+	//for (uint32_t y = 0; y < wh[1]; y++)
+	//{
+		//for (uint32_t x = 0; x < wh[0]; x++)
+		//{
+			//caca->pixels[y*wh[0]+x] = text->pixels[y*wh[0]+x];
+		//}
+		////pixelx = &text->pixels[((xy[1] + y) * text->width + xy[0]) * sizeof(int32_t)];
+		////pixeli = &caca->pixels[y * wh[0] * sizeof(int32_t)];
+		////memmove(pixeli, pixelx, wh[0] * sizeof(int32_t));
+	//}
+
+	//mlx_image_to_window(uwu->mlx, caca, 0, 0);
+
 	mlx_key_hook(uwu->mlx, &key_hook, uwu);
 	mlx_loop(uwu->mlx);
+	mlx_terminate(uwu->mlx);
 }

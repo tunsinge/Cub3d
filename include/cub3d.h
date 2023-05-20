@@ -6,7 +6,7 @@
 /*   By: mdoumi <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/02 17:01:31 by ^@^ Foxan ^       #+#    #+#             */
-/*   Updated: 2023/05/20 15:03:37 by mdoumi           ###   ########.fr       */
+/*   Updated: 2023/05/20 16:26:15 by mdoumi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 # include <math.h>
 # include "get_next_line_bonus.h"
 # include "../MLX42/include/MLX42/MLX42.h"
+# include <string.h>
 
 # define WHI 0xFFFFFFFF
 # define BLA 0x000000FF
