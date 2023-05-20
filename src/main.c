@@ -61,9 +61,7 @@ void	key_hook(mlx_key_data_t keydata, void *param)
 		uwu->ray->pdx = cosf(uwu->pa)*5;
 		uwu->ray->pdy = sinf(uwu->pa)*5;
 	}
-	raycaster(uwu);
-	render_player(uwu);
-	render_map(uwu);
+	render(uwu);
 }
 
 
@@ -84,8 +82,10 @@ void	init_(t_cub3d *uwu, char **av)
 	uwu->p_color = CYA;
 	get_pp(uwu);
 
+	uwu->mapX = 8;
+	uwu->mapY = 5;
+
 	uwu->ray = malloc(sizeof(t_ray));
-	printf("%f\n", uwu->pa);
 
 	uwu->mlx = mlx_init(windowWidth, windowHeight, "cub3d", true);
 }
@@ -101,9 +101,8 @@ int	main(int ac, char **av)
 	init_(uwu, av);
 
 
-	init_player(uwu);
-	raycaster(uwu);
-	render_map(uwu);
+	init_img(uwu);
+	render(uwu);
 
 	mlx_key_hook(uwu->mlx, &key_hook, uwu);
 	mlx_loop(uwu->mlx);

@@ -28,6 +28,25 @@ void	ft_bzero(void *s, size_t n)
 	}
 }
 
+void	init_img(t_cub3d *uwu)
+{
+	init_player(uwu);
+	init_map(uwu);
+	uwu->trwaD_img = mlx_new_image(uwu->mlx, windowWidth, windowHeight);
+
+	raycaster(uwu);
+
+	mlx_image_to_window(uwu->mlx, uwu->trwaD_img, 0, 0);
+	uwu->trwaD_img->instances[0].z = 0;
+}
+
+void	render(t_cub3d *uwu)
+{
+	render_player(uwu);
+
+	raycaster(uwu);
+}
+
 void	render_player(t_cub3d *uwu)
 {
 	uwu->player_img->instances[0].x = uwu->px;
@@ -35,10 +54,6 @@ void	render_player(t_cub3d *uwu)
 
 	uwu->ray->pxx = uwu->ray->pdx*5 + uwu->px;
 	uwu->ray->pyy = uwu->ray->pdy*5 + uwu->py;
-
-	mlx_delete_image(uwu->mlx, uwu->ray_img);
-	uwu->ray_img = mlx_new_image(uwu->mlx, windowWidth, windowHeight);
-	mlx_image_to_window(uwu->mlx, uwu->ray_img, 0, 0);
 }
 
 void	init_player(t_cub3d *uwu)
@@ -54,8 +69,7 @@ void	init_player(t_cub3d *uwu)
 
 	uwu->player_img = fill(uwu->mlx, uwu->p_size, uwu->p_size, uwu->p_color);
 	mlx_image_to_window(uwu->mlx, uwu->player_img, uwu->px, uwu->py);
-
-	render_player(uwu);
+	uwu->player_img->instances[0].z = 2;
 }
 
 mlx_image_t	*color_chart(t_cub3d *uwu, char value)
@@ -78,11 +92,11 @@ mlx_image_t	*color_chart(t_cub3d *uwu, char value)
 	return (NULL);
 }
 
-void	render_map(t_cub3d *uwu)
+void	init_map(t_cub3d *uwu)
 {
 	int	i;
 	int	j;
-	mlx_image_t	*tmp;
+	uwu->map_img = mlx_new_image(uwu->mlx, uwu->mapX*(uwu->m_size+1), uwu->mapY*(uwu->m_size+1));
 
 	i = 0;
 	while (uwu->map[i])
@@ -90,12 +104,16 @@ void	render_map(t_cub3d *uwu)
 		j = 0;
 		while (uwu->map[i][j])
 		{
-			tmp = color_chart(uwu, uwu->map[i][j]);
-			mlx_image_to_window(uwu->mlx, tmp, j*uwu->m_size, i*uwu->m_size);
+			if (uwu->map[i][j] == '1')
+				fill_img(uwu->map_img, j*uwu->m_size, i*uwu->m_size, BLA, uwu->m_size);
+			if (!is_etranger(uwu->map[i][j]) && uwu->map[i][j] != '1')
+				fill_img(uwu->map_img, j*uwu->m_size, i*uwu->m_size, WHI, uwu->m_size);
 			j++;
 		}
 		i++;
 	}
+	mlx_image_to_window(uwu->mlx, uwu->map_img, 0, 0);
+	uwu->map_img->instances[0].z = 1;
 }
 
 mlx_image_t	*fill(mlx_t *mlx, int w, int h, uint32_t color)
@@ -108,3 +126,11 @@ mlx_image_t	*fill(mlx_t *mlx, int w, int h, uint32_t color)
 			mlx_put_pixel(image, x, y, color);
 	return (image);
 }
+
+void	fill_img(mlx_image_t *img, int w, int h, uint32_t color, int size)
+{
+	for (int x = w; x < w+size; x++)
+		for(int y = h; y < h+size; y++)
+			mlx_put_pixel(img, x, y, color);
+}
+

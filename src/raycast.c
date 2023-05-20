@@ -6,7 +6,7 @@
 /*   By: mdoumi <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/18 02:13:02 by mdoumi            #+#    #+#             */
-/*   Updated: 2023/05/19 20:25:42 by mdoumi           ###   ########.fr       */
+/*   Updated: 2023/05/19 20:25:42y mdoumi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -341,15 +341,15 @@ void	raycaster(t_cub3d *uwu)
 		{
 			float c = All_Textures[(int)(ty)*32 + (int)(tx)] * shade;
 			int color = get_rgba(c*255,c*255,c*255, 255);
-			for (int z = 0; z < 8; z++)mlx_put_pixel(uwu->ray_img, r*8+z, lineO+y, color);
+			for (int z = 0; z < 8; z++)mlx_put_pixel(uwu->trwaD_img, r*8+z, lineO+y, color);
 			ty += ty_step;
 		}
 
 		for (int z = 0; z < 8; z++)
 		{
-			draw_line(uwu->ray_img, r*8+z, 0, r*8+z, lineO, CYA); // Plafond
+			draw_line(uwu->trwaD_img, r*8+z, 0, r*8+z, lineO, CYA); // Plafond
 			//draw_line(r*8+530+z, lineO, r*8+530+z, lineH+lineO, color); // Mur
-			draw_line(uwu->ray_img, r*8+z, lineH+lineO, r*8+z, 320, GRE); // Sol
+			draw_line(uwu->trwaD_img, r*8+z, lineH+lineO, r*8+z, 320, GRE); // Sol
 		}
 
 		ra+=DR*(60 / ray_nb);

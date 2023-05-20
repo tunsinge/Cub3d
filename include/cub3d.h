@@ -6,7 +6,7 @@
 /*   By: mdoumi <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/02 17:01:31 by ^@^ Foxan ^       #+#    #+#             */
-/*   Updated: 2023/05/18 15:40:22 by mdoumi           ###   ########.fr       */
+/*   Updated: 2023/05/20 15:03:37 by mdoumi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,21 +69,30 @@ typedef struct s_cub3d
 	float		px;
 	float		py;
 	float		pa;
+	int			mapX;
+	int			mapY;
 	int			m_size;
 	int			p_size;
 	int			p_color;
 	char		**map;
+	mlx_image_t	*player_img;
+	mlx_image_t	*ray_img;
+	mlx_image_t	*map_img;
+	mlx_image_t	*trwaD_img;
 	t_textures	*textures;
 	t_ray		*ray;
 	mlx_t		*mlx;
-	mlx_image_t	*player_img;
-	mlx_image_t	*ray_img;
 }	t_cub3d;
 
 void	init_player(t_cub3d *uwu);
+void	fill_img(mlx_image_t *img, int w, int h, uint32_t color, int size);
+void	init_img(t_cub3d *uwu);
+int	is_etranger(char c);
+void	init_map(t_cub3d *uwu);
 void	raycaster(t_cub3d *uwu);
 int		ft_strlen(char *str);
 int		ft_strrlen(char **str);
+void	render(t_cub3d *uwu);
 void	check_map(char **map);
 char	*ft_substr(char *s, int start, int len);
 int		ft_strcmp(char *s1, char *s2);
