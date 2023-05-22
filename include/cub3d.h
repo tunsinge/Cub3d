@@ -37,7 +37,7 @@
 # define P3 3*PI/2
 # define DR 0.0174533
 
-# define scale 2
+# define scale 3
 # define windowWidth 480*scale
 # define windowHeight 320*scale
 
@@ -142,6 +142,6 @@ int			verify_texture(char *texture);
 
 void		load_textures(t_textures *textures);
 void		delete_textures(t_textures *textures);
-int			get_pixel_color(mlx_texture_t *texture, int x, int y);
+int			pixel_to_color(mlx_texture_t *text, int x, int y);
 
 #endif // CUB3D_H
