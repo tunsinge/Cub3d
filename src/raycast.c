@@ -350,7 +350,7 @@ void	raycaster(t_cub3d *uwu)
 		{
 			draw_line(uwu->trwaD_img, r*w/ray_nb+z, 0, r*w/ray_nb+z, lineO, CYA); // Plafond
 			//draw_line(r*8+530+z, lineO, r*8+530+z, lineH+lineO, color); // Mur
-			draw_line(uwu->trwaD_img, r*w/ray_nb+z, lineH+lineO, r*w/ray_nb+z, h, GRE); // Sol
+			draw_line(uwu->trwaD_img, r*w/ray_nb+z, lineH+lineO, r*w/ray_nb+z, h - 1, GRE); // Sol
 		}
 
 		ra+=DR*(60 / ray_nb);
