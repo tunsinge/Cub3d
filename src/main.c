@@ -12,21 +12,60 @@
 
 #include "cub3d.h"
 
+int	roundc(float n)
+{
+	if (n - (int)n > 0.5)
+		return ((int)n + 1);
+	return ((int)n);
+}
+
 void	key_hook(mlx_key_data_t keydata, void *param)
 {
 	t_cub3d	*uwu;
 
 	uwu = param;
-	if (keydata.key == MLX_KEY_ESCAPE && keydata.action == 1)
+	if (keydata.key == MLX_KEY_ESCAPE)
 		quit_program();
+
+	int xo = 0; if(uwu->ray->pdx<0){xo=-20;} else{xo=20;}
+	int yo = 0; if(uwu->ray->pdy<0){yo=-20;} else{yo=20;}
+	int	ipx=uwu->px/(float)uwu->m_size, ipx_a=(uwu->px+xo)/uwu->m_size, ipx_s=(uwu->px-xo)/uwu->m_size;
+	int	ipy=uwu->py/(float)uwu->m_size, ipy_a=(uwu->py+yo)/uwu->m_size, ipy_s=(uwu->py-yo)/uwu->m_size;
 	if (keydata.key == 'W')
-		uwu->player_img->instances[0].y -= 5;
+	{
+		if (uwu->map[ipy][ipx_a]=='0'){uwu->px+=uwu->ray->pdx;}
+		if (uwu->map[ipy_a][ipx]=='0'){uwu->py+=uwu->ray->pdy;}
+		//if (uwu->map[(int)uwu->py/uwu->m_size][(int)uwu->ray->pxx/uwu->m_size] != '1')
+			//uwu->px += uwu->ray->pdx;
+		//if (uwu->map[(int)uwu->ray->pyy/uwu->m_size][(int)uwu->px/uwu->m_size] != '1')
+			//uwu->py += uwu->ray->pdy;
+	}
 	if (keydata.key == 'S')
-		uwu->player_img->instances[0].y += 5;
+	{
+		uwu->px -= uwu->ray->pdx;
+		uwu->py -= uwu->ray->pdy;
+	}
 	if (keydata.key == 'A')
-		uwu->player_img->instances[0].x -= 5;
+	{
+		uwu->pa -= 0.1;
+		if (uwu->pa < 0)
+		{
+			uwu->pa += 2*PI;
+		}
+		uwu->ray->pdx = cosf(uwu->pa)*5;
+		uwu->ray->pdy = sinf(uwu->pa)*5;
+	}
 	if (keydata.key == 'D')
-		uwu->player_img->instances[0].x += 5;
+	{
+		uwu->pa += 0.1;
+		if (uwu->pa > 2*PI)
+		{
+			uwu->pa -= 2*PI;
+		}
+		uwu->ray->pdx = cosf(uwu->pa)*5;
+		uwu->ray->pdy = sinf(uwu->pa)*5;
+	}
+	render(uwu);
 }
 
 
@@ -42,14 +81,18 @@ void	init_(t_cub3d *uwu, char **av)
 	check_map_path(av);
 	uwu->map = parse_map(uwu, av[1]);
 	check_map(uwu->map);
-	uwu->tab = tab_to_struct(uwu);
-	uwu->case_size = 64;
+	uwu->m_size = 256 / ft_strlen(uwu->map[0]);
+	uwu->p_size = uwu->m_size / 4;
+	uwu->p_color = CYA;
 	get_pp(uwu);
-	uwu->mlx = mlx_init(1080, 720, "cub3d", true);
 	uwu->player_size = uwu->case_size / 4;
 	uwu->player_img = fill(uwu->mlx, uwu->player_size, uwu->player_size, BLA);
 	uwu->map_s_y = ft_strrlen(uwu->map);
 	uwu->map_s_x = ft_strlen(uwu->map[0]);
+	uwu->mapX = 8;
+	uwu->mapY = 5;
+	uwu->ray = malloc(sizeof(t_ray));
+	uwu->mlx = mlx_init(windowWidth, windowHeight, "cub3d", true);
 }
 
 int	main(int ac, char **av)
@@ -61,8 +104,30 @@ int	main(int ac, char **av)
 	uwu = malloc(sizeof(t_cub3d));
 	init_(uwu, av);
 	printf("%d\n", check_map_closed(uwu));
+	init_img(uwu);
 	render(uwu);
-	render_player(uwu);
+
+	//mlx_texture_t *text = mlx_load_png("./imaa.png");
+	//mlx_image_t *caca = mlx_new_image(uwu->mlx, 32, 32);
+
+	//uint8_t* pixelx;
+	//uint8_t* pixeli;
+	//const int32_t xy[] = {0, 0};
+	//const uint32_t wh[] = {64, 64};
+	//for (uint32_t y = 0; y < wh[1]; y++)
+	//{
+		//for (uint32_t x = 0; x < wh[0]; x++)
+		//{
+			//caca->pixels[y*wh[0]+x] = text->pixels[y*wh[0]+x];
+		//}
+		////pixelx = &text->pixels[((xy[1] + y) * text->width + xy[0]) * sizeof(int32_t)];
+		////pixeli = &caca->pixels[y * wh[0] * sizeof(int32_t)];
+		////memmove(pixeli, pixelx, wh[0] * sizeof(int32_t));
+	//}
+
+	//mlx_image_to_window(uwu->mlx, caca, 0, 0);
+
 	mlx_key_hook(uwu->mlx, &key_hook, uwu);
 	mlx_loop(uwu->mlx);
+	mlx_terminate(uwu->mlx);
 }

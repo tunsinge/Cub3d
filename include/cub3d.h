@@ -6,7 +6,7 @@
 /*   By: mdoumi <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/02 17:01:31 by ^@^ Foxan ^       #+#    #+#             */
-/*   Updated: 2023/05/04 12:36:33 by mdoumi           ###   ########.fr       */
+/*   Updated: 2023/05/20 16:26:15 by mdoumi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,10 @@
 # include <stdlib.h>
 # include <fcntl.h>
 # include <unistd.h>
+# include <math.h>
 # include "get_next_line_bonus.h"
 # include "../MLX42/include/MLX42/MLX42.h"
+# include <string.h>
 
 # define WHI 0xFFFFFFFF
 # define BLA 0x000000FF
@@ -30,7 +32,15 @@
 # define PIN 0xFF00FFFF
 # define ALP 0x00000000
 
-# define INVALID_PATH "Error\nMap is not valid. It must end with .cub.\n"
+# define PI 3.1415926535
+# define P2 PI/2
+# define P3 3*PI/2
+# define DR 0.0174533
+
+# define scale 2
+# define windowWidth 480*scale
+# define windowHeight 320*scale
+
 # define OPEN_ERROR "Error\nOpen failed.\n"
 # define INV_ARGS "Error\n1 Argument is required.\n"
 # define ETRANGER_ERROR "Error\nInvalid character in map.\n"
@@ -42,12 +52,7 @@
 								identifier in textures\n"
 # define INVALID_TEXTURE_PATH "Error\nInvalid texture path\n"
 # define INVALID_TEXTURE_FORMAT "Error\nInvalid texture format\n"
-
-typedef struct s_case
-{
-	char		value;
-	mlx_image_t	*img;
-}	t_case;
+# define INVALID_PATH "Error\nMap is not valid. It must end with .cub.\n"
 
 typedef struct s_textures
 {
@@ -63,6 +68,15 @@ typedef struct s_textures
 	mlx_texture_t	*text_we;
 }	t_textures;
 
+typedef struct s_ray
+{
+	float	pdx;
+	float	pdy;
+
+	float	pxx;
+	float	pyy;
+}	t_ray;
+
 typedef struct s_cub3d
 {
 	int			i;
@@ -73,33 +87,51 @@ typedef struct s_cub3d
 	int			player_size;
 	int			map_s_x;
 	int			map_s_y;
+	float		px;
+	float		py;
+	float		pa;
+	int			mapX;
+	int			mapY;
+	int			m_size;
+	int			p_size;
+	int			p_color;
 	char		**map;
-	t_textures	*textures;
-	mlx_t		*mlx;
 	mlx_image_t	*player_img;
-	t_case		***tab;
+	mlx_image_t	*ray_img;
+	mlx_image_t	*map_img;
+	mlx_image_t	*trwaD_img;
+	t_textures	*textures;
+	t_ray		*ray;
+	mlx_t		*mlx;
 }	t_cub3d;
 
-int			ft_strlen(char *str);
-int			ft_strrlen(char **str);
-void		check_map(char **map);
-char		*ft_substr(char *s, int start, int len);
-int			ft_strcmp(char *s1, char *s2);
-char		**parse_map(t_cub3d *uwu, char *path);
-void		*error(char *code);
-char		**append_to_map(char *line, char **map);
-void		quit_program(void);
-void		parse_textures(t_cub3d *uwu, int fd);
-char		**ft_split(char const *str, char c);
-char		*ft_strdup(char *s1);
+void	init_player(t_cub3d *uwu);
+void	fill_img(mlx_image_t *img, int w, int h, uint32_t color, int size);
+void	init_img(t_cub3d *uwu);
+int	is_etranger(char c);
+void	init_map(t_cub3d *uwu);
+void	raycaster(t_cub3d *uwu);
+int		ft_strlen(char *str);
+int		ft_strrlen(char **str);
+void	render(t_cub3d *uwu);
+void	check_map(char **map);
+char	*ft_substr(char *s, int start, int len);
+int		ft_strcmp(char *s1, char *s2);
+char	**parse_map(t_cub3d *uwu, char *path);
+void	*error(char *code);
+char	**append_to_map(char *line, char **map);
+void	draw_line(mlx_image_t *img, int x0, int y0, int x1, int y1, int color);
+void	quit_program(void);
+void	parse_textures(t_cub3d *uwu, int fd);
+char	**ft_split(char const *str, char c);
+char	*ft_strdup(char *s1);
 mlx_image_t	*fill(mlx_t *mlx, int w, int h, uint32_t color);
-void		render(t_cub3d *uwu);
+void		render_map(t_cub3d *uwu);
 mlx_image_t	*color_chart(t_cub3d *uwu, char value);
 void		render_player(t_cub3d *uwu);
 int			get_rgba(int r, int g, int b, int a);
 void		get_pp(t_cub3d *uwu);
 void		check_map_path(char **av);
-t_case		***tab_to_struct(t_cub3d *uwu);
 int			ft_atoi(char *str);
 void		store_texture(t_cub3d *uwu, char **fields);
 char		*ft_strdupnonl(char *s1);

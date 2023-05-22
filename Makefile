@@ -1,12 +1,12 @@
 # **************************************************************************** #
 #                                                                              #
 #                                                         :::      ::::::::    #
-#    Makefile                                            :+:      :+:    :+:    #
+#    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: Foxan         <foxan57@gmail.com>          +#+  +:+       +#+         #
+#    By: mdoumi <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/03 10:23:53 by Foxan             #+#    #+#              #
-#    Updated: 2022/11/03 10:23:54 by Foxan            ###   ########.fr        #
+#    Updated: 2023/05/18 14:33:39 by mdoumi           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,8 +24,9 @@ RESET			:= \033[0m
 
 #//= Variables =//#
 CC				:= gcc
-NAME			:= minishell
-PROJECT_NAME	:= MINISHELL
+NAME			:= cub3d
+PROJECT_NAME	:= CUB3D
+#SRCS = ./src/raycasting.c
 SRCS			:=	./src/main.c \
 					./src/check_map.c \
 					./src/error.c \
@@ -38,18 +39,18 @@ SRCS			:=	./src/main.c \
 					./src/parsing.c \
 					./src/parsing_utils.c \
 					./src/quit.c \
-					./src/raycasting.c \
+					./src/raycast.c \
 					./src/render.c \
 					./src/utils.c \
 					./src/GNL/get_next_line_bonus.c \
 					./src/GNL/get_next_line_utils_bonus.c
 INCLUDES		:= -I ./include
-FLAGS			:= -Wall -Wextra -Werror -g -g3
+FLAGS			:= -g -g3
 OBJS			:= ${SRCS:.c=.o}
 SOMETHING		:= 0
 LIBMLX			:= ./MLX42
 LIBGLFW 		:= -L "/Users/$$USER/.brew/opt/glfw/lib/"
-LIBS			:= $(LIBMLX)/libmlx42.a -lglfw
+LIBS			:= $(LIBMLX)/libmlx42.a -lglfw -lm
 
 #//= Main compiling rules =//#
 
