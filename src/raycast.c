@@ -12,202 +12,137 @@
 
 #include "cub3d.h"
 
-int	mapX = 8, mapY = 5, mapS = 64;
-
 void	draw_line(mlx_image_t *img, int x0, int y0, int x1, int y1, int color)
 {
-	int dx;
-	int dy;
-	int err;
-	int e2;
-	int	sx;
-	int	sy;
+	t_drwlvars	v;
 
-	dx = abs(x1-x0);
-	sx = x0<x1 ? 1 : -1;
-	dy = abs(y1-y0);
-	sy = y0<y1 ? 1 : -1;
-	err = (dx>dy ? dx : -dy)/2;
-
+	v.sx = (x0 < x1) + (x0 >= x1) * -1;
+	v.sy = (y0 < y1) + (y0 >= y1) * -1;
+	v.err = abs(x1 - x0);
+	if (abs(x1 - x0) <= abs(y1 - y0))
+		v.err = -abs(y1 - y0);
 	while (1)
 	{
 		if (x0 >= 0 && x0 <= windowWidth && y0 >= 0 && y0 <= windowHeight)
 			mlx_put_pixel(img, x0, y0, color);
 		else
 			return ;
-		if (x0==x1 && y0==y1) break;
-		e2 = err;
-		if (e2 >-dx) { err -= dy; x0 += sx; }
-		if (e2 < dy) { err += dx; y0 += sy; }
+		if (x0 == x1 && y0 == y1)
+			return ;
+		v.e2 = v.err;
+		if (v.e2 > -abs(x1 - x0))
+			((void)0, v.err -= abs(y1 - y0), x0 += v.sx);
+		if (v.e2 < abs(y1 - y0))
+			((void)0, v.err += abs(x1 - x0), y0 += v.sy);
 	}
 }
 
-float dist (float ax, float ay, float bx, float by)
+float	dist(float ax, float ay, float bx, float by)
 {
-	return (sqrt((bx-ax) * (bx-ax) + (by-ay) * (by-ay)));
+	return (sqrt((bx - ax) * (bx - ax) + (by - ay) * (by - ay)));
 }
 
 void	check_angle(float *ra)
 {
 	if (*ra < 0)
-		*ra += 2*PI;
-	if (*ra>2*PI)
-		*ra -= 2*PI;
+		*ra += 2 * PI;
+	if (*ra > 2 * PI)
+		*ra -= 2 * PI;
 }
 
 void	raycaster(t_cub3d *uwu)
 {
-	float	px, py, pa, rx, ry, ra, xo, yo,ray_nb,r,disT;
-	int		mx,my,mp,dof;
-	int		w = 480 * scale, h = 320 * scale;
+	mlx_texture_t	*texture;
 
-	px = uwu->px + uwu->p_size / 2;
-	py = uwu->py + uwu->p_size / 2;
-	ra = uwu->pa-DR*30;
-	pa = uwu->pa;
-	check_angle(&ra);
-	ray_nb = 480;
-	for (r = 0; r < ray_nb; r++)
+	VAR->w = 480 * scale;
+	VAR->h = 320 * scale;
+	VAR->px = uwu->px + uwu->p_size / 2;
+	VAR->py = uwu->py + uwu->p_size / 2;
+	VAR->ra = uwu->pa - DR * 30;
+	VAR->pa = uwu->pa;
+	check_angle(&VAR->ra);
+	VAR->ray_nb = 480;
+	VAR->r = 0;
+	while (VAR->r < VAR->ray_nb)
 	{
-		dof = 0;
-		float disH=1000000, hx=px, hy=py;
-		float aTan = -1/tan(ra);
-		if (ra > PI)
+		horizontal(uwu);
+		vertical(uwu);
+		VAR->shade = 1;
+		if (VAR->dis_v < VAR->dis_h)
 		{
-			ry = (((int)py/uwu->m_size)*uwu->m_size)-0.0001;
-			rx = (py-ry)*aTan+px;
-			yo = -uwu->m_size;
-			xo = -yo*aTan;
-		}
-		if (ra < PI)
-		{
-			ry = (((int)py/uwu->m_size)*uwu->m_size) + uwu->m_size;
-			rx = (py-ry)*aTan+px;
-			yo = uwu->m_size;
-			xo = -yo*aTan;
-		}
-		if (ra == 0 || ra == PI)
-		{
-			ry = py;
-			rx = px;
-			dof = 8;
-		}
-		while (dof < 8)
-		{
-			mx = (int)(rx)/uwu->m_size;
-			my = (int)(ry)/uwu->m_size;
-			if (mx+my*mapX > 0 && mx < mapX && my < mapY && uwu->map[my][mx] == '1')
-			{
-				hx=rx;
-				hy=ry;
-				disH=dist(px,py,hx,hy);
-				dof = 8;
-			}
+			VAR->rx = VAR->vx;
+			VAR->ry = VAR->vy;
+			VAR->dist = VAR->dis_v;
+			if (VAR->ra > P2 && VAR->ra < P3)
+				texture = uwu->textures->text_we;
 			else
-			{
-				rx += xo;
-				ry += yo;
-				dof++;
-			}
+				texture = uwu->textures->text_ea;
 		}
-
-		//HAHA
-
-		dof = 0;
-		float disV=1000000, vx=px, vy=py;
-		float nTan = -tan(ra);
-		if (ra > P2 && ra < P3)
+		if (VAR->dis_v >= VAR->dis_h)
 		{
-			rx = (((int)px/uwu->m_size)*uwu->m_size)-0.0001;
-			ry = (px-rx)*nTan+py;
-			xo = -uwu->m_size;
-			yo = -xo*nTan;
-		}
-		if (ra < P2 || ra > P3)
-		{
-			rx = (((int)px/uwu->m_size)*uwu->m_size) + uwu->m_size;
-			ry = (px-rx)*nTan+py;
-			xo = uwu->m_size;
-			yo = -xo*nTan;
-		}
-		if (ra == 0 || ra == PI)
-		{
-			ry = py;
-			rx = px;
-			dof = 8;
-		}
-		while (dof < 8)
-		{
-			mx = (int)(rx)/uwu->m_size;
-			my = (int)(ry)/uwu->m_size;
-			if (mx+my*mapX > 0 && mx < mapX && my < mapY && uwu->map[my][mx] == '1')
-			{
-				vx=rx;
-				vy=ry;
-				disV=dist(px,py,vx,vy);
-				dof = 8;
-			}
+			VAR->shade = 0.5;
+			VAR->rx = VAR->hx;
+			VAR->ry = VAR->hy;
+			VAR->dist = VAR->dis_h;
+			if (VAR->ra > PI)
+				texture = uwu->textures->text_no;
 			else
-			{
-				rx += xo;
-				ry += yo;
-				dof++;
-			}
+				texture = uwu->textures->text_so;
 		}
-
-		float shade = 1;
-		if (disV<disH)
+		VAR->ca = VAR->pa - VAR->ra;
+		VAR->dist = VAR->dist * cosf(VAR->ca);
+		check_angle(&VAR->ca);
+		VAR->line_h = (uwu->m_size * VAR->h) / VAR->dist;
+		VAR->sext = uwu->textures->text_no->width;
+		VAR->seyt = uwu->textures->text_no->height;
+		VAR->ty_step = VAR->seyt / (float)VAR->line_h;
+		VAR->ty_off = 0;
+		if (VAR->line_h > VAR->h)
 		{
-			rx=vx;
-			ry=vy;
-			disT = disV;
+			VAR->ty_off = (VAR->line_h - VAR->h) / 2.0;
+			VAR->line_h = VAR->h;
 		}
-		if (disV>disH)
+		VAR->line_o = VAR->h / 2 - VAR->line_h / 2;
+		VAR->ty = VAR->ty_step * VAR->ty_off;
+		if (VAR->shade != 1)
 		{
-			shade = 0.5;
-			rx=hx;
-			ry=hy;
-			disT = disH;
+			VAR->tx = (int)(VAR->rx / (uwu->m_size / VAR->sext))
+				% (int)VAR->sext;
+			if (VAR->ra < PI)
+				VAR->tx = VAR->sext - 1 - VAR->tx;
 		}
-		//draw_line(uwu->ray_img, px, py, rx, ry, RED);
-
-		//---Draw 3D Walls---
-		float ca=pa-ra;
-		disT = disT*cosf(ca);
-		check_angle(&ca);
-		float lineH=(uwu->m_size*h)/disT;
-
-		float	sext = uwu->textures->text_no->width;
-		float	seyt = uwu->textures->text_no->height;
-
-		float ty_step = seyt/(float)lineH;
-		float ty_off = 0;
-		if(lineH>h){ty_off = (lineH-h)/2.0;lineH=h;}
-		float lineO=h/2-lineH/2;
-
-		int y;
-		float ty = ty_step*ty_off;
-		float tx;
-
-		if (shade != 1){ tx=(int)(rx/(uwu->m_size/sext))%(int)sext;} // if(ra<PI){ tx=31-tx ;} }
-		else		   { tx=(int)(ry/(uwu->m_size/sext))%(int)seyt;}// if (ra>P2 && ra<P3) { tx=31-tx; }}
-
-		mlx_texture_t	*texture;
-		for (y = 0; y < lineH; y++)
+		else
 		{
-			int color = pixel_to_color(texture, tx, ty);
-			for (int z = 0; z < w/ray_nb; z++)mlx_put_pixel(uwu->trwaD_img, r*w/ray_nb+z, lineO+y, color);
-			ty += ty_step;
+			VAR->tx = (int)(VAR->ry / (uwu->m_size / VAR->sext))
+				% (int)VAR->seyt;
+			if (VAR->ra > P2 && VAR->ra < P3)
+				VAR->tx = VAR->sext - 1 - VAR->tx;
 		}
-
-		for (int z = 0; z < w/ray_nb; z++)
+		VAR->y = 0;
+		while (VAR->y < VAR->line_h)
 		{
-			draw_line(uwu->trwaD_img, r*w/ray_nb+z, 0, r*w/ray_nb+z, lineO, CYA); // Plafond
-			//draw_line(r*8+530+z, lineO, r*8+530+z, lineH+lineO, color); // Mur
-			draw_line(uwu->trwaD_img, r*w/ray_nb+z, lineH+lineO, r*w/ray_nb+z, h - 1, GRE); // Sol
+			VAR->color = pixel_to_color(texture, VAR->tx, VAR->ty);
+			VAR->z = 0;
+			while (VAR->z < VAR->w / VAR->ray_nb)
+				mlx_put_pixel(uwu->trwaD_img,
+					VAR->r * VAR->w / VAR->ray_nb + VAR->z++,
+					VAR->line_o + VAR->y, VAR->color);
+			VAR->ty += VAR->ty_step;
+			VAR->y++;
 		}
-
-		ra+=DR*(60 / ray_nb);
-		check_angle(&ra);
+		VAR->z = 0;
+		while (VAR->z < VAR->w / VAR->ray_nb)
+		{
+			draw_line(uwu->trwaD_img, VAR->r * VAR->w / VAR->ray_nb + VAR->z,
+				0, VAR->r * VAR->w / VAR->ray_nb + VAR->z,
+				VAR->line_o, uwu->textures->color_ce);
+			draw_line(uwu->trwaD_img, VAR->r * VAR->w / VAR->ray_nb + VAR->z,
+				VAR->line_h + VAR->line_o, VAR->r * VAR->w / VAR->ray_nb
+				+ VAR->z, VAR->h - 1, uwu->textures->color_fl);
+			VAR->z++;
+		}
+		VAR->ra += DR * (60 / VAR->ray_nb);
+		check_angle(&VAR->ra);
+		VAR->r++;
 	}
 }

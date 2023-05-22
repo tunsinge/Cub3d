@@ -26,7 +26,6 @@ RESET			:= \033[0m
 CC				:= gcc
 NAME			:= cub3d
 PROJECT_NAME	:= CUB3D
-#SRCS = ./src/raycasting.c
 SRCS			:=	./src/main.c \
 					./src/check_map.c \
 					./src/error.c \
@@ -44,7 +43,10 @@ SRCS			:=	./src/main.c \
 					./src/utils.c \
 					./src/GNL/get_next_line_bonus.c \
 					./src/GNL/get_next_line_utils_bonus.c \
-					./src/textures.c
+					./src/textures.c \
+					./src/render2.c \
+					./src/rc_h.c \
+					./src/rc_v.c
 INCLUDES		:= -I ./include
 FLAGS			:= -g -g3
 OBJS			:= ${SRCS:.c=.o}

@@ -6,7 +6,7 @@
 /*   By: mdoumi <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/01 22:57:56 by mdoumi            #+#    #+#             */
-/*   Updated: 2023/05/04 12:07:30by mdoumi           ###   ########.fr       */
+/*   Updated: 2023/05/04 12:07:30 by mdoumi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@ void	key_hook(mlx_key_data_t keydata, void *param)
 	uwu = param;
 	if (keydata.key == MLX_KEY_ESCAPE)
 		quit_program();
-
 	//int xo = 0; if(uwu->ray->pdx<0){xo=-20;} else{xo=20;}
 	//int yo = 0; if(uwu->ray->pdy<0){yo=-20;} else{yo=20;}
 	//int	ipx=uwu->px/(float)uwu->m_size, ipx_a=(uwu->px+xo)/uwu->m_size, ipx_s=(uwu->px-xo)/uwu->m_size;
@@ -50,7 +49,7 @@ void	key_hook(mlx_key_data_t keydata, void *param)
 		uwu->pa -= 0.1;
 		if (uwu->pa < 0)
 		{
-			uwu->pa += 2*PI;
+			uwu->pa += 2 * PI;
 		}
 		uwu->ray->pdx = cosf(uwu->pa)*5;
 		uwu->ray->pdy = sinf(uwu->pa)*5;
@@ -58,12 +57,12 @@ void	key_hook(mlx_key_data_t keydata, void *param)
 	if (keydata.key == 'D')
 	{
 		uwu->pa += 0.1;
-		if (uwu->pa > 2*PI)
+		if (uwu->pa > 2 * PI)
 		{
-			uwu->pa -= 2*PI;
+			uwu->pa -= 2 * PI;
 		}
-		uwu->ray->pdx = cosf(uwu->pa)*5;
-		uwu->ray->pdy = sinf(uwu->pa)*5;
+		uwu->ray->pdx = cosf(uwu->pa) * 5;
+		uwu->ray->pdy = sinf(uwu->pa) * 5;
 	}
 	render(uwu);
 }
@@ -85,10 +84,11 @@ void	init_(t_cub3d *uwu, char **av)
 	uwu->p_size = uwu->m_size / 4;
 	uwu->p_color = CYA;
 	get_pp(uwu);
-	uwu->mapX = 8;
-	uwu->mapY = 5;
 	uwu->map_s_y = ft_strrlen(uwu->map);
 	uwu->map_s_x = ft_strlen(uwu->map[0]);
+	printf("%d, %d\n", uwu->map_s_x, uwu->map_s_y);
+	uwu->mapX = uwu->map_s_x;
+	uwu->mapY = uwu->map_s_y;
 	uwu->ray = malloc(sizeof(t_ray));
 	uwu->mlx = mlx_init(windowWidth, windowHeight, "cub3d", true);
 	load_textures(uwu->textures);
@@ -102,11 +102,10 @@ int	main(int ac, char **av)
 		return ((error(INV_ARGS), 1));
 	uwu = malloc(sizeof(t_cub3d));
 	init_(uwu, av);
-	printf("%d\n", check_map_closed(uwu));
 	init_img(uwu);
 	render(uwu);
 	mlx_key_hook(uwu->mlx, &key_hook, uwu);
 	mlx_loop(uwu->mlx);
-	mlx_terminate(uwu->mlx);
 	delete_textures(uwu->textures);
+	mlx_terminate(uwu->mlx);
 }
