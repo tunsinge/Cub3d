@@ -55,6 +55,7 @@ char	**append_to_map(char *line, char **map)
 void	parse_textures(t_cub3d *uwu, int fd)
 {
 	char	*line;
+	char	*line_nonl;
 	char	**fields;
 	int		nb_parsed;
 
@@ -64,11 +65,14 @@ void	parse_textures(t_cub3d *uwu, int fd)
 		line = get_next_line(fd);
 		if (line[0] != '\n')
 		{
-			fields = ft_split(line, ' ');
+			line_nonl = ft_strdupnonl(line);
+			fields = ft_split(line_nonl, ' ');
 			if (ft_strrlen(fields) != 2)
 				return ((void)error(INVALID_LINE), quit_program());
 			store_texture(uwu, fields);
 			nb_parsed++;
+			free_s(fields);
+			free(line_nonl);
 		}
 		free(line);
 	}

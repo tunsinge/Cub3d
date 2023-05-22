@@ -85,12 +85,13 @@ void	init_(t_cub3d *uwu, char **av)
 	uwu->p_size = uwu->m_size / 4;
 	uwu->p_color = CYA;
 	get_pp(uwu);
-
+	uwu->player_size = uwu->case_size / 4;
+	uwu->player_img = fill(uwu->mlx, uwu->player_size, uwu->player_size, BLA);
+	uwu->map_s_y = ft_strrlen(uwu->map);
+	uwu->map_s_x = ft_strlen(uwu->map[0]);
 	uwu->mapX = 8;
 	uwu->mapY = 5;
-
 	uwu->ray = malloc(sizeof(t_ray));
-
 	uwu->mlx = mlx_init(windowWidth, windowHeight, "cub3d", true);
 }
 
@@ -100,10 +101,9 @@ int	main(int ac, char **av)
 
 	if (ac != 2)
 		return ((error(INV_ARGS), 1));
-
 	uwu = malloc(sizeof(t_cub3d));
 	init_(uwu, av);
-
+	printf("%d\n", check_map_closed(uwu));
 	init_img(uwu);
 	render(uwu);
 

@@ -89,6 +89,8 @@ mlx_image_t	*color_chart(t_cub3d *uwu, char value)
 		return (fill(uwu->mlx, size, size, WHI));
 	if (value == 'W')
 		return (fill(uwu->mlx, size, size, WHI));
+// 	if (value == ' ')
+// 		return (fill(uwu->mlx, size, size, ALP));
 	return (NULL);
 }
 
@@ -119,11 +121,21 @@ void	init_map(t_cub3d *uwu)
 mlx_image_t	*fill(mlx_t *mlx, int w, int h, uint32_t color)
 {
 	mlx_image_t	*image;
+	int			x;
+	int			y;
 
+	x = 0;
 	image = mlx_new_image(mlx, w, h);
-	for (int x = 0; x < (int)image->width; x++)
-		for(int y = 0; y < (int)image->height; y++)
+	while (x < (int)image->width)
+	{
+		y = 0;
+		while (y < (int) image->height)
+		{
 			mlx_put_pixel(image, x, y, color);
+			y++;
+		}
+		x++;
+	}
 	return (image);
 }
 

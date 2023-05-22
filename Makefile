@@ -37,6 +37,7 @@ SRCS			:=	./src/main.c \
 					./src/ft_strlen.c \
 					./src/ft_substr.c \
 					./src/parsing.c \
+					./src/parsing_utils.c \
 					./src/quit.c \
 					./src/raycast.c \
 					./src/render.c \

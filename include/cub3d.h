@@ -30,6 +30,7 @@
 # define CYA 0x00FFFFFF
 # define YEL 0xFFFF00FF
 # define PIN 0xFF00FFFF
+# define ALP 0x00000000
 
 # define PI 3.1415926535
 # define P2 PI/2
@@ -44,15 +45,27 @@
 # define INV_ARGS "Error\n1 Argument is required.\n"
 # define ETRANGER_ERROR "Error\nInvalid character in map.\n"
 # define INVALID_LINE "Error\nInvalid line in file.\n"
+# define NOT_CLOSED_MAP "Error\nMap is not closed\n"
+# define INVALID_COLOR_FORMAT "Error\nInvalid color format\n"
+# define INVALID_COLOR_RGB_VALUE "Error\nInvalid RGB value in colors\n"
+# define INVALID_TEXTURES_CODE "Error\nInvalid or duplicate texture or color \
+								identifier in textures\n"
+# define INVALID_TEXTURE_PATH "Error\nInvalid texture path\n"
+# define INVALID_TEXTURE_FORMAT "Error\nInvalid texture format\n"
+# define INVALID_PATH "Error\nMap is not valid. It must end with .cub.\n"
 
 typedef struct s_textures
 {
-	char	*texture_no;
-	char	*texture_so;
-	char	*texture_ea;
-	char	*texture_we;
-	int		color_fl;
-	int		color_ce;
+	char			*texture_no;
+	char			*texture_so;
+	char			*texture_ea;
+	char			*texture_we;
+	int				color_fl;
+	int				color_ce;
+	mlx_texture_t	*text_no;
+	mlx_texture_t	*text_so;
+	mlx_texture_t	*text_ea;
+	mlx_texture_t	*text_we;
 }	t_textures;
 
 typedef struct s_ray
@@ -68,6 +81,12 @@ typedef struct s_cub3d
 {
 	int			i;
 	int			j;
+	int			p_x;
+	int			p_y;
+	int			case_size;
+	int			player_size;
+	int			map_s_x;
+	int			map_s_y;
 	float		px;
 	float		py;
 	float		pa;
@@ -116,5 +135,13 @@ void		check_map_path(char **av);
 int			ft_atoi(char *str);
 void		store_texture(t_cub3d *uwu, char **fields);
 char		*ft_strdupnonl(char *s1);
+int			check_map_closed(t_cub3d *uwu);
+void		free_s(char **str);
+int			is_num(char *num);
+int			verify_texture(char *texture);
+
+void		load_textures(t_textures *textures);
+void		delete_textures(t_textures *textures);
+int			get_pixel_color(mlx_texture_t *texture, int x, int y);
 
 #endif // CUB3D_H
