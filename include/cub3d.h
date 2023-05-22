@@ -36,9 +36,12 @@
 # define ETRANGER_ERROR "Error\nInvalid character in map.\n"
 # define INVALID_LINE "Error\nInvalid line in file.\n"
 # define NOT_CLOSED_MAP "Error\nMap is not closed\n"
-# define INVALID_COLOR_FORMAT "Error\nInvalid color format in textures\n"
-# define INVALID_COLOR_RGB_VALUE "Error\nInvalid color RGB value in textures\n"
-# define INVALID_TEXTURES_CODE "Error\nInvalid or duplicate texture or color identifier in textures\n"
+# define INVALID_COLOR_FORMAT "Error\nInvalid color format\n"
+# define INVALID_COLOR_RGB_VALUE "Error\nInvalid RGB value in colors\n"
+# define INVALID_TEXTURES_CODE "Error\nInvalid or duplicate texture or color \
+								identifier in textures\n"
+# define INVALID_TEXTURE_PATH "Error\nInvalid texture path\n"
+# define INVALID_TEXTURE_FORMAT "Error\nInvalid texture format\n"
 
 typedef struct s_case
 {
@@ -48,12 +51,16 @@ typedef struct s_case
 
 typedef struct s_textures
 {
-	char	*texture_no;
-	char	*texture_so;
-	char	*texture_ea;
-	char	*texture_we;
-	int		color_fl;
-	int		color_ce;
+	char			*texture_no;
+	char			*texture_so;
+	char			*texture_ea;
+	char			*texture_we;
+	int				color_fl;
+	int				color_ce;
+	mlx_texture_t	*text_no;
+	mlx_texture_t	*text_so;
+	mlx_texture_t	*text_ea;
+	mlx_texture_t	*text_we;
 }	t_textures;
 
 typedef struct s_cub3d
@@ -99,5 +106,10 @@ char		*ft_strdupnonl(char *s1);
 int			check_map_closed(t_cub3d *uwu);
 void		free_s(char **str);
 int			is_num(char *num);
+int			verify_texture(char *texture);
+
+void		load_textures(t_textures *textures);
+void		delete_textures(t_textures *textures);
+int			get_pixel_color(mlx_texture_t *texture, int x, int y);
 
 #endif // CUB3D_H

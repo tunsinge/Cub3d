@@ -61,13 +61,38 @@ void	store_color(t_cub3d *uwu, char **fields)
 void	store_texture(t_cub3d *uwu, char **fields)
 {
 	if (ft_strcmp(fields[0], "NO") == 0 && !uwu->textures->texture_no)
-		uwu->textures->texture_no = ft_strdupnonl(fields[1]);
+	{
+		if (verify_texture(fields[1]))
+			uwu->textures->texture_no = ft_strdupnonl(fields[1]);
+	}
 	else if (ft_strcmp(fields[0], "SO") == 0 && !uwu->textures->texture_so)
-		uwu->textures->texture_so = ft_strdupnonl(fields[1]);
+	{
+		if (verify_texture(fields[1]))
+			uwu->textures->texture_so = ft_strdupnonl(fields[1]);
+	}
 	else if (ft_strcmp(fields[0], "EA") == 0 && !uwu->textures->texture_ea)
-		uwu->textures->texture_ea = ft_strdupnonl(fields[1]);
+	{
+		if (verify_texture(fields[1]))
+			uwu->textures->texture_ea = ft_strdupnonl(fields[1]);
+	}
 	else if (ft_strcmp(fields[0], "WE") == 0 && !uwu->textures->texture_we)
-		uwu->textures->texture_we = ft_strdupnonl(fields[1]);
+	{
+		if (verify_texture(fields[1]))
+			uwu->textures->texture_we = ft_strdupnonl(fields[1]);
+	}
 	else
 		store_color(uwu, fields);
+}
+
+int	verify_texture(char *texture)
+{
+	int	len;
+
+	len = ft_strlen(texture);
+	if (len < 5)
+		return (error(INVALID_TEXTURE_PATH), quit_program(), 0);
+	if (!(texture[len - 4] == '.' && texture[len - 3] == 'p'
+			&& texture[len - 2] == 'n' && texture[len - 1] == 'g'))
+		return (error(INVALID_TEXTURE_FORMAT), quit_program(), 0);
+	return (1);
 }
