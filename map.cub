@@ -1,7 +1,7 @@
-NO ./foxsip3.png
-SO ./foxsip3.png
-WE ./foxsip3.png
-EA ./foxsip3.png
+NO ./textures/blue.png
+SO ./textures/grey.png
+WE ./textures/red.png
+EA ./textures/green.png
 
 F 220,100,0
 C 225,30,0

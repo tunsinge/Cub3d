@@ -192,9 +192,10 @@ void	raycaster(t_cub3d *uwu)
 		if (shade != 1){ tx=(int)(rx/(uwu->m_size/sext))%(int)sext;} // if(ra<PI){ tx=31-tx ;} }
 		else		   { tx=(int)(ry/(uwu->m_size/sext))%(int)seyt;}// if (ra>P2 && ra<P3) { tx=31-tx; }}
 
+		mlx_texture_t	*texture;
 		for (y = 0; y < lineH; y++)
 		{
-			int color = pixel_to_color(uwu->textures->text_no, tx, ty);
+			int color = pixel_to_color(texture, tx, ty);
 			for (int z = 0; z < w/ray_nb; z++)mlx_put_pixel(uwu->trwaD_img, r*w/ray_nb+z, lineO+y, color);
 			ty += ty_step;
 		}
