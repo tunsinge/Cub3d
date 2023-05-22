@@ -55,19 +55,19 @@ int	check_map_closed(t_cub3d *uwu)
 	int	j;
 
 	i = -1;
-	while (uwu->tab[++i])
+	while (uwu->map[++i])
 	{
 		j = 0;
-		while (uwu->tab[i][j])
+		while (uwu->map[i][j])
 		{
-			if (uwu->tab[i][j]->value == '0')
+			if (uwu->map[i][j] == '0')
 			{
 				if (i - 1 < 0 || j - 1 < 0
 					|| i + 1 >= uwu->map_s_y || j + 1 >= uwu->map_s_x
-					|| uwu->tab[i + 1][j]->value == ' '
-					|| uwu->tab[i - 1][j]->value == ' '
-					|| uwu->tab[i][j + 1]->value == ' '
-					|| uwu->tab[i][j - 1]->value == ' ')
+					|| uwu->map[i + 1][j] == ' '
+					|| uwu->map[i - 1][j] == ' '
+					|| uwu->map[i][j + 1] == ' '
+					|| uwu->map[i][j - 1] == ' ')
 					return (error(NOT_CLOSED_MAP), 0);
 			}
 			j++;

@@ -85,12 +85,10 @@ void	init_(t_cub3d *uwu, char **av)
 	uwu->p_size = uwu->m_size / 4;
 	uwu->p_color = CYA;
 	get_pp(uwu);
-	uwu->player_size = uwu->case_size / 4;
-	uwu->player_img = fill(uwu->mlx, uwu->player_size, uwu->player_size, BLA);
-	uwu->map_s_y = ft_strrlen(uwu->map);
-	uwu->map_s_x = ft_strlen(uwu->map[0]);
 	uwu->mapX = 8;
 	uwu->mapY = 5;
+	uwu->map_s_y = ft_strrlen(uwu->map);
+	uwu->map_s_x = ft_strlen(uwu->map[0]);
 	uwu->ray = malloc(sizeof(t_ray));
 	uwu->mlx = mlx_init(windowWidth, windowHeight, "cub3d", true);
 }
@@ -106,27 +104,6 @@ int	main(int ac, char **av)
 	printf("%d\n", check_map_closed(uwu));
 	init_img(uwu);
 	render(uwu);
-
-	//mlx_texture_t *text = mlx_load_png("./imaa.png");
-	//mlx_image_t *caca = mlx_new_image(uwu->mlx, 32, 32);
-
-	//uint8_t* pixelx;
-	//uint8_t* pixeli;
-	//const int32_t xy[] = {0, 0};
-	//const uint32_t wh[] = {64, 64};
-	//for (uint32_t y = 0; y < wh[1]; y++)
-	//{
-		//for (uint32_t x = 0; x < wh[0]; x++)
-		//{
-			//caca->pixels[y*wh[0]+x] = text->pixels[y*wh[0]+x];
-		//}
-		////pixelx = &text->pixels[((xy[1] + y) * text->width + xy[0]) * sizeof(int32_t)];
-		////pixeli = &caca->pixels[y * wh[0] * sizeof(int32_t)];
-		////memmove(pixeli, pixelx, wh[0] * sizeof(int32_t));
-	//}
-
-	//mlx_image_to_window(uwu->mlx, caca, 0, 0);
-
 	mlx_key_hook(uwu->mlx, &key_hook, uwu);
 	mlx_loop(uwu->mlx);
 	mlx_terminate(uwu->mlx);
