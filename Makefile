@@ -43,7 +43,8 @@ SRCS			:=	./src/main.c \
 					./src/render.c \
 					./src/utils.c \
 					./src/GNL/get_next_line_bonus.c \
-					./src/GNL/get_next_line_utils_bonus.c
+					./src/GNL/get_next_line_utils_bonus.c \
+					./src/textures.c
 INCLUDES		:= -I ./include
 FLAGS			:= -g -g3
 OBJS			:= ${SRCS:.c=.o}
