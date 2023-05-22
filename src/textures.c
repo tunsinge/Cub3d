@@ -33,6 +33,8 @@ int	pixel_to_color(mlx_texture_t *text, int x, int y)
 	uint8_t		*pixel;
 	uint32_t	color;
 
+	if (!text)
+		return (0x000000FF);
 	if (x < 0 || x > text->width || y < 0 || y > text->height)
 		return (0x000000FF);
 	pixel = &text->pixels[(y * text->width + x) * text->bytes_per_pixel];
