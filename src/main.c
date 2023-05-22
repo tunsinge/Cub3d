@@ -26,15 +26,19 @@ void	key_hook(mlx_key_data_t keydata, void *param)
 	uwu = param;
 	if (keydata.key == MLX_KEY_ESCAPE)
 		quit_program();
+
+	int xo = 0; if(uwu->ray->pdx<0){xo=-20;} else{xo=20;}
+	int yo = 0; if(uwu->ray->pdy<0){yo=-20;} else{yo=20;}
+	int	ipx=uwu->px/(float)uwu->m_size, ipx_a=(uwu->px+xo)/uwu->m_size, ipx_s=(uwu->px-xo)/uwu->m_size;
+	int	ipy=uwu->py/(float)uwu->m_size, ipy_a=(uwu->py+yo)/uwu->m_size, ipy_s=(uwu->py-yo)/uwu->m_size;
 	if (keydata.key == 'W')
 	{
-		//if (uwu->map[roundc(uwu->ray->pyy/uwu->m_size)][roundc(uwu->ray->pxx/uwu->m_size)] != '1')
-		//{
+		if (uwu->map[ipy][ipx_a]=='0'){uwu->px+=uwu->ray->pdx;}
+		if (uwu->map[ipy_a][ipx]=='0'){uwu->py+=uwu->ray->pdy;}
+		//if (uwu->map[(int)uwu->py/uwu->m_size][(int)uwu->ray->pxx/uwu->m_size] != '1')
 			//uwu->px += uwu->ray->pdx;
+		//if (uwu->map[(int)uwu->ray->pyy/uwu->m_size][(int)uwu->px/uwu->m_size] != '1')
 			//uwu->py += uwu->ray->pdy;
-		//}
-			uwu->px += uwu->ray->pdx;
-			uwu->py += uwu->ray->pdy;
 	}
 	if (keydata.key == 'S')
 	{

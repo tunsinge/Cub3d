@@ -207,13 +207,14 @@ void	raycaster(t_cub3d *uwu)
 {
 	float	px, py, pa, rx, ry, ra, xo, yo,ray_nb,r,disT;
 	int		mx,my,mp,dof;
+	int		w = 480 * scale, h = 320 * scale;
 
 	px = uwu->px + uwu->p_size / 2;
 	py = uwu->py + uwu->p_size / 2;
 	ra = uwu->pa-DR*30;
 	pa = uwu->pa;
 	check_angle(&ra);
-	ray_nb = 60;
+	ray_nb = 480;
 	for (r = 0; r < ray_nb; r++)
 	{
 		dof = 0;
@@ -305,13 +306,13 @@ void	raycaster(t_cub3d *uwu)
 		float shade = 1;
 		if (disV<disH)
 		{
-			shade = 0.5;
 			rx=vx;
 			ry=vy;
 			disT = disV;
 		}
 		if (disV>disH)
 		{
+			shade = 0.5;
 			rx=hx;
 			ry=hy;
 			disT = disH;
@@ -319,37 +320,37 @@ void	raycaster(t_cub3d *uwu)
 		//draw_line(uwu->ray_img, px, py, rx, ry, RED);
 
 		//---Draw 3D Walls---
-		float ca=pa-ra; if(ca<0) {ca+=2*PI;} if(ca>2*PI) {ca-=2*PI;} disT=disT*cosf(ca);
-		float lineH=(mapS*320)/disT;
+		float ca=pa-ra;
+		disT = disT*cosf(ca);
+		check_angle(&ca);
+		float lineH=(uwu->m_size*h)/disT;
 		float ty_step = 32.0/(float)lineH;
 		float ty_off = 0;
-		if(lineH>320){ty_off = (lineH-320)/2.0;lineH=320;}
-		float lineO=160-lineH/2;
-
-		//draw_texture(r*8+530, lineO, r*8+530, lineH+lineO, color);
+		if(lineH>h){ty_off = (lineH-h)/2.0;lineH=h;}
+		float lineO=h/2-lineH/2;
 
 		int y;
 		float ty = ty_step*ty_off;
 		float tx;
 
-		if (shade == 1){ tx=(int)(rx/2.0)%32; if(ra<PI){ tx=31-tx ;} }
-		else		   { tx=(int)(ry/2.0)%32; if (ra>P2 && ra<P3) { tx=31-tx; }}
+		if (shade != 1){ tx=(int)(rx/(uwu->m_size/32.0))%32; if(ra<PI){ tx=31-tx ;} }
+		else		   { tx=(int)(ry/(uwu->m_size/32.0))%32; if (ra>P2 && ra<P3) { tx=31-tx; }}
 
-		ty += 32*2;
+		ty += 32*0;
 
 		for (y = 0; y < lineH; y++)
 		{
 			float c = All_Textures[(int)(ty)*32 + (int)(tx)] * shade;
 			int color = get_rgba(c*255,c*255,c*255, 255);
-			for (int z = 0; z < 8; z++)mlx_put_pixel(uwu->trwaD_img, r*8+z, lineO+y, color);
+			for (int z = 0; z < w/ray_nb; z++)mlx_put_pixel(uwu->trwaD_img, r*w/ray_nb+z, lineO+y, color);
 			ty += ty_step;
 		}
 
-		for (int z = 0; z < 8; z++)
+		for (int z = 0; z < w/ray_nb; z++)
 		{
-			draw_line(uwu->trwaD_img, r*8+z, 0, r*8+z, lineO, CYA); // Plafond
+			draw_line(uwu->trwaD_img, r*w/ray_nb+z, 0, r*w/ray_nb+z, lineO, CYA); // Plafond
 			//draw_line(r*8+530+z, lineO, r*8+530+z, lineH+lineO, color); // Mur
-			draw_line(uwu->trwaD_img, r*8+z, lineH+lineO, r*8+z, 320, GRE); // Sol
+			draw_line(uwu->trwaD_img, r*w/ray_nb+z, lineH+lineO, r*w/ray_nb+z, h, GRE); // Sol
 		}
 
 		ra+=DR*(60 / ray_nb);

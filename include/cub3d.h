@@ -36,8 +36,9 @@
 # define P3 3*PI/2
 # define DR 0.0174533
 
-# define windowWidth 1024
-# define windowHeight 512
+# define scale 2
+# define windowWidth 480*scale
+# define windowHeight 320*scale
 
 # define OPEN_ERROR "Error\nOpen failed.\n"
 # define INV_ARGS "Error\n1 Argument is required.\n"

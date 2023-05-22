@@ -31,7 +31,7 @@ void	ft_bzero(void *s, size_t n)
 void	init_img(t_cub3d *uwu)
 {
 	init_player(uwu);
-	//init_map(uwu);
+	init_map(uwu);
 	uwu->trwaD_img = mlx_new_image(uwu->mlx, windowWidth, windowHeight);
 
 	raycaster(uwu);
@@ -42,7 +42,7 @@ void	init_img(t_cub3d *uwu)
 
 void	render(t_cub3d *uwu)
 {
-	//render_player(uwu);
+	render_player(uwu);
 
 	raycaster(uwu);
 }
@@ -113,7 +113,7 @@ void	init_map(t_cub3d *uwu)
 		i++;
 	}
 	mlx_image_to_window(uwu->mlx, uwu->map_img, 0, 0);
-	uwu->map_img->instances[0].z = -1;
+	uwu->map_img->instances[0].z = 1;
 }
 
 mlx_image_t	*fill(mlx_t *mlx, int w, int h, uint32_t color)
