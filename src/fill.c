@@ -31,7 +31,6 @@ void	fill_map(t_cub3d *uwu)
 	int	x;
 	int	width;
 
-	print_map(uwu);
 	width = max_width(uwu);
 	y = 0;
 	while (uwu->map[y])
@@ -44,7 +43,6 @@ void	fill_map(t_cub3d *uwu)
 			ft_strjoinfree(&uwu->map[y], "0");
 		y++;
 	}
-	print_map(uwu);
 }
 
 int	max_width(t_cub3d *uwu)

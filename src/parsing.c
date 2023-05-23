@@ -22,7 +22,8 @@ char	**parse_map(t_cub3d *uwu, char *path)
 	if (fd == -1)
 		return (error(OPEN_ERROR));
 	map = malloc(sizeof(char *));
-	parse_textures(uwu, fd);
+	if (parse_textures(uwu, fd))
+		return (NULL);
 	map[0] = NULL;
 	buff = get_next_line(fd);
 	while (buff[0] == '\n')
@@ -52,7 +53,7 @@ char	**append_to_map(char *line, char **map)
 	return (map_tmp);
 }
 
-void	parse_textures(t_cub3d *uwu, int fd)
+int	parse_textures(t_cub3d *uwu, int fd)
 {
 	char	*line;
 	char	*line_nonl;
@@ -68,7 +69,7 @@ void	parse_textures(t_cub3d *uwu, int fd)
 			line_nonl = ft_strdupnonl(line);
 			fields = ft_split(line_nonl, ' ');
 			if (ft_strrlen(fields) != 2)
-				return ((void)error(INVALID_LINE), quit_program());
+				return (error(INVALID_LINE), 1);
 			store_texture(uwu, fields);
 			nb_parsed++;
 			free_s(fields);
@@ -76,4 +77,5 @@ void	parse_textures(t_cub3d *uwu, int fd)
 		}
 		free(line);
 	}
+	return (0);
 }

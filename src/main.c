@@ -22,12 +22,17 @@ void	init_(t_cub3d *uwu, char **av)
 	uwu->textures->color_fl = 0;
 	uwu->textures->color_ce = 0;
 	uwu->speed = 0;
-	check_map_path(av);
+	if (check_map_path(av))
+		quit_program();
 	uwu->map = parse_map(uwu, av[1]);
-	check_map(uwu->map);
+	if (!uwu->map)
+		quit_program();
+	if (check_map(uwu->map))
+		quit_program();
 	fill_map(uwu);
 	uwu->p_color = CYA;
-	get_pp(uwu);
+	if (get_pp(uwu))
+		quit_program();
 	uwu->map_s_y = ft_strrlen(uwu->map);
 	uwu->map_s_x = ft_strlen(uwu->map[0]);
 	uwu->m_size = 256 / uwu->map_s_x;
@@ -35,7 +40,8 @@ void	init_(t_cub3d *uwu, char **av)
 	printf("map_s_x : %d, map_s_y : %d\n", uwu->map_s_x, uwu->map_s_y);
 	uwu->ray = malloc(sizeof(t_ray));
 	uwu->mlx = mlx_init(windowWidth, windowHeight, "cub3d", true);
-	load_textures(uwu->textures);
+	if (load_textures(uwu->textures))
+		return (quit_program());
 }
 
 int	main(int ac, char **av)

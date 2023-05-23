@@ -57,6 +57,8 @@
 # define INVALID_TEXTURE_PATH "Error\nInvalid texture path\n"
 # define INVALID_TEXTURE_FORMAT "Error\nInvalid texture format\n"
 # define INVALID_PATH "Error\nMap is not valid. It must end with .cub.\n"
+# define NO_START_ERROR "Error\nNo start for the player in the map\n"
+# define LOADING_TEXTURE_ERROR "Error\nError while trying to load a texture\n"
 
 typedef struct s_textures
 {
@@ -163,42 +165,46 @@ typedef struct s_cub3d
 	mlx_t		*mlx;
 }	t_cub3d;
 
-void		init_player(t_cub3d *uwu);
-void		fill_img(t_cub3d *uwu, int w, int h, uint32_t color);
-void		init_img(t_cub3d *uwu);
-int			is_etranger(char c);
-void		init_map(t_cub3d *uwu);
-void		raycaster(t_cub3d *uwu);
-int			ft_strlen(char *str);
-int			ft_strrlen(char **str);
-void		render(t_cub3d *uwu);
-void		check_map(char **map);
-char		*ft_substr(char *s, int start, int len);
-int			ft_strcmp(char *s1, char *s2);
-char		**parse_map(t_cub3d *uwu, char *path);
-void		*error(char *code);
-char		**append_to_map(char *line, char **map);
-void		draw_line(mlx_image_t *img, int x0, int y0, int x1, int y1, int color);
-void		quit_program(void);
-void		parse_textures(t_cub3d *uwu, int fd);
-char		**ft_split(char const *str, char c);
-char		*ft_strdup(char *s1);
-mlx_image_t	*fill(mlx_t *mlx, int w, int h, uint32_t color);
-void		render_map(t_cub3d *uwu);
-//mlx_image_t	*color_chart(t_cub3d *uwu, char value);
-void		render_player(t_cub3d *uwu);
-int			get_rgba(int r, int g, int b, int a);
-void		get_pp(t_cub3d *uwu);
-void		check_map_path(char **av);
-int			ft_atoi(char *str);
-void		store_texture(t_cub3d *uwu, char **fields);
-char		*ft_strdupnonl(char *s1);
+int			check_map(char **map);
+int			check_map_path(char **av);
 int			check_map_closed(t_cub3d *uwu);
-void		free_s(char **str);
-int			is_num(char *num);
+int			is_etranger(char c);
 int			verify_texture(char *texture);
 
-void		load_textures(t_textures *textures);
+int			parse_textures(t_cub3d *uwu, int fd);
+int			store_texture(t_cub3d *uwu, char **fields);
+char		**parse_map(t_cub3d *uwu, char *path);
+char		**append_to_map(char *line, char **map);
+int			get_pp(t_cub3d *uwu);
+
+void		init_player(t_cub3d *uwu);
+void		init_img(t_cub3d *uwu);
+void		init_map(t_cub3d *uwu);
+
+void		fill_img(t_cub3d *uwu, int w, int h, uint32_t color);
+mlx_image_t	*fill(mlx_t *mlx, int w, int h, uint32_t color);
+void		raycaster(t_cub3d *uwu);
+void		render(t_cub3d *uwu);
+void		render_player(t_cub3d *uwu);
+void		render_map(t_cub3d *uwu);
+void		draw_line(mlx_image_t *img, int x0, int y0, int x1, int y1, int color);
+
+int			ft_strlen(char *str);
+int			ft_strrlen(char **str);
+char		*ft_substr(char *s, int start, int len);
+int			ft_strcmp(char *s1, char *s2);
+void		*error(char *code);
+void		quit_program(void);
+char		**ft_split(char const *str, char c);
+char		*ft_strdup(char *s1);
+//mlx_image_t	*color_chart(t_cub3d *uwu, char value);
+int			get_rgba(int r, int g, int b, int a);
+int			ft_atoi(char *str);
+char		*ft_strdupnonl(char *s1);
+void		free_s(char **str);
+int			is_num(char *num);
+
+int			load_textures(t_textures *textures);
 void		delete_textures(t_textures *textures);
 int			pixel_to_color(mlx_texture_t *text, int x, int y);
 

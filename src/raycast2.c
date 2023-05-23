@@ -44,8 +44,8 @@ void	setup(t_cub3d *uwu)
 	VAR->dist = VAR->dist * cosf(VAR->ca);
 	check_angle(&VAR->ca);
 	VAR->line_h = (uwu->map_s_x * VAR->h) / VAR->dist;
-	VAR->sext = uwu->textures->text_no->width;
-	VAR->seyt = uwu->textures->text_no->height;
+	VAR->sext = VAR->texture->width;
+	VAR->seyt = VAR->texture->height;
 	VAR->ty_step = VAR->seyt / (float)VAR->line_h;
 	VAR->ty_off = 0;
 }

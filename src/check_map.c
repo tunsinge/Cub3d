@@ -20,7 +20,7 @@ int	is_etranger(char c)
 	return (1);
 }
 
-void	check_map(char **map)
+int	check_map(char **map)
 {
 	int	i;
 	int	j;
@@ -32,21 +32,28 @@ void	check_map(char **map)
 		while (map[i][j])
 		{
 			if (is_etranger(map[i][j]))
-				error(ETRANGER_ERROR);
+				return (error(ETRANGER_ERROR), 1);
 			j++;
 		}
 		i++;
 	}
+	return (0);
 }
 
-void	check_map_path(char **av)
+int	check_map_path(char **av)
 {
 	char	*s;
+	int		e;
 
+	e = 0;
 	s = ft_substr(av[1], ft_strlen(av[1]) - 4, ft_strlen(av[1]));
 	if (ft_strcmp(s, ".cub") != 0)
+	{
 		error(INVALID_PATH);
+		e = 1;
+	}
 	free(s);
+	return (e);
 }
 
 int	check_map_closed(t_cub3d *uwu)
