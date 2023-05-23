@@ -30,6 +30,8 @@ int	test_collide(t_cub3d *uwu, int x, int y)
 	return (uwu->map[y][x] == '1');
 }
 
+//todo l'algo des collisions il morche pos
+
 int	find_x_pos(t_cub3d *uwu, int dx)
 {
 	int	px;
