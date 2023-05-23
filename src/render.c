@@ -42,6 +42,8 @@ void	init_player(t_cub3d *uwu)
 	uwu->py = uwu->py * uwu->map_s_x + uwu->map_s_x * 3 / 8;
 	uwu->ray->pdx = cosf(uwu->pa) * 5;
 	uwu->ray->pdy = sinf(uwu->pa) * 5;
+	uwu->ray->pdxs = cosf(uwu->pa + P2) * 5;
+	uwu->ray->pdys = sinf(uwu->pa + P2) * 5;
 	uwu->ray->pxx = uwu->ray->pdx * 5 + uwu->px;
 	uwu->ray->pyy = uwu->ray->pdy * 5 + uwu->py;
 	if (uwu->p_size < 2)

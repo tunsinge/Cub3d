@@ -12,58 +12,6 @@
 
 #include "cub3d.h"
 
-void	key_hook(mlx_key_data_t keydata, void *param)
-{
-	t_cub3d	*uwu;
-
-	uwu = param;
-	if (keydata.key == MLX_KEY_ESCAPE)
-		quit_program();
-	//int xo = 0; if(uwu->ray->pdx<0){xo=-20;} else{xo=20;}
-	//int yo = 0; if(uwu->ray->pdy<0){yo=-20;} else{yo=20;}
-	//int	ipx=uwu->px/(float)uwu->m_size, ipx_a=(uwu->px+xo)/uwu->m_size, ipx_s=(uwu->px-xo)/uwu->m_size;
-	//int	ipy=uwu->py/(float)uwu->m_size, ipy_a=(uwu->py+yo)/uwu->m_size, ipy_s=(uwu->py-yo)/uwu->m_size;
-	if (keydata.key == 'W')
-	{
-		//if (uwu->map[ipy][ipx_a]=='0'){uwu->px+=uwu->ray->pdx;}
-		//if (uwu->map[ipy_a][ipx]=='0'){uwu->py+=uwu->ray->pdy;}
-//		if (uwu->map[(int)uwu->py/uwu->m_size][(int)uwu->ray->pxx/uwu->m_size] != '1')
-			uwu->px += uwu->ray->pdx;
-//		if (uwu->map[(int)uwu->ray->pyy/uwu->m_size][(int)uwu->px/uwu->m_size] != '1')
-			uwu->py += uwu->ray->pdy;
-	}
-	if (keydata.key == 'S')
-	{
-		uwu->px -= uwu->ray->pdx;
-		uwu->py -= uwu->ray->pdy;
-	}
-	if (keydata.key == 'A')
-	{
-		uwu->pa -= 0.1;
-		if (uwu->pa < 0)
-		{
-			uwu->pa += 2 * PI;
-		}
-		uwu->ray->pdx = cosf(uwu->pa)*5;
-		uwu->ray->pdy = sinf(uwu->pa)*5;
-	}
-	if (keydata.key == 'D')
-	{
-		uwu->pa += 0.1;
-		if (uwu->pa > 2 * PI)
-		{
-			uwu->pa -= 2 * PI;
-		}
-		uwu->ray->pdx = cosf(uwu->pa) * 5;
-		uwu->ray->pdy = sinf(uwu->pa) * 5;
-	}
-	printf("px : %f, py : %f\n", uwu->px, uwu->py);
-	printf("x : %d, y : %d\n", uwu->player_img->instances[0].x, uwu->player_img->instances[0].y);
-	printf("map_s_x : %d, m_size : %d\n", uwu->map_s_x, uwu->m_size);
-	render(uwu);
-}
-
-
 void	init_(t_cub3d *uwu, char **av)
 {
 	uwu->textures = malloc(sizeof(t_textures));
@@ -73,6 +21,7 @@ void	init_(t_cub3d *uwu, char **av)
 	uwu->textures->texture_ea = NULL;
 	uwu->textures->color_fl = 0;
 	uwu->textures->color_ce = 0;
+	uwu->speed = 0;
 	check_map_path(av);
 	uwu->map = parse_map(uwu, av[1]);
 	check_map(uwu->map);
@@ -98,8 +47,10 @@ int	main(int ac, char **av)
 	uwu = malloc(sizeof(t_cub3d));
 	init_(uwu, av);
 	init_img(uwu);
-	render(uwu);
+	init_controls(uwu);
 	mlx_key_hook(uwu->mlx, &key_hook, uwu);
+	mlx_loop_hook(uwu->mlx, &controls_hook, uwu);
+	render(uwu);
 	mlx_loop(uwu->mlx);
 	delete_textures(uwu->textures);
 	mlx_terminate(uwu->mlx);

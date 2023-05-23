@@ -23,6 +23,7 @@
 # include <string.h>
 
 # define VAR uwu->ray
+# define MAX_DOF 25
 
 # define WHI 0xFFFFFFFF
 # define BLA 0x000000FF
@@ -71,6 +72,17 @@ typedef struct s_textures
 	mlx_texture_t	*text_we;
 }	t_textures;
 
+typedef struct s_keys
+{
+	int	key_w;
+	int	key_a;
+	int	key_s;
+	int	key_d;
+	int	key_r;
+	int	key_l;
+	int	key_shift;
+}	t_keys;
+
 typedef struct s_drwlvars
 {
 	int	dx;
@@ -85,6 +97,8 @@ typedef struct s_ray
 {
 	float			pdx;
 	float			pdy;
+	float			pdxs;
+	float			pdys;
 	float			pxx;
 	float			pyy;
 	float			px;
@@ -138,12 +152,14 @@ typedef struct s_cub3d
 	int			m_size;
 	int			p_size;
 	int			p_color;
+	float		speed;
 	char		**map;
 	mlx_image_t	*player_img;
 	mlx_image_t	*map_img;
 	mlx_image_t	*trwad_img;
 	t_textures	*textures;
 	t_ray		*ray;
+	t_keys		keys;
 	mlx_t		*mlx;
 }	t_cub3d;
 
@@ -200,11 +216,23 @@ void		draw(t_cub3d *uwu);
 
 void		fill_map(t_cub3d *uwu);
 int			max_width(t_cub3d *uwu);
+void		print_map(t_cub3d *uwu);
 
 char		*ft_strjoin(char const *s1, char const *s2);
 char		*ft_strjoinfree(char **s1, char const *s2);
 char		*ft_strjoinn(char *s1, char **str2);
 char		*ft_strjoinnfree(char **s1, char **str2, char *sep);
 
+void		key_hook(mlx_key_data_t keydata, void *param);
+void		controls_hook(void *param);
+void		init_controls(t_cub3d *uwu);
+void		move(t_cub3d *uwu);
+void		rotate(t_cub3d *uwu);
+
+int			test_collide(t_cub3d *uwu, int x, int y);
+int			find_x_pos(t_cub3d *uwu, int dx);
+int			find_y_pos(t_cub3d *uwu, int dy);
+void		move_x(t_cub3d *uwu, int dx);
+void		move_y(t_cub3d *uwu, int dy);
 
 #endif // CUB3D_H

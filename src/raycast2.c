@@ -95,9 +95,11 @@ void	draw(t_cub3d *uwu)
 		draw_line(uwu->trwad_img, VAR->r * VAR->w / VAR->ray_nb + VAR->z,
 			0, VAR->r * VAR->w / VAR->ray_nb + VAR->z,
 			VAR->line_o, uwu->textures->color_ce);
-		draw_line(uwu->trwad_img, VAR->r * VAR->w / VAR->ray_nb + VAR->z,
-			VAR->line_h + VAR->line_o, VAR->r * VAR->w / VAR->ray_nb
-			+ VAR->z, VAR->h - 1, uwu->textures->color_fl);
+		draw_line(uwu->trwad_img,
+			VAR->r * VAR->w / VAR->ray_nb + VAR->z,
+			VAR->line_h + VAR->line_o - 1, VAR->r * VAR->w / VAR->ray_nb
+			+ VAR->z, VAR->h - 1,
+			uwu->textures->color_fl);
 		VAR->z++;
 	}
 }

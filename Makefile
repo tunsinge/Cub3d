@@ -49,7 +49,9 @@ SRCS			:=	./src/main.c \
 					./src/rc_h.c \
 					./src/rc_v.c \
 					./src/fill.c \
-					./src/ft_strjoin.c
+					./src/ft_strjoin.c \
+					./src/controls.c \
+					./src/collisions.c
 INCLUDES		:= -I ./include
 FLAGS			:= -g -g3
 OBJS			:= ${SRCS:.c=.o}

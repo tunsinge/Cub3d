@@ -36,14 +36,14 @@ void	horizontal(t_cub3d *uwu)
 	{
 		VAR->ry = VAR->py;
 		VAR->rx = VAR->px;
-		VAR->dof = 50;
+		VAR->dof = MAX_DOF;
 	}
 	horizontal2(uwu);
 }
 
 void	horizontal2(t_cub3d *uwu)
 {
-	while (VAR->dof < 50)
+	while (VAR->dof < MAX_DOF)
 	{
 		VAR->mx = (int)(VAR->rx) / uwu->map_s_x;
 		VAR->my = (int)(VAR->ry) / uwu->map_s_x;
@@ -54,7 +54,7 @@ void	horizontal2(t_cub3d *uwu)
 			VAR->hx = VAR->rx;
 			VAR->hy = VAR->ry;
 			VAR->dis_h = dist(VAR->px, VAR->py, VAR->hx, VAR->hy);
-			VAR->dof = 50;
+			VAR->dof = MAX_DOF;
 		}
 		else
 		{
