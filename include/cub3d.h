@@ -26,6 +26,7 @@
 
 # define WHI 0xFFFFFFFF
 # define BLA 0x000000FF
+# define WHITR 0xFFFFFF1F
 # define RED 0xFF0000FF
 # define GRE 0x00FF00FF
 # define BLU 0x0000FFFF
@@ -82,79 +83,72 @@ typedef struct s_drwlvars
 
 typedef struct s_ray
 {
-	float	pdx;
-	float	pdy;
-	float	pxx;
-	float	pyy;
-	float	px;
-	float	py;
-	float	pa;
-	float	rx;
-	float	ry;
-	float	ra;
-	float	xo;
-	float	yo;
-	float	ray_nb;
-	float	r;
-	float	dist;
-	float	dis_h;
-	float	hx;
-	float	hy;
-	float	a_tan;
-	float	dis_v;
-	float	vx;
-	float	vy;
-	float	ntan;
-	float	shade;
-	float	ca;
-	float	line_h;
-	float	sext;
-	float	seyt;
-	float	ty_step;
-	float	ty_off;
-	float	line_o;
-	float	ty;
-	float	tx;
-	int		mx;
-	int		my;
-	int		dof;
-	int		y;
-	int		color;
-	int		w;
-	int		h;
-	int		z;
+	float			pdx;
+	float			pdy;
+	float			pxx;
+	float			pyy;
+	float			px;
+	float			py;
+	float			pa;
+	float			rx;
+	float			ry;
+	float			ra;
+	float			xo;
+	float			yo;
+	float			ray_nb;
+	float			r;
+	float			dist;
+	float			dis_h;
+	float			hx;
+	float			hy;
+	float			a_tan;
+	float			dis_v;
+	float			vx;
+	float			vy;
+	float			ntan;
+	float			shade;
+	float			ca;
+	float			line_h;
+	float			sext;
+	float			seyt;
+	float			ty_step;
+	float			ty_off;
+	float			line_o;
+	float			ty;
+	float			tx;
+	int				mx;
+	int				my;
+	int				dof;
+	int				y;
+	int				color;
+	int				w;
+	int				h;
+	int				z;
+	mlx_texture_t	*texture;
 }	t_ray;
 
 typedef struct s_cub3d
 {
 	int			i;
-	int			j;
-	int			p_x;
-	int			p_y;
-	int			case_size;
-	int			player_size;
 	int			map_s_x;
 	int			map_s_y;
 	float		px;
 	float		py;
 	float		pa;
-	int			mapX;
-	int			mapY;
 	int			m_size;
 	int			p_size;
 	int			p_color;
 	char		**map;
 	mlx_image_t	*player_img;
-	mlx_image_t	*ray_img;
 	mlx_image_t	*map_img;
-	mlx_image_t	*trwaD_img;
+	mlx_image_t	*trwad_img;
 	t_textures	*textures;
 	t_ray		*ray;
 	mlx_t		*mlx;
 }	t_cub3d;
 
 void		init_player(t_cub3d *uwu);
-void		fill_img(mlx_image_t *img, int w, int h, uint32_t color, int size);
+void		fill_img(t_cub3d *uwu, int w, int h, uint32_t color);
 void		init_img(t_cub3d *uwu);
 int			is_etranger(char c);
 void		init_map(t_cub3d *uwu);
@@ -196,6 +190,21 @@ float		dist(float ax, float ay, float bx, float by);
 void		draw_line(mlx_image_t *img, int x0, int y0, int x1, int y1, int color);
 void		check_angle(float *ra);
 void		horizontal(t_cub3d *uwu);
+void		horizontal2(t_cub3d *uwu);
 void		vertical(t_cub3d *uwu);
+void		vertical2(t_cub3d *uwu);
+void		orientation(t_cub3d *uwu);
+void		setup(t_cub3d *uwu);
+void		calculations(t_cub3d *uwu);
+void		draw(t_cub3d *uwu);
+
+void		fill_map(t_cub3d *uwu);
+int			max_width(t_cub3d *uwu);
+
+char		*ft_strjoin(char const *s1, char const *s2);
+char		*ft_strjoinfree(char **s1, char const *s2);
+char		*ft_strjoinn(char *s1, char **str2);
+char		*ft_strjoinnfree(char **s1, char **str2, char *sep);
+
 
 #endif // CUB3D_H

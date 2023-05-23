@@ -12,13 +12,6 @@
 
 #include "cub3d.h"
 
-int	roundc(float n)
-{
-	if (n - (int)n > 0.5)
-		return ((int)n + 1);
-	return ((int)n);
-}
-
 void	key_hook(mlx_key_data_t keydata, void *param)
 {
 	t_cub3d	*uwu;
@@ -64,6 +57,9 @@ void	key_hook(mlx_key_data_t keydata, void *param)
 		uwu->ray->pdx = cosf(uwu->pa) * 5;
 		uwu->ray->pdy = sinf(uwu->pa) * 5;
 	}
+	printf("px : %f, py : %f\n", uwu->px, uwu->py);
+	printf("x : %d, y : %d\n", uwu->player_img->instances[0].x, uwu->player_img->instances[0].y);
+	printf("map_s_x : %d, m_size : %d\n", uwu->map_s_x, uwu->m_size);
 	render(uwu);
 }
 
@@ -80,15 +76,14 @@ void	init_(t_cub3d *uwu, char **av)
 	check_map_path(av);
 	uwu->map = parse_map(uwu, av[1]);
 	check_map(uwu->map);
-	uwu->m_size = 256 / ft_strlen(uwu->map[0]);
-	uwu->p_size = uwu->m_size / 4;
+	fill_map(uwu);
 	uwu->p_color = CYA;
 	get_pp(uwu);
 	uwu->map_s_y = ft_strrlen(uwu->map);
 	uwu->map_s_x = ft_strlen(uwu->map[0]);
-	printf("%d, %d\n", uwu->map_s_x, uwu->map_s_y);
-	uwu->mapX = uwu->map_s_x;
-	uwu->mapY = uwu->map_s_y;
+	uwu->m_size = 256 / uwu->map_s_x;
+	uwu->p_size = uwu->m_size / 4;
+	printf("map_s_x : %d, map_s_y : %d\n", uwu->map_s_x, uwu->map_s_y);
 	uwu->ray = malloc(sizeof(t_ray));
 	uwu->mlx = mlx_init(windowWidth, windowHeight, "cub3d", true);
 	load_textures(uwu->textures);

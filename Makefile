@@ -39,6 +39,7 @@ SRCS			:=	./src/main.c \
 					./src/parsing_utils.c \
 					./src/quit.c \
 					./src/raycast.c \
+					./src/raycast2.c \
 					./src/render.c \
 					./src/utils.c \
 					./src/GNL/get_next_line_bonus.c \
@@ -46,7 +47,9 @@ SRCS			:=	./src/main.c \
 					./src/textures.c \
 					./src/render2.c \
 					./src/rc_h.c \
-					./src/rc_v.c
+					./src/rc_v.c \
+					./src/fill.c \
+					./src/ft_strjoin.c
 INCLUDES		:= -I ./include
 FLAGS			:= -g -g3
 OBJS			:= ${SRCS:.c=.o}
