@@ -64,6 +64,14 @@
 # define NO_START_ERROR "Error\nNo start for the player in the map\n"
 # define LOADING_TEXTURE_ERROR "Error\nError while trying to load a texture\n"
 
+# define KEY_FORWARD MLX_KEY_W
+# define KEY_BACKWARD MLX_KEY_S
+# define KEY_STRAF_RIGHT MLX_KEY_D
+# define KEY_STRAF_LEFT MLX_KEY_A
+# define KEY_ROTATE_RIGHT MLX_KEY_RIGHT
+# define KEY_ROTATE_LEFT MLX_KEY_LEFT
+# define KEY_RUN MLX_KEY_LEFT_SHIFT
+
 typedef struct s_textures
 {
 	char			*texture_no;
@@ -86,9 +94,13 @@ typedef struct s_keys
 	int	key_d;
 	int	key_r;
 	int	key_l;
+<<<<<<< HEAD
 	int	key_wi;
 	int	key_shift;
 	int	key_jump;
+=======
+	int	key_run;
+>>>>>>> 733bca438c0a0425c09b9b09948c35c7cc45ca83
 }	t_keys;
 
 typedef struct s_drwlvars
