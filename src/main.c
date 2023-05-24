@@ -37,7 +37,6 @@ void	init_(t_cub3d *uwu, char **av)
 	uwu->map_s_x = ft_strlen(uwu->map[0]);
 	uwu->m_size = 256 / uwu->map_s_x;
 	uwu->p_size = uwu->m_size / 4;
-	printf("map_s_x : %d, map_s_y : %d\n", uwu->map_s_x, uwu->map_s_y);
 	uwu->ray = malloc(sizeof(t_ray));
 	uwu->mlx = mlx_init(windowWidth, windowHeight, "cub3d", true);
 	if (load_textures(uwu->textures))

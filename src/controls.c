@@ -20,7 +20,7 @@ void	init_controls(t_cub3d *uwu)
 	uwu->keys.key_d = 0;
 	uwu->keys.key_r = 0;
 	uwu->keys.key_l = 0;
-	uwu->keys.key_shift = 0;
+	uwu->keys.key_run = 0;
 }
 
 void	controls_hook(void *param)
@@ -28,7 +28,7 @@ void	controls_hook(void *param)
 	t_cub3d	*uwu;
 
 	uwu = param;
-	if (uwu->keys.key_shift)
+	if (uwu->keys.key_run)
 		uwu->speed = 1.5;
 	else
 		uwu->speed = 0.25;
@@ -44,34 +44,34 @@ void	key_hook(mlx_key_data_t keydata, void *param)
 	uwu = param;
 	if (keydata.key == MLX_KEY_ESCAPE)
 		quit_program();
-	if (keydata.key == MLX_KEY_W && keydata.action == MLX_PRESS)
+	if (keydata.key == KEY_FORWARD && keydata.action == MLX_PRESS)
 		uwu->keys.key_w = 1;
-	if (keydata.key == MLX_KEY_S && keydata.action == MLX_PRESS)
+	if (keydata.key == KEY_BACKWARD && keydata.action == MLX_PRESS)
 		uwu->keys.key_s = 1;
-	if (keydata.key == MLX_KEY_D && keydata.action == MLX_PRESS)
+	if (keydata.key == KEY_STRAF_RIGHT && keydata.action == MLX_PRESS)
 		uwu->keys.key_d = 1;
-	if (keydata.key == MLX_KEY_A && keydata.action == MLX_PRESS)
+	if (keydata.key == KEY_STRAF_LEFT && keydata.action == MLX_PRESS)
 		uwu->keys.key_a = 1;
-	if (keydata.key == MLX_KEY_LEFT && keydata.action == MLX_PRESS)
+	if (keydata.key == KEY_ROTATE_LEFT && keydata.action == MLX_PRESS)
 		uwu->keys.key_l = 1;
-	if (keydata.key == MLX_KEY_RIGHT && keydata.action == MLX_PRESS)
+	if (keydata.key == KEY_ROTATE_RIGHT && keydata.action == MLX_PRESS)
 		uwu->keys.key_r = 1;
-	if (keydata.key == MLX_KEY_LEFT_SHIFT && keydata.action == MLX_PRESS)
-		uwu->keys.key_shift = 1;
-	if (keydata.key == MLX_KEY_W && keydata.action == MLX_RELEASE)
+	if (keydata.key == KEY_RUN && keydata.action == MLX_PRESS)
+		uwu->keys.key_run = 1;
+	if (keydata.key == KEY_FORWARD && keydata.action == MLX_RELEASE)
 		uwu->keys.key_w = 0;
-	if (keydata.key == MLX_KEY_S && keydata.action == MLX_RELEASE)
+	if (keydata.key == KEY_BACKWARD && keydata.action == MLX_RELEASE)
 		uwu->keys.key_s = 0;
-	if (keydata.key == MLX_KEY_D && keydata.action == MLX_RELEASE)
+	if (keydata.key == KEY_STRAF_RIGHT && keydata.action == MLX_RELEASE)
 		uwu->keys.key_d = 0;
-	if (keydata.key == MLX_KEY_A && keydata.action == MLX_RELEASE)
+	if (keydata.key == KEY_STRAF_LEFT && keydata.action == MLX_RELEASE)
 		uwu->keys.key_a = 0;
-	if (keydata.key == MLX_KEY_LEFT && keydata.action == MLX_RELEASE)
+	if (keydata.key == KEY_ROTATE_LEFT && keydata.action == MLX_RELEASE)
 		uwu->keys.key_l = 0;
-	if (keydata.key == MLX_KEY_RIGHT && keydata.action == MLX_RELEASE)
+	if (keydata.key == KEY_ROTATE_RIGHT && keydata.action == MLX_RELEASE)
 		uwu->keys.key_r = 0;
-	if (keydata.key == MLX_KEY_LEFT_SHIFT && keydata.action == MLX_RELEASE)
-		uwu->keys.key_shift = 0;
+	if (keydata.key == KEY_RUN && keydata.action == MLX_RELEASE)
+		uwu->keys.key_run = 0;
 }
 
 void	move(t_cub3d *uwu)
