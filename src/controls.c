@@ -6,7 +6,7 @@
 /*   By: mdoumi <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 11:56:53 by ^@^ Foxan ^       #+#    #+#             */
-/*   Updated: 2023/05/24 19:39:56 by mdoumi           ###   ########.fr       */
+/*   Updated: 2023/05/24 19:42:44 by mdoumi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ void	key_hook(mlx_key_data_t keydata, void *param)
 	if (keydata.key == MLX_KEY_SPACE && keydata.action == MLX_PRESS && uwu->keys.key_jump == 0)
 		uwu->keys.key_jump = 1;
 	if (keydata.key == KEY_RUN && keydata.action == MLX_PRESS)
-		uwu->keys.key_run = 1;
+		uwu->keys.key_shift = 1;
 	if (keydata.key == KEY_FORWARD && keydata.action == MLX_RELEASE)
 		uwu->keys.key_w = 0;
 	if (keydata.key == KEY_BACKWARD && keydata.action == MLX_RELEASE)
@@ -82,7 +82,7 @@ void	key_hook(mlx_key_data_t keydata, void *param)
 	if (keydata.key == KEY_ROTATE_RIGHT && keydata.action == MLX_RELEASE)
 		uwu->keys.key_r = 0;
 	if (keydata.key == KEY_RUN && keydata.action == MLX_RELEASE)
-		uwu->keys.key_run = 0;
+		uwu->keys.key_shift = 0;
 }
 
 void	move(t_cub3d *uwu)
