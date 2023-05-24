@@ -6,7 +6,7 @@
 /*   By: mdoumi <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/02 17:01:31 by ^@^ Foxan ^       #+#    #+#             */
-/*   Updated: 2023/05/24 19:41:54 by mdoumi           ###   ########.fr       */
+/*   Updated: 2023/05/24 20:52:34 by mdoumi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -251,6 +251,12 @@ void		controls_hook(void *param);
 void		init_controls(t_cub3d *uwu);
 void		move(t_cub3d *uwu);
 void		rotate(t_cub3d *uwu);
+
+// controls2.c
+
+void	mouse(t_cub3d *uwu);
+void	map_zoom(t_cub3d *uwu);
+void	jump(t_cub3d *uwu);
 
 int			test_collide(t_cub3d *uwu, int x, int y);
 int			find_x_pos(t_cub3d *uwu, int dx);

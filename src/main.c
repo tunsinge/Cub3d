@@ -5,14 +5,14 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: mdoumi <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/01 22:57:56 by mdoumi            #+#    #+#             */
-/*   Updated: 2023/05/24 19:00:51 by mdoumi           ###   ########.fr       */
+/*   Created: 2023/05/24 20:41:06 by mdoumi            #+#    #+#             */
+/*   Updated: 2023/05/24 20:51:32 by mdoumi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	init_(t_cub3d *uwu, char **av)
+static void	first_init(t_cub3d *uwu)
 {
 	uwu->textures = malloc(sizeof(t_textures));
 	uwu->textures->texture_no = NULL;
@@ -24,6 +24,11 @@ void	init_(t_cub3d *uwu, char **av)
 	uwu->speed = 0;
 	uwu->hehe = 0;
 	uwu->jumping = 0;
+}
+
+void	init_(t_cub3d *uwu, char **av)
+{
+	first_init(uwu);
 	if (check_map_path(av))
 		quit_program();
 	uwu->map = parse_map(uwu, av[1]);

@@ -6,7 +6,7 @@
 /*   By: mdoumi <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/02 16:33:53 by mdoumi            #+#    #+#             */
-/*   Updated: 2023/05/18 02:16:02 by mdoumi           ###   ########.fr       */
+/*   Updated: 2023/05/24 20:37:06 by mdoumi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,8 +75,7 @@ int	parse_textures(t_cub3d *uwu, int fd)
 			if (store_texture(uwu, fields))
 				return (1);
 			nb_parsed++;
-			free_s(fields);
-			free(line_nonl);
+			(free_s(fields), free(line_nonl));
 		}
 		free(line);
 	}
