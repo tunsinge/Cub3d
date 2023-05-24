@@ -23,9 +23,11 @@
 # include <string.h>
 
 # define VAR uwu->ray
+# define MAX_DOF 25
 
 # define WHI 0xFFFFFFFF
 # define BLA 0x000000FF
+# define WHITR 0xFFFFFF1F
 # define RED 0xFF0000FF
 # define GRE 0x00FF00FF
 # define BLU 0x0000FFFF
@@ -55,6 +57,8 @@
 # define INVALID_TEXTURE_PATH "Error\nInvalid texture path\n"
 # define INVALID_TEXTURE_FORMAT "Error\nInvalid texture format\n"
 # define INVALID_PATH "Error\nMap is not valid. It must end with .cub.\n"
+# define NO_START_ERROR "Error\nNo start for the player in the map\n"
+# define LOADING_TEXTURE_ERROR "Error\nError while trying to load a texture\n"
 
 typedef struct s_textures
 {
@@ -70,6 +74,17 @@ typedef struct s_textures
 	mlx_texture_t	*text_we;
 }	t_textures;
 
+typedef struct s_keys
+{
+	int	key_w;
+	int	key_a;
+	int	key_s;
+	int	key_d;
+	int	key_r;
+	int	key_l;
+	int	key_shift;
+}	t_keys;
+
 typedef struct s_drwlvars
 {
 	int	dx;
@@ -82,113 +97,114 @@ typedef struct s_drwlvars
 
 typedef struct s_ray
 {
-	float	pdx;
-	float	pdy;
-	float	pxx;
-	float	pyy;
-	float	px;
-	float	py;
-	float	pa;
-	float	rx;
-	float	ry;
-	float	ra;
-	float	xo;
-	float	yo;
-	float	ray_nb;
-	float	r;
-	float	dist;
-	float	dis_h;
-	float	hx;
-	float	hy;
-	float	a_tan;
-	float	dis_v;
-	float	vx;
-	float	vy;
-	float	ntan;
-	float	shade;
-	float	ca;
-	float	line_h;
-	float	sext;
-	float	seyt;
-	float	ty_step;
-	float	ty_off;
-	float	line_o;
-	float	ty;
-	float	tx;
-	int		mx;
-	int		my;
-	int		dof;
-	int		y;
-	int		color;
-	int		w;
-	int		h;
-	int		z;
+	float			pdx;
+	float			pdy;
+	float			pdxs;
+	float			pdys;
+	float			pxx;
+	float			pyy;
+	float			px;
+	float			py;
+	float			pa;
+	float			rx;
+	float			ry;
+	float			ra;
+	float			xo;
+	float			yo;
+	float			ray_nb;
+	float			r;
+	float			dist;
+	float			dis_h;
+	float			hx;
+	float			hy;
+	float			a_tan;
+	float			dis_v;
+	float			vx;
+	float			vy;
+	float			ntan;
+	float			shade;
+	float			ca;
+	float			line_h;
+	float			sext;
+	float			seyt;
+	float			ty_step;
+	float			ty_off;
+	float			line_o;
+	float			ty;
+	float			tx;
+	int				mx;
+	int				my;
+	int				dof;
+	int				y;
+	int				color;
+	int				w;
+	int				h;
+	int				z;
+	mlx_texture_t	*texture;
 }	t_ray;
 
 typedef struct s_cub3d
 {
 	int			i;
-	int			j;
-	int			p_x;
-	int			p_y;
-	int			case_size;
-	int			player_size;
 	int			map_s_x;
 	int			map_s_y;
 	float		px;
 	float		py;
 	float		pa;
-	int			mapX;
-	int			mapY;
 	int			m_size;
 	int			p_size;
 	int			p_color;
+	float		speed;
 	char		**map;
 	mlx_image_t	*player_img;
-	mlx_image_t	*ray_img;
 	mlx_image_t	*map_img;
-	mlx_image_t	*trwaD_img;
+	mlx_image_t	*trwad_img;
 	t_textures	*textures;
 	t_ray		*ray;
+	t_keys		keys;
 	mlx_t		*mlx;
 }	t_cub3d;
 
-void		init_player(t_cub3d *uwu);
-void		fill_img(mlx_image_t *img, int w, int h, uint32_t color, int size);
-void		init_img(t_cub3d *uwu);
-int			is_etranger(char c);
-void		init_map(t_cub3d *uwu);
-void		raycaster(t_cub3d *uwu);
-int			ft_strlen(char *str);
-int			ft_strrlen(char **str);
-void		render(t_cub3d *uwu);
-void		check_map(char **map);
-char		*ft_substr(char *s, int start, int len);
-int			ft_strcmp(char *s1, char *s2);
-char		**parse_map(t_cub3d *uwu, char *path);
-void		*error(char *code);
-char		**append_to_map(char *line, char **map);
-void		draw_line(mlx_image_t *img, int x0, int y0, int x1, int y1, int color);
-void		quit_program(void);
-void		parse_textures(t_cub3d *uwu, int fd);
-char		**ft_split(char const *str, char c);
-char		*ft_strdup(char *s1);
-mlx_image_t	*fill(mlx_t *mlx, int w, int h, uint32_t color);
-void		render_map(t_cub3d *uwu);
-//mlx_image_t	*color_chart(t_cub3d *uwu, char value);
-void		render_player(t_cub3d *uwu);
-int			get_rgba(int r, int g, int b, int a);
-void		get_pp(t_cub3d *uwu);
-void		check_map_path(char **av);
-int			ft_atoi(char *str);
-void		store_texture(t_cub3d *uwu, char **fields);
-char		*ft_strdupnonl(char *s1);
+int			check_map(char **map);
+int			check_map_path(char **av);
 int			check_map_closed(t_cub3d *uwu);
-void		free_s(char **str);
-int			is_num(char *num);
+int			is_etranger(char c);
 int			verify_texture(char *texture);
 
-void		load_textures(t_textures *textures);
+int			parse_textures(t_cub3d *uwu, int fd);
+int			store_texture(t_cub3d *uwu, char **fields);
+char		**parse_map(t_cub3d *uwu, char *path);
+char		**append_to_map(char *line, char **map);
+int			get_pp(t_cub3d *uwu);
+
+void		init_player(t_cub3d *uwu);
+void		init_img(t_cub3d *uwu);
+void		init_map(t_cub3d *uwu);
+
+void		fill_img(t_cub3d *uwu, int w, int h, uint32_t color);
+mlx_image_t	*fill(mlx_t *mlx, int w, int h, uint32_t color);
+void		raycaster(t_cub3d *uwu);
+void		render(t_cub3d *uwu);
+void		render_player(t_cub3d *uwu);
+void		render_map(t_cub3d *uwu);
+void		draw_line(mlx_image_t *img, int x0, int y0, int x1, int y1, int color);
+
+int			ft_strlen(char *str);
+int			ft_strrlen(char **str);
+char		*ft_substr(char *s, int start, int len);
+int			ft_strcmp(char *s1, char *s2);
+void		*error(char *code);
+void		quit_program(void);
+char		**ft_split(char const *str, char c);
+char		*ft_strdup(char *s1);
+//mlx_image_t	*color_chart(t_cub3d *uwu, char value);
+int			get_rgba(int r, int g, int b, int a);
+int			ft_atoi(char *str);
+char		*ft_strdupnonl(char *s1);
+void		free_s(char **str);
+int			is_num(char *num);
+
+int			load_textures(t_textures *textures);
 void		delete_textures(t_textures *textures);
 int			pixel_to_color(mlx_texture_t *text, int x, int y);
 
@@ -196,6 +212,33 @@ float		dist(float ax, float ay, float bx, float by);
 void		draw_line(mlx_image_t *img, int x0, int y0, int x1, int y1, int color);
 void		check_angle(float *ra);
 void		horizontal(t_cub3d *uwu);
+void		horizontal2(t_cub3d *uwu);
 void		vertical(t_cub3d *uwu);
+void		vertical2(t_cub3d *uwu);
+void		orientation(t_cub3d *uwu);
+void		setup(t_cub3d *uwu);
+void		calculations(t_cub3d *uwu);
+void		draw(t_cub3d *uwu);
+
+void		fill_map(t_cub3d *uwu);
+int			max_width(t_cub3d *uwu);
+void		print_map(t_cub3d *uwu);
+
+char		*ft_strjoin(char const *s1, char const *s2);
+char		*ft_strjoinfree(char **s1, char const *s2);
+char		*ft_strjoinn(char *s1, char **str2);
+char		*ft_strjoinnfree(char **s1, char **str2, char *sep);
+
+void		key_hook(mlx_key_data_t keydata, void *param);
+void		controls_hook(void *param);
+void		init_controls(t_cub3d *uwu);
+void		move(t_cub3d *uwu);
+void		rotate(t_cub3d *uwu);
+
+int			test_collide(t_cub3d *uwu, int x, int y);
+int			find_x_pos(t_cub3d *uwu, int dx);
+int			find_y_pos(t_cub3d *uwu, int dy);
+void		move_x(t_cub3d *uwu, int dx);
+void		move_y(t_cub3d *uwu, int dy);
 
 #endif // CUB3D_H

@@ -15,35 +15,38 @@
 void	vertical(t_cub3d *uwu)
 {
 	VAR->dof = 0;
-	VAR->dis_v = 1000000;
 	VAR->vx = VAR->px;
 	VAR->vy = VAR->py;
 	VAR->ntan = -tan(VAR->ra);
 	if (VAR->ra > P2 && VAR->ra < P3)
 	{
-		VAR->rx = (((int)VAR->px / uwu->m_size) * uwu->m_size) - 0.0001;
+		VAR->rx = (((int)VAR->px / uwu->map_s_x) * uwu->map_s_x) - 0.0001;
 		VAR->ry = (VAR->px - VAR->rx) * VAR->ntan + VAR->py;
-		VAR->xo = -uwu->m_size;
+		VAR->xo = -uwu->map_s_x;
 		VAR->yo = -VAR->xo * VAR->ntan;
 	}
 	if (VAR->ra < P2 || VAR->ra > P3)
 	{
-		VAR->rx = (((int)VAR->px / uwu->m_size) * uwu->m_size)
-			+ uwu->m_size;
+		VAR->rx = (((int)VAR->px / uwu->map_s_x) * uwu->map_s_x) + uwu->map_s_x;
 		VAR->ry = (VAR->px - VAR->rx) * VAR->ntan + VAR->py;
-		VAR->xo = uwu->m_size;
+		VAR->xo = uwu->map_s_x;
 		VAR->yo = -VAR->xo * VAR->ntan;
 	}
 	if (VAR->ra == 0 || VAR->ra == PI)
 	{
 		VAR->ry = VAR->py;
 		VAR->rx = VAR->px;
-		VAR->dof = 50;
+		VAR->dof = MAX_DOF;
 	}
-	while (VAR->dof < 50)
+	vertical2(uwu);
+}
+
+void	vertical2(t_cub3d *uwu)
+{
+	while (VAR->dof < MAX_DOF)
 	{
-		VAR->mx = (int)(VAR->rx) / uwu->m_size;
-		VAR->my = (int)(VAR->ry) / uwu->m_size;
+		VAR->mx = (int)(VAR->rx) / uwu->map_s_x;
+		VAR->my = (int)(VAR->ry) / uwu->map_s_x;
 		if (VAR->mx + VAR->my * uwu->map_s_x > 0 && VAR->mx < uwu->map_s_x
 			&& VAR->my < uwu->map_s_y
 			&& uwu->map[VAR->my][VAR->mx] == '1')
@@ -51,12 +54,13 @@ void	vertical(t_cub3d *uwu)
 			VAR->vx = VAR->rx;
 			VAR->vy = VAR->ry;
 			VAR->dis_v = dist(VAR->px, VAR->py, VAR->vx, VAR->vy);
-			VAR->dof = 50;
+			VAR->dof = MAX_DOF;
 		}
 		else
 		{
 			VAR->rx += VAR->xo;
 			VAR->ry += VAR->yo;
+			VAR->dis_v = 1000000;
 			VAR->dof++;
 		}
 	}

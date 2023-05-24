@@ -31,12 +31,14 @@ int	is_player(char c)
 	return (0);
 }
 
-void	get_pp(t_cub3d *uwu)
+int	get_pp(t_cub3d *uwu)
 {
 	int	i;
 	int	j;
 
 	i = 0;
+	uwu->px = -1;
+	uwu->py = -1;
 	while (uwu->map[i])
 	{
 		j = 0;
@@ -52,6 +54,9 @@ void	get_pp(t_cub3d *uwu)
 		}
 		i++;
 	}
+	if (uwu->px == -1 || uwu->py == -1)
+		return (error(NO_START_ERROR), 1);
+	return (0);
 }
 
 int	get_rgba(int r, int g, int b, int a)

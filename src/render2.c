@@ -12,33 +12,6 @@
 
 #include "cub3d.h"
 
-void	init_map(t_cub3d *uwu)
-{
-	int	i;
-	int	j;
-
-	uwu->map_img = mlx_new_image(uwu->mlx, uwu->map_s_x * (uwu->m_size + 1),
-			uwu->map_s_y * (uwu->m_size + 1));
-	i = 0;
-	while (uwu->map[i])
-	{
-		j = 0;
-		while (uwu->map[i][j])
-		{
-			if (uwu->map[i][j] == '1')
-				fill_img(uwu->map_img, j * uwu->m_size, i * uwu->m_size, BLA,
-					uwu->m_size);
-			if (!is_etranger(uwu->map[i][j]) && uwu->map[i][j] != '1')
-				fill_img(uwu->map_img, j * uwu->m_size, i * uwu->m_size, WHI,
-					uwu->m_size);
-			j++;
-		}
-		i++;
-	}
-	mlx_image_to_window(uwu->mlx, uwu->map_img, 0, 0);
-	uwu->map_img->instances[0].z = 1;
-}
-
 mlx_image_t	*fill(mlx_t *mlx, int w, int h, uint32_t color)
 {
 	mlx_image_t	*image;
@@ -60,18 +33,18 @@ mlx_image_t	*fill(mlx_t *mlx, int w, int h, uint32_t color)
 	return (image);
 }
 
-void	fill_img(mlx_image_t *img, int w, int h, uint32_t color, int size)
+void	fill_img(t_cub3d *uwu, int w, int h, uint32_t color)
 {
 	int	x;
 	int	y;
 
 	x = w;
-	while (x < w + size)
+	while (x < w + uwu->m_size)
 	{
 		y = h;
-		while (y < h + size)
+		while (y < h + uwu->m_size)
 		{
-			mlx_put_pixel(img, x, y, color);
+			mlx_put_pixel(uwu->map_img, x, y, color);
 			y++;
 		}
 		x++;
