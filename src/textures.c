@@ -15,15 +15,19 @@
 int	load_textures(t_textures *textures)
 {
 	textures->text_no = mlx_load_png(textures->texture_no);
+	printf("%s\n", textures->texture_no);
 	if (!textures->text_no)
 		return (error(LOADING_TEXTURE_ERROR), 1);
 	textures->text_so = mlx_load_png(textures->texture_so);
+	printf("%s\n", textures->texture_so);
 	if (!textures->text_so)
 		return (error(LOADING_TEXTURE_ERROR), 1);
 	textures->text_ea = mlx_load_png(textures->texture_ea);
+	printf("%s\n", textures->texture_ea);
 	if (!textures->text_ea)
 		return (error(LOADING_TEXTURE_ERROR), 1);
 	textures->text_we = mlx_load_png(textures->texture_we);
+	printf("%s\n", textures->texture_we);
 	if (!textures->text_we)
 		return (error(LOADING_TEXTURE_ERROR), 1);
 	return (0);

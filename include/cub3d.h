@@ -63,6 +63,7 @@
 # define INVALID_PATH "Error\nMap is not valid. It must end with .cub.\n"
 # define NO_START_ERROR "Error\nNo start for the player in the map\n"
 # define LOADING_TEXTURE_ERROR "Error\nError while trying to load a texture\n"
+# define FILE_EMPTY "Error\nError file is empty\n"
 
 # define KEY_FORWARD MLX_KEY_W
 # define KEY_BACKWARD MLX_KEY_S
@@ -185,7 +186,7 @@ int			check_map(char **map);
 int			check_map_path(char **av);
 int			check_map_closed(t_cub3d *uwu);
 int			is_etranger(char c);
-int			verify_texture(char *texture);
+int			verify_texture(char *texture, int *pb);
 
 int			parse_textures(t_cub3d *uwu, int fd);
 int			store_texture(t_cub3d *uwu, char **fields);
