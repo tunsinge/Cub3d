@@ -1,4 +1,4 @@
-NO ./fox2.png
+NO ./textures/blue.png
 SO ./textures/grey.png
 WE ./textures/red.png
 EA ./textures/green.png

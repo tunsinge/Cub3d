@@ -6,7 +6,7 @@
 #    By: mdoumi <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/03 10:23:53 by Foxan             #+#    #+#              #
-#    Updated: 2023/05/18 14:33:39 by mdoumi           ###   ########.fr        #
+#    Updated: 2023/05/24 18:03:44 by mdoumi           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -52,7 +52,7 @@ SRCS			:=	./src/main.c \
 					./src/ft_strjoin.c \
 					./src/controls.c \
 					./src/collisions.c
-INCLUDES		:= -I ./include
+INCLUDES		:= -I ./include -I /Users/$$USER/.brew/opt/glfw/include
 FLAGS			:= -g -g3
 OBJS			:= ${SRCS:.c=.o}
 SOMETHING		:= 0

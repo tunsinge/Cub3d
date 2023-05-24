@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   collisions.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ^@^ Foxan ^@^ <thibaut.unsinger@gmail.com  +#+  +:+       +#+        */
+/*   By: mdoumi <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/23 14:47:32 by ^@^ Foxan ^@^     #+#    #+#             */
-/*   Updated: 2023/05/23 14:47:33 by ^@^ Foxan ^@^    ###   ########.fr       */
+/*   Created: 2023/05/23 14:47:32 by ^@^ Foxan ^       #+#    #+#             */
+/*   Updated: 2023/05/24 17:19:55by mdoumi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,14 +52,28 @@ int	find_y_pos(t_cub3d *uwu, int dy)
 	return (y);
 }
 
-void	move_x(t_cub3d *uwu, int dx)
+void	move_x(t_cub3d *uwu, float dx)
 {
-//	if (!test_collide(uwu, find_x_pos(uwu, dx), find_y_pos(uwu, 0)))
+	int	i;
+	float	nb;
+
+	i = 0;
+	nb = 0;
+	nb = uwu->px + dx * uwu->speed + 5 * (dx > 0);
+	if (uwu->map[(int)uwu->py / uwu->map_s_x][(int)nb / uwu->map_s_x] == '1')
+		return ;
 	uwu->px += dx * uwu->speed;
 }
 
-void	move_y(t_cub3d *uwu, int dy)
+void	move_y(t_cub3d *uwu, float dy)
 {
-//	if (!test_collide(uwu, find_x_pos(uwu, 0), find_y_pos(uwu, dy)))
+	int	i;
+	float	nb;
+
+	i = 0;
+	nb = 0;
+	nb = uwu->py + dy * uwu->speed + 5 * (dy > 0);
+	if (uwu->map[(int)nb / uwu->map_s_x][(int)uwu->px / uwu->map_s_x] == '1')
+		return ;
 	uwu->py += dy * uwu->speed;
 }

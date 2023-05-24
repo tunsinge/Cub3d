@@ -6,7 +6,7 @@
 /*   By: mdoumi <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/02 17:01:31 by ^@^ Foxan ^       #+#    #+#             */
-/*   Updated: 2023/05/20 16:26:15 by mdoumi           ###   ########.fr       */
+/*   Updated: 2023/05/24 19:04:37 by mdoumi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@
 # include "get_next_line_bonus.h"
 # include "../MLX42/include/MLX42/MLX42.h"
 # include <string.h>
+
+# include <GLFW/glfw3.h>
 
 # define VAR uwu->ray
 # define MAX_DOF 25
@@ -44,6 +46,8 @@
 # define scale 3
 # define windowWidth 480*scale
 # define windowHeight 320*scale
+# define N_SPEED 0.25
+# define S_SPEED 0.75
 
 # define OPEN_ERROR "Error\nOpen failed.\n"
 # define INV_ARGS "Error\n1 Argument is required.\n"
@@ -82,7 +86,9 @@ typedef struct s_keys
 	int	key_d;
 	int	key_r;
 	int	key_l;
+	int	key_wi;
 	int	key_shift;
+	int	key_jump;
 }	t_keys;
 
 typedef struct s_drwlvars
@@ -148,6 +154,7 @@ typedef struct s_cub3d
 	int			i;
 	int			map_s_x;
 	int			map_s_y;
+	int			hehe;
 	float		px;
 	float		py;
 	float		pa;
@@ -155,6 +162,7 @@ typedef struct s_cub3d
 	int			p_size;
 	int			p_color;
 	float		speed;
+	float		jumping;
 	char		**map;
 	mlx_image_t	*player_img;
 	mlx_image_t	*map_img;
@@ -238,7 +246,7 @@ void		rotate(t_cub3d *uwu);
 int			test_collide(t_cub3d *uwu, int x, int y);
 int			find_x_pos(t_cub3d *uwu, int dx);
 int			find_y_pos(t_cub3d *uwu, int dy);
-void		move_x(t_cub3d *uwu, int dx);
-void		move_y(t_cub3d *uwu, int dy);
+void		move_x(t_cub3d *uwu, float dx);
+void		move_y(t_cub3d *uwu, float dy);
 
 #endif // CUB3D_H

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycast2.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ^@^ Foxan ^@^ <thibaut.unsinger@gmail.com  +#+  +:+       +#+        */
+/*   By: mdoumi <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/23 09:37:55 by ^@^ Foxan ^@^     #+#    #+#             */
-/*   Updated: 2023/05/23 09:37:55 by ^@^ Foxan ^@^    ###   ########.fr       */
+/*   Created: 2023/05/23 09:37:55 by ^@^ Foxan ^       #+#    #+#             */
+/*   Updated: 2023/05/24 19:32:10 by mdoumi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ void	calculations(t_cub3d *uwu)
 		VAR->ty_off = (VAR->line_h - VAR->h) / 2.0;
 		VAR->line_h = VAR->h;
 	}
-	VAR->line_o = VAR->h / 2 - VAR->line_h / 2;
+	VAR->line_o = (VAR->h / 2 - VAR->line_h / 2) + uwu->jumping;
 	VAR->ty = VAR->ty_step * VAR->ty_off;
 	if (VAR->shade != 1)
 	{

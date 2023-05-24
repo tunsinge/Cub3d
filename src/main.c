@@ -6,7 +6,7 @@
 /*   By: mdoumi <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/01 22:57:56 by mdoumi            #+#    #+#             */
-/*   Updated: 2023/05/04 12:07:30 by mdoumi           ###   ########.fr       */
+/*   Updated: 2023/05/24 19:00:51 by mdoumi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@ void	init_(t_cub3d *uwu, char **av)
 	uwu->textures->color_fl = 0;
 	uwu->textures->color_ce = 0;
 	uwu->speed = 0;
+	uwu->hehe = 0;
+	uwu->jumping = 0;
 	if (check_map_path(av))
 		quit_program();
 	uwu->map = parse_map(uwu, av[1]);
@@ -42,6 +44,7 @@ void	init_(t_cub3d *uwu, char **av)
 	uwu->mlx = mlx_init(windowWidth, windowHeight, "cub3d", true);
 	if (load_textures(uwu->textures))
 		return (quit_program());
+	mlx_set_cursor_mode(uwu->mlx, MLX_MOUSE_HIDDEN);
 }
 
 int	main(int ac, char **av)
