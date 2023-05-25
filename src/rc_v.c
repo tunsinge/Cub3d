@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rc_v.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ^@^ Foxan ^@^ <thibaut.unsinger@gmail.com  +#+  +:+       +#+        */
+/*   By: mdoumi <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/22 19:32:02 by ^@^ Foxan ^@^     #+#    #+#             */
-/*   Updated: 2023/05/22 19:32:03 by ^@^ Foxan ^@^    ###   ########.fr       */
+/*   Created: 2023/05/22 19:32:02 by ^@^ Foxan ^       #+#    #+#             */
+/*   Updated: 2023/05/25 11:36:34 by mdoumi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,54 +14,57 @@
 
 void	vertical(t_cub3d *uwu)
 {
-	VAR->dof = 0;
-	VAR->vx = VAR->px;
-	VAR->vy = VAR->py;
-	VAR->ntan = -tan(VAR->ra);
-	if (VAR->ra > P2 && VAR->ra < P3)
+	t_ray	*n;
+
+	((void)0, n = uwu->ray, n->dof = 0, n->vx = n->px, n->vy = n->py);
+	n->ntan = -tan(n->ra);
+	if (n->ra > P2 && n->ra < P3)
 	{
-		VAR->rx = (((int)VAR->px / uwu->map_s_x) * uwu->map_s_x) - 0.0001;
-		VAR->ry = (VAR->px - VAR->rx) * VAR->ntan + VAR->py;
-		VAR->xo = -uwu->map_s_x;
-		VAR->yo = -VAR->xo * VAR->ntan;
+		n->rx = (((int)n->px / uwu->map_s_x) * uwu->map_s_x) - 0.0001;
+		n->ry = (n->px - n->rx) * n->ntan + n->py;
+		n->xo = -uwu->map_s_x;
+		n->yo = -n->xo * n->ntan;
 	}
-	if (VAR->ra < P2 || VAR->ra > P3)
+	if (n->ra < P2 || n->ra > P3)
 	{
-		VAR->rx = (((int)VAR->px / uwu->map_s_x) * uwu->map_s_x) + uwu->map_s_x;
-		VAR->ry = (VAR->px - VAR->rx) * VAR->ntan + VAR->py;
-		VAR->xo = uwu->map_s_x;
-		VAR->yo = -VAR->xo * VAR->ntan;
+		n->rx = (((int)n->px / uwu->map_s_x) * uwu->map_s_x) + uwu->map_s_x;
+		n->ry = (n->px - n->rx) * n->ntan + n->py;
+		n->xo = uwu->map_s_x;
+		n->yo = -n->xo * n->ntan;
 	}
-	if (VAR->ra == 0 || VAR->ra == PI)
+	if (n->ra == 0 || n->ra == PI)
 	{
-		VAR->ry = VAR->py;
-		VAR->rx = VAR->px;
-		VAR->dof = MAX_DOF;
+		n->ry = n->py;
+		n->rx = n->px;
+		n->dof = MAX_DOF;
 	}
 	vertical2(uwu);
 }
 
 void	vertical2(t_cub3d *uwu)
 {
-	while (VAR->dof < MAX_DOF)
+	t_ray	*n;
+
+	n = uwu->ray;
+	while (n->dof < MAX_DOF)
 	{
-		VAR->mx = (int)(VAR->rx) / uwu->map_s_x;
-		VAR->my = (int)(VAR->ry) / uwu->map_s_x;
-		if (VAR->mx + VAR->my * uwu->map_s_x > 0 && VAR->mx < uwu->map_s_x
-			&& VAR->my < uwu->map_s_y
-			&& uwu->map[VAR->my][VAR->mx] == '1')
+		n->mx = (int)(n->rx) / uwu->map_s_x;
+		n->my = (int)(n->ry) / uwu->map_s_x;
+		if (n->mx + n->my * uwu->map_s_x > 0 && n->mx < uwu->map_s_x
+			&& n->my < uwu->map_s_y
+			&& uwu->map[n->my][n->mx] == '1')
 		{
-			VAR->vx = VAR->rx;
-			VAR->vy = VAR->ry;
-			VAR->dis_v = dist(VAR->px, VAR->py, VAR->vx, VAR->vy);
-			VAR->dof = MAX_DOF;
+			n->vx = n->rx;
+			n->vy = n->ry;
+			n->dis_v = dist(n->px, n->py, n->vx, n->vy);
+			n->dof = MAX_DOF;
 		}
 		else
 		{
-			VAR->rx += VAR->xo;
-			VAR->ry += VAR->yo;
-			VAR->dis_v = 1000000;
-			VAR->dof++;
+			n->rx += n->xo;
+			n->ry += n->yo;
+			n->dis_v = 1000000;
+			n->dof++;
 		}
 	}
 }

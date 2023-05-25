@@ -6,7 +6,7 @@
 /*   By: mdoumi <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 08:31:59 by mdoumi            #+#    #+#             */
-/*   Updated: 2023/05/25 08:43:05 by mdoumi           ###   ########.fr       */
+/*   Updated: 2023/05/25 11:29:28 by mdoumi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,11 +48,11 @@ int	store_color(t_cub3d *uwu, char **fields)
 		return (error(INVALID_COLOR_FORMAT), 1);
 	if (!is_num(color[0]) || !is_num(color[1]) || !is_num(color[2]))
 		return (error(INVALID_COLOR_RGB_VALUE), 1);
-	if (ft_strcmp(fields[0], "F") == 0 && !uwu->textures->color_fl)
-		uwu->textures->color_fl = get_rgba(ft_atoi(color[0]), ft_atoi(color[1]),
+	if (ft_strcmp(fields[0], "F") == 0 && !uwu->t->fl)
+		uwu->t->fl = get_rgba(ft_atoi(color[0]), ft_atoi(color[1]),
 				ft_atoi(color[2]), 255);
-	else if (ft_strcmp(fields[0], "C") == 0 && !uwu->textures->color_ce)
-		uwu->textures->color_ce = get_rgba(ft_atoi(color[0]), ft_atoi(color[1]),
+	else if (ft_strcmp(fields[0], "C") == 0 && !uwu->t->ce)
+		uwu->t->ce = get_rgba(ft_atoi(color[0]), ft_atoi(color[1]),
 				ft_atoi(color[2]), 255);
 	else
 		return (error(INVALID_TEXTURES_CODE), 1);
@@ -63,25 +63,25 @@ int	store_texture(t_cub3d *uwu, char **fields)
 {
 	static int	pb = 0;
 
-	if (ft_strcmp(fields[0], "NO") == 0 && !uwu->textures->texture_no)
+	if (ft_strcmp(fields[0], "NO") == 0 && !uwu->t->t_no)
 	{
 		if (!verify_texture(fields[1], &pb))
-			uwu->textures->texture_no = ft_strdupnonl(fields[1]);
+			uwu->t->t_no = ft_strdupnonl(fields[1]);
 	}
-	else if (ft_strcmp(fields[0], "SO") == 0 && !uwu->textures->texture_so)
+	else if (ft_strcmp(fields[0], "SO") == 0 && !uwu->t->t_so)
 	{
 		if (!verify_texture(fields[1], &pb))
-			uwu->textures->texture_so = ft_strdupnonl(fields[1]);
+			uwu->t->t_so = ft_strdupnonl(fields[1]);
 	}
-	else if (ft_strcmp(fields[0], "EA") == 0 && !uwu->textures->texture_ea)
+	else if (ft_strcmp(fields[0], "EA") == 0 && !uwu->t->t_ea)
 	{
 		if (!verify_texture(fields[1], &pb))
-			uwu->textures->texture_ea = ft_strdupnonl(fields[1]);
+			uwu->t->t_ea = ft_strdupnonl(fields[1]);
 	}
-	else if (ft_strcmp(fields[0], "WE") == 0 && !uwu->textures->texture_we)
+	else if (ft_strcmp(fields[0], "WE") == 0 && !uwu->t->t_we)
 	{
 		if (!verify_texture(fields[1], &pb))
-			uwu->textures->texture_we = ft_strdupnonl(fields[1]);
+			uwu->t->t_we = ft_strdupnonl(fields[1]);
 	}
 	else
 		return (store_color(uwu, fields));

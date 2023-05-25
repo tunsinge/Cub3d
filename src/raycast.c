@@ -6,7 +6,7 @@
 /*   By: mdoumi <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/18 02:13:02 by mdoumi            #+#    #+#             */
-/*   Updated: 2023/05/25 09:48:00 by mdoumi           ###   ########.fr       */
+/*   Updated: 2023/05/25 11:25:45 by mdoumi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,16 +36,16 @@ void	check_angle(float *ra)
 
 void	raycaster(t_cub3d *uwu)
 {
-	VAR->w = WINW;
-	VAR->h = WINH;
-	VAR->px = uwu->px + uwu->p_size / 2;
-	VAR->py = uwu->py + uwu->p_size / 2;
-	VAR->ra = uwu->pa - DR * 30;
-	VAR->pa = uwu->pa;
-	check_angle(&VAR->ra);
-	VAR->ray_nb = 480;
-	VAR->r = 0;
-	while (VAR->r < VAR->ray_nb)
+	uwu->ray->w = WINW;
+	uwu->ray->h = WINH;
+	uwu->ray->px = uwu->px + uwu->p_size / 2;
+	uwu->ray->py = uwu->py + uwu->p_size / 2;
+	uwu->ray->ra = uwu->pa - DR * 30;
+	uwu->ray->pa = uwu->pa;
+	check_angle(&uwu->ray->ra);
+	uwu->ray->ray_nb = 480;
+	uwu->ray->r = 0;
+	while (uwu->ray->r < uwu->ray->ray_nb)
 	{
 		horizontal(uwu);
 		vertical(uwu);
@@ -53,8 +53,8 @@ void	raycaster(t_cub3d *uwu)
 		setup(uwu);
 		calculations(uwu);
 		draw(uwu);
-		VAR->ra += DR * (60 / VAR->ray_nb);
-		check_angle(&VAR->ra);
-		VAR->r++;
+		uwu->ray->ra += DR * (60 / uwu->ray->ray_nb);
+		check_angle(&uwu->ray->ra);
+		uwu->ray->r++;
 	}
 }

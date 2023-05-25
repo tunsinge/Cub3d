@@ -6,39 +6,35 @@
 /*   By: mdoumi <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 14:58:14 by ^@^ Foxan ^       #+#    #+#             */
-/*   Updated: 2023/05/25 09:51:12 by mdoumi           ###   ########.fr       */
+/*   Updated: 2023/05/25 11:46:22 by mdoumi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int	load_textures(t_textures *textures)
+int	load_textures(t_textures *t)
 {
-	textures->text_no = mlx_load_png(textures->texture_no);
-	printf("%s\n", textures->texture_no);
-	if (!textures->text_no)
+	t->text_no = mlx_load_png(t->t_no);
+	if (!t->text_no)
 		return (error(LOADING_TEXTURE_ERROR), 1);
-	textures->text_so = mlx_load_png(textures->texture_so);
-	printf("%s\n", textures->texture_so);
-	if (!textures->text_so)
+	t->text_so = mlx_load_png(t->t_so);
+	if (!t->text_so)
 		return (error(LOADING_TEXTURE_ERROR), 1);
-	textures->text_ea = mlx_load_png(textures->texture_ea);
-	printf("%s\n", textures->texture_ea);
-	if (!textures->text_ea)
+	t->text_ea = mlx_load_png(t->t_ea);
+	if (!t->text_ea)
 		return (error(LOADING_TEXTURE_ERROR), 1);
-	textures->text_we = mlx_load_png(textures->texture_we);
-	printf("%s\n", textures->texture_we);
-	if (!textures->text_we)
+	t->text_we = mlx_load_png(t->t_we);
+	if (!t->text_we)
 		return (error(LOADING_TEXTURE_ERROR), 1);
 	return (0);
 }
 
-void	delete_textures(t_textures *textures)
+void	delete_textures(t_textures *t)
 {
-	mlx_delete_texture(textures->text_no);
-	mlx_delete_texture(textures->text_so);
-	mlx_delete_texture(textures->text_ea);
-	mlx_delete_texture(textures->text_we);
+	mlx_delete_texture(t->text_no);
+	mlx_delete_texture(t->text_so);
+	mlx_delete_texture(t->text_ea);
+	mlx_delete_texture(t->text_we);
 }
 
 int	pixel_to_color(mlx_texture_t *text, uint32_t x, uint32_t y)

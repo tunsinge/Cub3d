@@ -6,7 +6,7 @@
 /*   By: mdoumi <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 11:56:53 by ^@^ Foxan ^       #+#    #+#             */
-/*   Updated: 2023/05/25 09:52:18 by mdoumi           ###   ########.fr       */
+/*   Updated: 2023/05/25 11:44:41 by mdoumi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ void	key_hook(mlx_key_data_t keydata, void *param)
 
 	uwu = param;
 	if (keydata.key == MLX_KEY_ESCAPE)
-		quit_program();
+		quit_program(uwu);
 	set_key(keydata, KEY_FORWARD, &uwu->keys.key_w);
 	set_key(keydata, KEY_BACKWARD, &uwu->keys.key_s);
 	set_key(keydata, KEY_STRAF_RIGHT, &uwu->keys.key_d);

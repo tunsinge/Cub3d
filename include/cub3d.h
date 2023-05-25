@@ -6,7 +6,7 @@
 /*   By: mdoumi <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/02 17:01:31 by ^@^ Foxan ^       #+#    #+#             */
-/*   Updated: 2023/05/25 09:52:48 by mdoumi           ###   ########.fr       */
+/*   Updated: 2023/05/25 11:43:51 by mdoumi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@
 # include "../MLX42/include/MLX42/MLX42.h"
 # include <string.h>
 
-# define VAR uwu->ray
 # define MAX_DOF 25
 
 # define WHI 0xFFFFFFFF
@@ -72,12 +71,12 @@
 
 typedef struct s_textures
 {
-	char			*texture_no;
-	char			*texture_so;
-	char			*texture_ea;
-	char			*texture_we;
-	int				color_fl;
-	int				color_ce;
+	char			*t_no;
+	char			*t_so;
+	char			*t_ea;
+	char			*t_we;
+	int				fl;
+	int				ce;
 	mlx_texture_t	*text_no;
 	mlx_texture_t	*text_so;
 	mlx_texture_t	*text_ea;
@@ -148,12 +147,12 @@ typedef struct s_ray
 	int				my;
 	int				dof;
 	int				y;
-	int				color;
+	int				c;
 	int				w;
 	int				h;
 	int				z;
 	int				xy[2];
-	mlx_texture_t	*texture;
+	mlx_texture_t	*t;
 }	t_ray;
 
 typedef struct s_cub3d
@@ -174,7 +173,7 @@ typedef struct s_cub3d
 	mlx_image_t	*player_img;
 	mlx_image_t	*map_img;
 	mlx_image_t	*trwad_img;
-	t_textures	*textures;
+	t_textures	*t;
 	t_ray		*ray;
 	t_keys		keys;
 	mlx_t		*mlx;
@@ -256,7 +255,7 @@ int			ft_strrlen(char **str);
 
 char		*ft_substr(char *s, int start, int len);
 
-// main.c`
+// main.c
 
 void		init_(t_cub3d *uwu, char **av);
 
@@ -276,7 +275,7 @@ int			parse_textures(t_cub3d *uwu, int fd);
 
 // quit.c
 
-void		quit_program(void);
+void		quit_program(t_cub3d *uwu);
 
 // raycast.c
 
