@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   textures.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ^@^ Foxan ^@^ <thibaut.unsinger@gmail.com  +#+  +:+       +#+        */
+/*   By: mdoumi <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/17 14:58:14 by ^@^ Foxan ^@^     #+#    #+#             */
-/*   Updated: 2023/05/17 14:58:14 by ^@^ Foxan ^@^    ###   ########.fr       */
+/*   Created: 2023/05/17 14:58:14 by ^@^ Foxan ^       #+#    #+#             */
+/*   Updated: 2023/05/25 09:51:12 by mdoumi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void	delete_textures(t_textures *textures)
 	mlx_delete_texture(textures->text_we);
 }
 
-int	pixel_to_color(mlx_texture_t *text, int x, int y)
+int	pixel_to_color(mlx_texture_t *text, uint32_t x, uint32_t y)
 {
 	uint8_t		*pixel;
 	uint32_t	color;

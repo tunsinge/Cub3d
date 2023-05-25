@@ -6,7 +6,7 @@
 /*   By: mdoumi <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 12:16:49 by mdoumi            #+#    #+#             */
-/*   Updated: 2023/05/24 16:32:37 by mdoumi           ###   ########.fr       */
+/*   Updated: 2023/05/25 09:42:35 by mdoumi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	init_img(t_cub3d *uwu)
 {
 	init_player(uwu);
 	init_map(uwu);
-	uwu->trwad_img = mlx_new_image(uwu->mlx, windowWidth, windowHeight);
+	uwu->trwad_img = mlx_new_image(uwu->mlx, WINW, WINH);
 	raycaster(uwu);
 	mlx_image_to_window(uwu->mlx, uwu->trwad_img, 0, 0);
 	uwu->trwad_img->instances[0].z = 0;

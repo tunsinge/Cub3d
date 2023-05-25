@@ -6,7 +6,7 @@
 /*   By: mdoumi <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 20:41:06 by mdoumi            #+#    #+#             */
-/*   Updated: 2023/05/24 20:51:32 by mdoumi           ###   ########.fr       */
+/*   Updated: 2023/05/25 09:42:35 by mdoumi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ void	init_(t_cub3d *uwu, char **av)
 	uwu->m_size = 256 / uwu->map_s_x;
 	uwu->p_size = uwu->m_size / 4;
 	uwu->ray = malloc(sizeof(t_ray));
-	uwu->mlx = mlx_init(windowWidth, windowHeight, "cub3d", true);
+	uwu->mlx = mlx_init(WINW, WINH, "cub3d", true);
 	if (load_textures(uwu->textures))
 		return (quit_program());
 	mlx_set_cursor_mode(uwu->mlx, MLX_MOUSE_HIDDEN);

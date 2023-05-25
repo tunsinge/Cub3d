@@ -6,7 +6,7 @@
 /*   By: mdoumi <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 09:37:55 by ^@^ Foxan ^       #+#    #+#             */
-/*   Updated: 2023/05/24 19:32:10 by mdoumi           ###   ########.fr       */
+/*   Updated: 2023/05/25 09:11:28 by mdoumi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,17 +89,17 @@ void	draw(t_cub3d *uwu)
 		VAR->ty += VAR->ty_step;
 		VAR->y++;
 	}
-	VAR->z = 0;
-	while (VAR->z < VAR->w / VAR->ray_nb)
+	VAR->z = -1;
+	while (++VAR->z < VAR->w / VAR->ray_nb)
 	{
-		draw_line(uwu->trwad_img, VAR->r * VAR->w / VAR->ray_nb + VAR->z,
-			0, VAR->r * VAR->w / VAR->ray_nb + VAR->z,
-			VAR->line_o, uwu->textures->color_ce);
-		draw_line(uwu->trwad_img,
+		VAR->xy[0] = 0;
+		VAR->xy[1] = VAR->line_o;
+		draw_col(uwu->trwad_img, VAR->xy,
+			VAR->r * VAR->w / VAR->ray_nb + VAR->z, uwu->textures->color_ce);
+		VAR->xy[0] = VAR->line_h + VAR->line_o - 1;
+		VAR->xy[1] = VAR->h - 1;
+		draw_col(uwu->trwad_img, VAR->xy,
 			VAR->r * VAR->w / VAR->ray_nb + VAR->z,
-			VAR->line_h + VAR->line_o - 1, VAR->r * VAR->w / VAR->ray_nb
-			+ VAR->z, VAR->h - 1,
 			uwu->textures->color_fl);
-		VAR->z++;
 	}
 }

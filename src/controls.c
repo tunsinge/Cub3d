@@ -6,7 +6,7 @@
 /*   By: mdoumi <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 11:56:53 by ^@^ Foxan ^       #+#    #+#             */
-/*   Updated: 2023/05/24 21:02:53 by mdoumi           ###   ########.fr       */
+/*   Updated: 2023/05/25 09:52:18 by mdoumi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ void	controls_hook(void *param)
 	render(uwu);
 }
 
-void	set_key(mlx_key_data_t keydata, int key, int *value)
+void	set_key(mlx_key_data_t keydata, keys_t key, int *value)
 {
 	if (keydata.key == key && keydata.action == MLX_PRESS)
 		*value = 1;

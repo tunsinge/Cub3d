@@ -6,7 +6,7 @@
 /*   By: mdoumi <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 20:42:55 by mdoumi            #+#    #+#             */
-/*   Updated: 2023/05/24 20:54:09 by mdoumi           ###   ########.fr       */
+/*   Updated: 2023/05/25 09:42:35 by mdoumi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,19 +43,19 @@ void	mouse(t_cub3d *uwu)
 
 	if (uwu->hehe < 5)
 	{
-		mlx_set_mouse_pos(uwu->mlx, windowWidth / 2, windowHeight / 2);
+		mlx_set_mouse_pos(uwu->mlx, WINW / 2, WINH / 2);
 		return ;
 	}
 	mlx_get_mouse_pos(uwu->mlx, &pos[0], &pos[1]);
-	if (pos[0] != windowWidth / 2)
+	if (pos[0] != WINW / 2)
 	{
-		uwu->pa += (pos[0] - windowWidth / 2) * 0.0005;
+		uwu->pa += (pos[0] - WINW / 2) * 0.0005;
 		check_angle(&uwu->pa);
 		uwu->ray->pdx = cosf(uwu->pa) * 5;
 		uwu->ray->pdy = sinf(uwu->pa) * 5;
 		uwu->ray->pdxs = cosf(uwu->pa + P2) * 2;
 		uwu->ray->pdys = sinf(uwu->pa + P2) * 2;
-		mlx_set_mouse_pos(uwu->mlx, windowWidth / 2, windowHeight / 2);
+		mlx_set_mouse_pos(uwu->mlx, WINW / 2, WINH / 2);
 	}
 }
 

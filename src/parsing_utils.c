@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: mdoumi <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/11 09:56:05 by ^@^ Foxan ^       #+#    #+#             */
-/*   Updated: 2023/05/24 20:36:11y mdoumi           ###   ########.fr       */
+/*   Created: 2023/05/25 08:31:59 by mdoumi            #+#    #+#             */
+/*   Updated: 2023/05/25 08:43:05 by mdoumi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,9 +61,8 @@ int	store_color(t_cub3d *uwu, char **fields)
 
 int	store_texture(t_cub3d *uwu, char **fields)
 {
-	int	pb;
+	static int	pb = 0;
 
-	pb = 0;
 	if (ft_strcmp(fields[0], "NO") == 0 && !uwu->textures->texture_no)
 	{
 		if (!verify_texture(fields[1], &pb))

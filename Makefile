@@ -6,7 +6,7 @@
 #    By: mdoumi <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/03 10:23:53 by Foxan             #+#    #+#              #
-#    Updated: 2023/05/24 20:45:28 by mdoumi           ###   ########.fr        #
+#    Updated: 2023/05/25 09:50:05 by mdoumi           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -54,7 +54,7 @@ SRCS			:=	./src/main.c \
 					./src/controls2.c \
 					./src/collisions.c
 INCLUDES		:= -I ./include -I /Users/$$USER/.brew/opt/glfw/include
-FLAGS			:= -g -g3
+FLAGS			:= -Wall -Wextra -Werror -g -g3
 OBJS			:= ${SRCS:.c=.o}
 SOMETHING		:= 0
 LIBMLX			:= ./MLX42
