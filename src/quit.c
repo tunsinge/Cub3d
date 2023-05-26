@@ -15,6 +15,8 @@
 void	quit_program(t_cub3d *uwu)
 {
 	delete_textures(uwu->t);
-	mlx_terminate(uwu->mlx);
+	if (uwu->mlx)
+		mlx_terminate(uwu->mlx);
+//	system("leaks cub3d");
 	exit(0);
 }

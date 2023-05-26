@@ -33,6 +33,27 @@ char	*ft_strdup(char *s1)
 	return (s2);
 }
 
+char	*ft_strdupnonl(char *s1)
+{
+	char	*s2;
+	int		len;
+
+	len = 0;
+	while (s1[len] && s1[len] != '\n')
+		len++;
+	s2 = malloc((len + 1) * sizeof(char));
+	if (s2 == NULL)
+		return (NULL);
+	len = 0;
+	while (s1[len] && s1[len] != '\n')
+	{
+		s2[len] = s1[len];
+		len++;
+	}
+	s2[len] = '\0';
+	return (s2);
+}
+
 char	**ft_strrdup(char **s1)
 {
 	char	**res;
@@ -63,27 +84,6 @@ char	**ft_strrldup(char **s1, int l)
 		res[i] = NULL;
 	res[i] = NULL;
 	return (res);
-}
-
-char	*ft_strdupnonl(char *s1)
-{
-	char	*s2;
-	int		len;
-
-	len = 0;
-	while (s1[len] && s1[len] != '\n')
-		len++;
-	s2 = malloc((len + 1) * sizeof(char));
-	if (s2 == NULL)
-		return (NULL);
-	len = 0;
-	while (s1[len] && s1[len] != '\n')
-	{
-		s2[len] = s1[len];
-		len++;
-	}
-	s2[len] = '\0';
-	return (s2);
 }
 
 char	*ft_strldup(char *s1, int l)

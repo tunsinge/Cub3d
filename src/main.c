@@ -19,11 +19,16 @@ static void	first_init(t_cub3d *uwu)
 	uwu->t->t_so = NULL;
 	uwu->t->t_we = NULL;
 	uwu->t->t_ea = NULL;
+	uwu->t->text_no = NULL;
+	uwu->t->text_so = NULL;
+	uwu->t->text_we = NULL;
+	uwu->t->text_ea = NULL;
 	uwu->t->fl = 0;
 	uwu->t->ce = 0;
-	uwu->speed = 0;
+	uwu->speed = N_SPEED;
 	uwu->hehe = 0;
 	uwu->jumping = 0;
+	uwu->mlx = NULL;
 }
 
 void	init_(t_cub3d *uwu, char **av)
@@ -32,18 +37,18 @@ void	init_(t_cub3d *uwu, char **av)
 	if (check_map_path(av))
 		quit_program(uwu);
 	uwu->map = parse_map(uwu, av[1]);
+	uwu->map_s_y = ft_strrlen(uwu->map);
+	uwu->map_s_x = ft_strlen(uwu->map[0]);
+	uwu->m_size = 256 / uwu->map_s_x;
+	uwu->p_size = uwu->m_size / 4;
 	if (!uwu->map)
 		quit_program(uwu);
-	if (check_map(uwu->map))
+	if (check_map(uwu->map) || !check_map_closed(uwu))
 		quit_program(uwu);
 	fill_map(uwu);
 	uwu->p_color = CYA;
 	if (get_pp(uwu))
 		quit_program(uwu);
-	uwu->map_s_y = ft_strrlen(uwu->map);
-	uwu->map_s_x = ft_strlen(uwu->map[0]);
-	uwu->m_size = 256 / uwu->map_s_x;
-	uwu->p_size = uwu->m_size / 4;
 	uwu->ray = malloc(sizeof(t_ray));
 	uwu->mlx = mlx_init(WINW, WINH, "cub3d", true);
 	if (load_textures(uwu->t))

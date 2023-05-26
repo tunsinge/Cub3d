@@ -96,16 +96,6 @@ typedef struct s_keys
 	int	key_jump;
 }	t_keys;
 
-typedef struct s_drwlvars
-{
-	int	dx;
-	int	dy;
-	int	err;
-	int	e2;
-	int	sx;
-	int	sy;
-}	t_drwlvars;
-
 typedef struct s_ray
 {
 	float			pdx;
