@@ -6,7 +6,7 @@
 /*   By: mdoumi <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/02 17:01:31 by ^@^ Foxan ^       #+#    #+#             */
-/*   Updated: 2023/05/25 11:43:51 by mdoumi           ###   ########.fr       */
+/*   Updated: 2023/05/26 11:46:26 by mdoumi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,16 +95,6 @@ typedef struct s_keys
 	int	key_shift;
 	int	key_jump;
 }	t_keys;
-
-typedef struct s_drwlvars
-{
-	int	dx;
-	int	dy;
-	int	err;
-	int	e2;
-	int	sx;
-	int	sy;
-}	t_drwlvars;
 
 typedef struct s_ray
 {

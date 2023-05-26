@@ -6,7 +6,7 @@
 /*   By: mdoumi <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 20:41:06 by mdoumi            #+#    #+#             */
-/*   Updated: 2023/05/26 10:30:01 by mdoumi           ###   ########.fr       */
+/*   Updated: 2023/05/26 11:46:04 by mdoumi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,13 @@ static void	first_init(t_cub3d *uwu)
 	uwu->t->t_so = NULL;
 	uwu->t->t_we = NULL;
 	uwu->t->t_ea = NULL;
+	uwu->t->text_no = NULL;
+	uwu->t->text_so = NULL;
+	uwu->t->text_we = NULL;
+	uwu->t->text_ea = NULL;
 	uwu->t->fl = 0;
 	uwu->t->ce = 0;
-	uwu->speed = 0;
+	uwu->speed = N_SPEED;
 	uwu->hehe = 0;
 	uwu->jumping = 0;
 }
