@@ -83,3 +83,19 @@ int	check_map_closed(t_cub3d *uwu)
 	}
 	return (1);
 }
+
+int	find_map_width(t_cub3d *uwu)
+{
+	int	i;
+	int	max;
+
+	i = 0;
+	max = 0;
+	while (uwu->map && uwu->map[i])
+	{
+		if (ft_strlen(uwu->map[i]) > max)
+			max = ft_strlen(uwu->map[i]);
+		i++;
+	}
+	return (max);
+}

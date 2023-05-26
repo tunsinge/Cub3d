@@ -38,7 +38,7 @@ void	init_(t_cub3d *uwu, char **av)
 		quit_program(uwu);
 	uwu->map = parse_map(uwu, av[1]);
 	uwu->map_s_y = ft_strrlen(uwu->map);
-	uwu->map_s_x = ft_strlen(uwu->map[0]);
+	uwu->map_s_x = find_map_width(uwu);
 	uwu->m_size = 256 / uwu->map_s_x;
 	uwu->p_size = uwu->m_size / 4;
 	if (!uwu->map)

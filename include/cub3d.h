@@ -22,7 +22,7 @@
 # include "../MLX42/include/MLX42/MLX42.h"
 # include <string.h>
 
-# define MAX_DOF 25
+# define MAX_DOF 150
 
 # define WHI 0xFFFFFFFF
 # define BLA 0x000000FF
@@ -175,6 +175,7 @@ int			is_etranger(char c);
 int			check_map(char **map);
 int			check_map_path(char **av);
 int			check_map_closed(t_cub3d *uwu);
+int			find_map_width(t_cub3d *uwu);
 
 // collisions.c
 
