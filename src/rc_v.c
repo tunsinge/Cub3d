@@ -6,7 +6,7 @@
 /*   By: mdoumi <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 19:32:02 by ^@^ Foxan ^       #+#    #+#             */
-/*   Updated: 2023/05/25 11:36:34 by mdoumi           ###   ########.fr       */
+/*   Updated: 2023/05/26 12:02:32 by mdoumi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,14 +25,14 @@ void	vertical(t_cub3d *uwu)
 		n->xo = -uwu->map_s_x;
 		n->yo = -n->xo * n->ntan;
 	}
-	if (n->ra < P2 || n->ra > P3)
+	else if (n->ra < P2 || n->ra > P3)
 	{
 		n->rx = (((int)n->px / uwu->map_s_x) * uwu->map_s_x) + uwu->map_s_x;
 		n->ry = (n->px - n->rx) * n->ntan + n->py;
 		n->xo = uwu->map_s_x;
 		n->yo = -n->xo * n->ntan;
 	}
-	if (n->ra == 0 || n->ra == PI)
+	else
 	{
 		n->ry = n->py;
 		n->rx = n->px;

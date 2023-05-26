@@ -6,7 +6,7 @@
 /*   By: mdoumi <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 09:37:55 by ^@^ Foxan ^       #+#    #+#             */
-/*   Updated: 2023/05/25 11:39:55 by mdoumi           ###   ########.fr       */
+/*   Updated: 2023/05/26 12:14:47 by mdoumi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,8 +96,10 @@ void	draw(t_cub3d *uwu)
 		uwu->ray->xy[1] = uwu->ray->line_o;
 		draw_col(uwu->trwad_img, uwu->ray->xy, uwu->ray->r * uwu->ray->w
 			/ uwu->ray->ray_nb + uwu->ray->z, uwu->t->ce);
+		if (uwu->ray->line_o + uwu->ray->line_h - 1 > WINH)
+			uwu->ray->line_h = WINH - uwu->ray->line_o;
 		uwu->ray->xy[0] = uwu->ray->line_h + uwu->ray->line_o - 1;
-		uwu->ray->xy[1] = uwu->ray->h - 1;
+		uwu->ray->xy[1] = uwu->ray->h + 200 - 1;
 		draw_col(uwu->trwad_img, uwu->ray->xy,
 			uwu->ray->r * uwu->ray->w / uwu->ray->ray_nb + uwu->ray->z,
 			uwu->t->fl);
