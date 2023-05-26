@@ -31,10 +31,14 @@ int	load_textures(t_textures *t)
 
 void	delete_textures(t_textures *t)
 {
-	mlx_delete_texture(t->text_no);
-	mlx_delete_texture(t->text_so);
-	mlx_delete_texture(t->text_ea);
-	mlx_delete_texture(t->text_we);
+	if (t->text_no)
+		mlx_delete_texture(t->text_no);
+	if (t->text_so)
+		mlx_delete_texture(t->text_so);
+	if (t->text_ea)
+		mlx_delete_texture(t->text_ea);
+	if (t->text_we)
+		mlx_delete_texture(t->text_we);
 }
 
 int	pixel_to_color(mlx_texture_t *text, uint32_t x, uint32_t y)

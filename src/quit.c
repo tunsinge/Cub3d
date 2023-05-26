@@ -15,14 +15,19 @@
 void	quit_program(t_cub3d *uwu)
 {
 	delete_textures(uwu->t);
-	mlx_terminate(uwu->mlx);
-	free(uwu->t->t_ea);
-	free(uwu->t->t_no);
-	free(uwu->t->t_so);
-	free(uwu->t->t_we);
+  if (uwu->t->t_ea)
+	  free(uwu->t->t_ea);
+  if (uwu->t->t_no)
+	  free(uwu->t->t_no);
+  if (uwu->t->t_so)
+	  free(uwu->t->t_so);
+  if (uwu->t->t_we)
+	  free(uwu->t->t_we);
 	free(uwu->t);
 	free(uwu->ray);
 	free_s(uwu->map);
 	free(uwu);
+  if (uwu->mlx)
+		mlx_terminate(uwu->mlx);
 	exit(0);
 }

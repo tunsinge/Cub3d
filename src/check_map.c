@@ -61,6 +61,7 @@ int	check_map_closed(t_cub3d *uwu)
 	int	i;
 	int	j;
 
+	print_map(uwu);
 	i = -1;
 	while (uwu->map[++i])
 	{
@@ -71,10 +72,10 @@ int	check_map_closed(t_cub3d *uwu)
 			{
 				if (i - 1 < 0 || j - 1 < 0
 					|| i + 1 >= uwu->map_s_y || j + 1 >= uwu->map_s_x
-					|| uwu->map[i + 1][j] == ' '
-					|| uwu->map[i - 1][j] == ' '
-					|| uwu->map[i][j + 1] == ' '
-					|| uwu->map[i][j - 1] == ' ')
+					|| is_etranger(uwu->map[i + 1][j])
+					|| is_etranger(uwu->map[i - 1][j])
+					|| is_etranger(uwu->map[i][j + 1])
+					|| is_etranger(uwu->map[i][j - 1]))
 					return (error(NOT_CLOSED_MAP), 0);
 			}
 			j++;

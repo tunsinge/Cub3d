@@ -50,7 +50,7 @@ char	**append_to_map(char *line, char **map)
 	i = -1;
 	while (map[++i])
 		map_tmp[i] = map[i];
-	map_tmp[i] = ft_substr(line, 0, ft_strlen(line) - 1);
+	map_tmp[i] = ft_strdupnonl(line);
 	map_tmp[i][ft_strlen(map_tmp[i])] = '\0';
 	map_tmp[++i] = NULL;
 	free(map);
