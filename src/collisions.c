@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: mdoumi <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/23 14:47:32 by ^@^ Foxan ^       #+#    #+#             */
-/*   Updated: 2023/05/24 17:19:55by mdoumi           ###   ########.fr       */
+/*   Created: 2023/05/24 20:41:42 by mdoumi            #+#    #+#             */
+/*   Updated: 2023/05/24 20:41:59 by mdoumi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,6 @@ int	find_x_pos(t_cub3d *uwu, int dx)
 	return (x);
 }
 
-
 int	find_y_pos(t_cub3d *uwu, int dy)
 {
 	int	py;
@@ -47,7 +46,7 @@ int	find_y_pos(t_cub3d *uwu, int dy)
 
 void	move_x(t_cub3d *uwu, float dx)
 {
-	int	i;
+	int		i;
 	float	nb;
 
 	i = 0;
@@ -60,7 +59,7 @@ void	move_x(t_cub3d *uwu, float dx)
 
 void	move_y(t_cub3d *uwu, float dy)
 {
-	int	i;
+	int		i;
 	float	nb;
 
 	i = 0;

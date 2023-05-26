@@ -6,7 +6,7 @@
 /*   By: mdoumi <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 19:28:46 by ^@^ Foxan ^       #+#    #+#             */
-/*   Updated: 2023/05/24 17:08:42 by mdoumi           ###   ########.fr       */
+/*   Updated: 2023/05/26 12:02:23 by mdoumi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,54 +14,57 @@
 
 void	horizontal(t_cub3d *uwu)
 {
-	VAR->dof = 0;
-	VAR->hx = VAR->px;
-	VAR->hy = VAR->py;
-	VAR->a_tan = -1 / tan(VAR->ra);
-	if (VAR->ra > PI)
+	t_ray	*n;
+
+	((void)0, n = uwu->ray, n->dof = 0, n->hx = n->px);
+	((void)0, n->hy = n->py, n->a_tan = -1 / tan(n->ra));
+	if (n->ra > PI)
 	{
-		VAR->ry = (((int)VAR->py / uwu->map_s_x) * uwu->map_s_x) - 0.0001;
-		VAR->rx = (VAR->py - VAR->ry) * VAR->a_tan + VAR->px;
-		VAR->yo = -uwu->map_s_x;
-		VAR->xo = -VAR->yo * VAR->a_tan;
+		n->ry = (((int)n->py / uwu->map_s_x) * uwu->map_s_x) - 0.0001;
+		n->rx = (n->py - n->ry) * n->a_tan + n->px;
+		n->yo = -uwu->map_s_x;
+		n->xo = -n->yo * n->a_tan;
 	}
-	if (VAR->ra < PI)
+	else if (n->ra < PI)
 	{
-		VAR->ry = (((int)VAR->py / uwu->map_s_x) * uwu->map_s_x) + uwu->map_s_x;
-		VAR->rx = (VAR->py - VAR->ry) * VAR->a_tan + VAR->px;
-		VAR->yo = uwu->map_s_x;
-		VAR->xo = -VAR->yo * VAR->a_tan;
+		n->ry = (((int)n->py / uwu->map_s_x) * uwu->map_s_x) + uwu->map_s_x;
+		n->rx = (n->py - n->ry) * n->a_tan + n->px;
+		n->yo = uwu->map_s_x;
+		n->xo = -n->yo * n->a_tan;
 	}
-	if (VAR->ra == 0 || VAR->ra == PI)
+	else
 	{
-		VAR->ry = VAR->py;
-		VAR->rx = VAR->px;
-		VAR->dof = MAX_DOF;
+		n->ry = n->py;
+		n->rx = n->px;
+		n->dof = MAX_DOF;
 	}
 	horizontal2(uwu);
 }
 
 void	horizontal2(t_cub3d *uwu)
 {
-	while (VAR->dof < MAX_DOF)
+	t_ray	*n;
+
+	n = uwu->ray;
+	while (n->dof < MAX_DOF)
 	{
-		VAR->mx = (int)(VAR->rx) / uwu->map_s_x;
-		VAR->my = (int)(VAR->ry) / uwu->map_s_x;
-		if (VAR->mx + VAR->my * uwu->map_s_x > 0 && VAR->mx < uwu->map_s_x
-			&& VAR->my < uwu->map_s_y
-			&& uwu->map[VAR->my][VAR->mx] == '1')
+		n->mx = (int)(n->rx) / uwu->map_s_x;
+		n->my = (int)(n->ry) / uwu->map_s_x;
+		if (n->mx + n->my * uwu->map_s_x > 0 && n->mx < uwu->map_s_x
+			&& n->my < uwu->map_s_y
+			&& uwu->map[n->my][n->mx] == '1')
 		{
-			VAR->hx = VAR->rx;
-			VAR->hy = VAR->ry;
-			VAR->dis_h = dist(VAR->px, VAR->py, VAR->hx, VAR->hy);
-			VAR->dof = MAX_DOF;
+			n->hx = n->rx;
+			n->hy = n->ry;
+			n->dis_h = dist(n->px, n->py, n->hx, n->hy);
+			n->dof = MAX_DOF;
 		}
 		else
 		{
-			VAR->rx += VAR->xo;
-			VAR->ry += VAR->yo;
-			VAR->dis_h = 1000000;
-			VAR->dof++;
+			n->rx += n->xo;
+			n->ry += n->yo;
+			n->dis_h = 1000000;
+			n->dof++;
 		}
 	}
 }

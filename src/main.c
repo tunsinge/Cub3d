@@ -5,44 +5,53 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: mdoumi <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/01 22:57:56 by mdoumi            #+#    #+#             */
-/*   Updated: 2023/05/24 19:00:51 by mdoumi           ###   ########.fr       */
+/*   Created: 2023/05/24 20:41:06 by mdoumi            #+#    #+#             */
+/*   Updated: 2023/05/26 11:46:04 by mdoumi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	init_(t_cub3d *uwu, char **av)
+static void	first_init(t_cub3d *uwu)
 {
-	uwu->textures = malloc(sizeof(t_textures));
-	uwu->textures->texture_no = NULL;
-	uwu->textures->texture_so = NULL;
-	uwu->textures->texture_we = NULL;
-	uwu->textures->texture_ea = NULL;
-	uwu->textures->color_fl = 0;
-	uwu->textures->color_ce = 0;
-	uwu->speed = 0;
+	uwu->t = malloc(sizeof(t_textures));
+	uwu->t->t_no = NULL;
+	uwu->t->t_so = NULL;
+	uwu->t->t_we = NULL;
+	uwu->t->t_ea = NULL;
+	uwu->t->text_no = NULL;
+	uwu->t->text_so = NULL;
+	uwu->t->text_we = NULL;
+	uwu->t->text_ea = NULL;
+	uwu->t->fl = 0;
+	uwu->t->ce = 0;
+	uwu->speed = N_SPEED;
 	uwu->hehe = 0;
 	uwu->jumping = 0;
+}
+
+void	init_(t_cub3d *uwu, char **av)
+{
+	first_init(uwu);
 	if (check_map_path(av))
-		quit_program();
+		quit_program(uwu);
 	uwu->map = parse_map(uwu, av[1]);
 	if (!uwu->map)
-		quit_program();
+		quit_program(uwu);
 	if (check_map(uwu->map))
-		quit_program();
+		quit_program(uwu);
 	fill_map(uwu);
 	uwu->p_color = CYA;
 	if (get_pp(uwu))
-		quit_program();
+		quit_program(uwu);
 	uwu->map_s_y = ft_strrlen(uwu->map);
 	uwu->map_s_x = ft_strlen(uwu->map[0]);
 	uwu->m_size = 256 / uwu->map_s_x;
 	uwu->p_size = uwu->m_size / 4;
 	uwu->ray = malloc(sizeof(t_ray));
-	uwu->mlx = mlx_init(windowWidth, windowHeight, "cub3d", true);
-	if (load_textures(uwu->textures))
-		return (quit_program());
+	uwu->mlx = mlx_init(WINW, WINH, "cub3d", true);
+	if (load_textures(uwu->t))
+		return (quit_program(uwu));
 	mlx_set_cursor_mode(uwu->mlx, MLX_MOUSE_HIDDEN);
 }
 
@@ -60,6 +69,5 @@ int	main(int ac, char **av)
 	mlx_loop_hook(uwu->mlx, &controls_hook, uwu);
 	render(uwu);
 	mlx_loop(uwu->mlx);
-	delete_textures(uwu->textures);
-	mlx_terminate(uwu->mlx);
+	quit_program(uwu);
 }
