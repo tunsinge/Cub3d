@@ -6,7 +6,7 @@
 /*   By: mdoumi <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/02 18:56:18 by mdoumi            #+#    #+#             */
-/*   Updated: 2023/05/25 11:43:26 by mdoumi           ###   ########.fr       */
+/*   Updated: 2023/05/26 10:47:00 by mdoumi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,5 +16,13 @@ void	quit_program(t_cub3d *uwu)
 {
 	delete_textures(uwu->t);
 	mlx_terminate(uwu->mlx);
+	free(uwu->t->t_ea);
+	free(uwu->t->t_no);
+	free(uwu->t->t_so);
+	free(uwu->t->t_we);
+	free(uwu->t);
+	free(uwu->ray);
+	free_s(uwu->map);
+	free(uwu);
 	exit(0);
 }

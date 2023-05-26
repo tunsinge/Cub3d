@@ -6,7 +6,7 @@
 /*   By: mdoumi <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/02 16:33:53 by mdoumi            #+#    #+#             */
-/*   Updated: 2023/05/24 20:37:06 by mdoumi           ###   ########.fr       */
+/*   Updated: 2023/05/26 10:43:19 by mdoumi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,10 @@ char	**parse_map(t_cub3d *uwu, char *path)
 	map[0] = NULL;
 	buff = get_next_line(fd);
 	while (buff[0] == '\n')
+	{
+		free(buff);
 		buff = get_next_line(fd);
+	}
 	while (buff != NULL)
 	{
 		map = append_to_map(buff, map);

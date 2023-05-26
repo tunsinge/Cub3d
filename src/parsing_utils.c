@@ -6,7 +6,7 @@
 /*   By: mdoumi <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 08:31:59 by mdoumi            #+#    #+#             */
-/*   Updated: 2023/05/25 11:29:28 by mdoumi           ###   ########.fr       */
+/*   Updated: 2023/05/26 10:35:18 by mdoumi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,11 @@ int	store_color(t_cub3d *uwu, char **fields)
 		uwu->t->ce = get_rgba(ft_atoi(color[0]), ft_atoi(color[1]),
 				ft_atoi(color[2]), 255);
 	else
+	{
+		free_s(color);
 		return (error(INVALID_TEXTURES_CODE), 1);
+	}
+	free_s(color);
 	return (0);
 }
 
