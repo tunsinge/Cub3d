@@ -6,7 +6,7 @@
 /*   By: mdoumi <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 20:41:06 by mdoumi            #+#    #+#             */
-/*   Updated: 2023/05/26 11:46:04 by mdoumi           ###   ########.fr       */
+/*   Updated: 2023/05/30 13:45:59 by mdoumi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@ static void	first_init(t_cub3d *uwu)
 	uwu->t->text_so = NULL;
 	uwu->t->text_we = NULL;
 	uwu->t->text_ea = NULL;
+	uwu->ray = malloc(sizeof(t_ray));
+	uwu->map = NULL;
 	uwu->t->fl = 0;
 	uwu->t->ce = 0;
 	uwu->speed = N_SPEED;
@@ -37,10 +39,13 @@ void	init_(t_cub3d *uwu, char **av)
 	if (check_map_path(av))
 		quit_program(uwu);
 	uwu->map = parse_map(uwu, av[1]);
+	if (!uwu->map || !uwu->map[0])
+		(error(INVALID_LINE), quit_program(uwu));
 	uwu->map_s_y = ft_strrlen(uwu->map);
-	uwu->map_s_x = find_map_width(uwu);
-	uwu->m_size = 256 / uwu->map_s_x;
-	uwu->p_size = uwu->m_size / 4;
+	uwu->map_s_x = 32;
+	uwu->m_size = 256 / find_map_width(uwu);
+	uwu->m_fix_size = uwu->m_size;
+	uwu->p_size = 8;
 	if (!uwu->map)
 		quit_program(uwu);
 	if (check_map(uwu->map) || !check_map_closed(uwu))
@@ -49,7 +54,6 @@ void	init_(t_cub3d *uwu, char **av)
 	uwu->p_color = CYA;
 	if (get_pp(uwu))
 		quit_program(uwu);
-	uwu->ray = malloc(sizeof(t_ray));
 	uwu->mlx = mlx_init(WINW, WINH, "cub3d", true);
 	if (load_textures(uwu->t))
 		return (quit_program(uwu));

@@ -6,7 +6,7 @@
 /*   By: mdoumi <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/02 16:33:53 by mdoumi            #+#    #+#             */
-/*   Updated: 2023/05/26 11:13:14 by mdoumi           ###   ########.fr       */
+/*   Updated: 2023/05/30 13:43:46 by mdoumi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ char	**parse_map(t_cub3d *uwu, char *path)
 		return (NULL);
 	map[0] = NULL;
 	buff = get_next_line(fd);
-	while (buff[0] == '\n')
+	while (buff && buff[0] == '\n')
 	{
 		free(buff);
 		buff = get_next_line(fd);
@@ -69,13 +69,13 @@ int	parse_textures(t_cub3d *uwu, int fd)
 	{
 		line = get_next_line(fd);
 		if (!line)
-			return (error(INVALID_LINE), 1);
+			return (error(INVALID_LINE), quit_program(uwu), 1);
 		if (line[0] != '\n')
 		{
 			line_nonl = ft_strdupnonl(line);
 			fields = ft_split(line_nonl, ' ');
 			if (ft_strrlen(fields) != 2)
-				return (error(INVALID_LINE), 1);
+				return (error(INVALID_LINE), quit_program(uwu), 1);
 			if (store_texture(uwu, fields))
 				return (1);
 			nb_parsed++;
