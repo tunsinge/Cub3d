@@ -6,7 +6,7 @@
 /*   By: mdoumi <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 09:37:55 by ^@^ Foxan ^       #+#    #+#             */
-/*   Updated: 2023/05/26 12:14:47 by mdoumi           ###   ########.fr       */
+/*   Updated: 2023/05/30 13:54:04 by mdoumi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,8 +77,8 @@ void	calculations(t_cub3d *uwu)
 
 void	draw(t_cub3d *uwu)
 {
-	uwu->ray->y = 0;
-	while (uwu->ray->y < uwu->ray->line_h)
+	uwu->ray->y = -1;
+	while (++uwu->ray->y < uwu->ray->line_h)
 	{
 		uwu->ray->c = pixel_to_color(uwu->ray->t, uwu->ray->tx, uwu->ray->ty);
 		uwu->ray->z = 0;
@@ -87,13 +87,11 @@ void	draw(t_cub3d *uwu)
 				uwu->ray->r * uwu->ray->w / uwu->ray->ray_nb + uwu->ray->z++,
 				uwu->ray->line_o + uwu->ray->y, uwu->ray->c);
 		uwu->ray->ty += uwu->ray->ty_step;
-		uwu->ray->y++;
 	}
 	uwu->ray->z = -1;
 	while (++uwu->ray->z < uwu->ray->w / uwu->ray->ray_nb)
 	{
-		uwu->ray->xy[0] = 0;
-		uwu->ray->xy[1] = uwu->ray->line_o;
+		((void)0, uwu->ray->xy[0] = 0, uwu->ray->xy[1] = uwu->ray->line_o);
 		draw_col(uwu->trwad_img, uwu->ray->xy, uwu->ray->r * uwu->ray->w
 			/ uwu->ray->ray_nb + uwu->ray->z, uwu->t->ce);
 		if (uwu->ray->line_o + uwu->ray->line_h - 1 > WINH)
