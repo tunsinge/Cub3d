@@ -6,7 +6,7 @@
 /*   By: mdoumi <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 08:31:59 by mdoumi            #+#    #+#             */
-/*   Updated: 2023/05/26 10:35:18 by mdoumi           ###   ########.fr       */
+/*   Updated: 2023/05/30 14:07:32 by mdoumi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,9 +45,9 @@ int	store_color(t_cub3d *uwu, char **fields)
 
 	color = ft_split(fields[1], ',');
 	if (ft_strrlen(color) != 3)
-		return (error(INVALID_COLOR_FORMAT), 1);
+		return (error(INVALID_COLOR_FORMAT), quit_program(uwu), 1);
 	if (!is_num(color[0]) || !is_num(color[1]) || !is_num(color[2]))
-		return (error(INVALID_COLOR_RGB_VALUE), 1);
+		return (error(INVALID_COLOR_RGB_VALUE), quit_program(uwu), 1);
 	if (ft_strcmp(fields[0], "F") == 0 && !uwu->t->fl)
 		uwu->t->fl = get_rgba(ft_atoi(color[0]), ft_atoi(color[1]),
 				ft_atoi(color[2]), 255);
@@ -57,7 +57,7 @@ int	store_color(t_cub3d *uwu, char **fields)
 	else
 	{
 		free_s(color);
-		return (error(INVALID_TEXTURES_CODE), 1);
+		return (error(INVALID_TEXTURES_CODE), quit_program(uwu), 1);
 	}
 	free_s(color);
 	return (0);

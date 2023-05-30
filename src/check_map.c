@@ -6,7 +6,7 @@
 /*   By: mdoumi <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/02 17:40:51 by mdoumi            #+#    #+#             */
-/*   Updated: 2023/05/30 13:32:53 by mdoumi           ###   ########.fr       */
+/*   Updated: 2023/05/30 14:03:21 by mdoumi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ int	check_map_closed(t_cub3d *uwu)
 					|| is_etranger(uwu->map[i - 1][j])
 					|| is_etranger(uwu->map[i][j + 1])
 					|| is_etranger(uwu->map[i][j - 1]))
-					return (error(NOT_CLOSED_MAP), 0);
+					return (error(NOT_CLOSED_MAP), quit_program(uwu), 0);
 			}
 			j++;
 		}

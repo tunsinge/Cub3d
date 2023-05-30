@@ -3,13 +3,13 @@ SO ./textures/grey.png
 WE ./textures/red.png
 EA ./textures/green.png
 
-F 0,155,90
-C 0,90,155
+F ,,
+C ,,
 
 
 111111111
 100000001
 100000001
-10000N001
+10000W001
 100000001
 111111111
