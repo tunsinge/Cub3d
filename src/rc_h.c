@@ -20,16 +20,16 @@ void	horizontal(t_cub3d *uwu)
 	((void)0, n->hy = n->py, n->a_tan = -1 / tan(n->ra));
 	if (n->ra > PI)
 	{
-		n->ry = (((int)n->py / uwu->map_s_x) * uwu->map_s_x) - 0.0001;
+		n->ry = (((int)n->py / 32) * 32) - 0.0001;
 		n->rx = (n->py - n->ry) * n->a_tan + n->px;
-		n->yo = -uwu->map_s_x;
+		n->yo = -32;
 		n->xo = -n->yo * n->a_tan;
 	}
 	else if (n->ra < PI)
 	{
-		n->ry = (((int)n->py / uwu->map_s_x) * uwu->map_s_x) + uwu->map_s_x;
+		n->ry = (((int)n->py / 32) * 32) + 32;
 		n->rx = (n->py - n->ry) * n->a_tan + n->px;
-		n->yo = uwu->map_s_x;
+		n->yo = 32;
 		n->xo = -n->yo * n->a_tan;
 	}
 	else
@@ -48,8 +48,8 @@ void	horizontal2(t_cub3d *uwu)
 	n = uwu->ray;
 	while (n->dof < MAX_DOF)
 	{
-		n->mx = (int)(n->rx) / uwu->map_s_x;
-		n->my = (int)(n->ry) / uwu->map_s_x;
+		n->mx = (int)(n->rx) / 32;
+		n->my = (int)(n->ry) / 32;
 		if (n->mx + n->my * uwu->map_s_x > 0 && n->mx < uwu->map_s_x
 			&& n->my < uwu->map_s_y
 			&& uwu->map[n->my][n->mx] == '1')

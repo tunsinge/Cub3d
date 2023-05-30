@@ -30,16 +30,16 @@ void	render(t_cub3d *uwu)
 
 void	render_player(t_cub3d *uwu)
 {
-	uwu->player_img->instances[0].x = uwu->px * uwu->m_size / uwu->map_s_x;
-	uwu->player_img->instances[0].y = uwu->py * uwu->m_size / uwu->map_s_x;
+	uwu->player_img->instances[0].x = uwu->px * uwu->m_size / uwu->map_s;
+	uwu->player_img->instances[0].y = uwu->py * uwu->m_size / uwu->map_s;
 	uwu->ray->pxx = uwu->ray->pdx * 5 + uwu->px;
 	uwu->ray->pyy = uwu->ray->pdy * 5 + uwu->py;
 }
 
 void	init_player(t_cub3d *uwu)
 {
-	uwu->px = uwu->px * uwu->map_s_x + uwu->map_s_x * 3 / 8;
-	uwu->py = uwu->py * uwu->map_s_x + uwu->map_s_x * 3 / 8;
+	uwu->px = uwu->px * uwu->map_s + uwu->map_s * 3 / 8;
+	uwu->py = uwu->py * uwu->map_s + uwu->map_s * 3 / 8;
 	uwu->ray->pdx = cosf(uwu->pa) * 5;
 	uwu->ray->pdy = sinf(uwu->pa) * 5;
 	uwu->ray->pdxs = cosf(uwu->pa + P2) * 5;

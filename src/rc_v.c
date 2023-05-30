@@ -20,16 +20,16 @@ void	vertical(t_cub3d *uwu)
 	n->ntan = -tan(n->ra);
 	if (n->ra > P2 && n->ra < P3)
 	{
-		n->rx = (((int)n->px / uwu->map_s_x) * uwu->map_s_x) - 0.0001;
+		n->rx = (((int)n->px / 32) * 32) - 0.0001;
 		n->ry = (n->px - n->rx) * n->ntan + n->py;
-		n->xo = -uwu->map_s_x;
+		n->xo = -32;
 		n->yo = -n->xo * n->ntan;
 	}
 	else if (n->ra < P2 || n->ra > P3)
 	{
-		n->rx = (((int)n->px / uwu->map_s_x) * uwu->map_s_x) + uwu->map_s_x;
+		n->rx = (((int)n->px / 32) * 32) + 32;
 		n->ry = (n->px - n->rx) * n->ntan + n->py;
-		n->xo = uwu->map_s_x;
+		n->xo = 32;
 		n->yo = -n->xo * n->ntan;
 	}
 	else
@@ -48,8 +48,8 @@ void	vertical2(t_cub3d *uwu)
 	n = uwu->ray;
 	while (n->dof < MAX_DOF)
 	{
-		n->mx = (int)(n->rx) / uwu->map_s_x;
-		n->my = (int)(n->ry) / uwu->map_s_x;
+		n->mx = (int)(n->rx) / 32;
+		n->my = (int)(n->ry) / 32;
 		if (n->mx + n->my * uwu->map_s_x > 0 && n->mx < uwu->map_s_x
 			&& n->my < uwu->map_s_y
 			&& uwu->map[n->my][n->mx] == '1')
