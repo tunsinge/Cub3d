@@ -6,7 +6,7 @@
 /*   By: mdoumi <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 20:42:55 by mdoumi            #+#    #+#             */
-/*   Updated: 2023/05/26 12:13:38 by mdoumi           ###   ########.fr       */
+/*   Updated: 2023/05/30 13:05:44 by mdoumi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ void	map_zoom(t_cub3d *uwu)
 {
 	if (uwu->keys.key_wi == 1)
 	{
-		if (uwu->m_size < (256 / uwu->map_s_x) * 2)
+		if (uwu->m_size < uwu->m_fix_size * 2)
 		{
 			uwu->m_size += 1;
 			mlx_delete_image(uwu->mlx, uwu->map_img);
@@ -74,7 +74,7 @@ void	map_zoom(t_cub3d *uwu)
 	}
 	else
 	{
-		if (uwu->m_size > 256 / uwu->map_s_x)
+		if (uwu->m_size > uwu->m_fix_size)
 		{
 			uwu->m_size -= 1;
 			mlx_delete_image(uwu->mlx, uwu->map_img);

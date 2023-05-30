@@ -6,7 +6,7 @@
 /*   By: mdoumi <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/02 17:40:51 by mdoumi            #+#    #+#             */
-/*   Updated: 2023/05/18 15:04:10 by mdoumi           ###   ########.fr       */
+/*   Updated: 2023/05/30 13:32:53 by mdoumi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,14 +61,13 @@ int	check_map_closed(t_cub3d *uwu)
 	int	i;
 	int	j;
 
-	print_map(uwu);
 	i = -1;
 	while (uwu->map[++i])
 	{
 		j = 0;
 		while (uwu->map[i][j])
 		{
-			if (uwu->map[i][j] == '0')
+			if (uwu->map[i][j] == '0' || is_player(uwu->map[i][j]))
 			{
 				if (i - 1 < 0 || j - 1 < 0
 					|| i + 1 >= uwu->map_s_y || j + 1 >= uwu->map_s_x

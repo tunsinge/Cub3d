@@ -6,7 +6,7 @@
 /*   By: mdoumi <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/02 17:01:31 by ^@^ Foxan ^       #+#    #+#             */
-/*   Updated: 2023/05/26 11:46:26 by mdoumi           ###   ########.fr       */
+/*   Updated: 2023/05/30 13:50:16 by mdoumi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -157,6 +157,7 @@ typedef struct s_cub3d
 	int			m_size;
 	int			p_size;
 	int			p_color;
+	int			m_fix_size;
 	float		speed;
 	float		jumping;
 	char		**map;
