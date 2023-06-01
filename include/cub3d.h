@@ -42,8 +42,8 @@
 
 # define WINW 1440
 # define WINH 960
-# define N_SPEED 0.25
-# define S_SPEED 0.75
+# define N_SPEED 0.0625
+# define S_SPEED 0.25
 
 # define OPEN_ERROR "Error\nOpen failed.\n"
 # define INV_ARGS "Error\n1 Argument is required.\n"

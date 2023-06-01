@@ -43,7 +43,7 @@ void	init_(t_cub3d *uwu, char **av)
 		(error(INVALID_LINE), quit_program(uwu));
 	uwu->map_s_y = ft_strrlen(uwu->map);
 	uwu->map_s_x = find_map_width(uwu);
-	uwu->map_s = 32;
+	uwu->map_s = 8;
 	uwu->m_size = 256 / find_map_width(uwu);
 	uwu->m_size += (uwu->m_size < 1);
 	uwu->m_fix_size = uwu->m_size;
