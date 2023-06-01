@@ -61,14 +61,14 @@ void	calculations(t_cub3d *uwu)
 	uwu->ray->ty = uwu->ray->ty_step * uwu->ray->ty_off;
 	if (uwu->ray->shade != 1)
 	{
-		uwu->ray->tx = (int)(uwu->ray->rx / (32 / uwu->ray->sext))
+		uwu->ray->tx = (int)(uwu->ray->rx / (8 / uwu->ray->sext))
 			% (int)uwu->ray->sext;
 		if (uwu->ray->ra < PI)
 			uwu->ray->tx = uwu->ray->sext - 1 - uwu->ray->tx;
 	}
 	else
 	{
-		uwu->ray->tx = (int)(uwu->ray->ry / (32 / uwu->ray->sext))
+		uwu->ray->tx = (int)(uwu->ray->ry / (8 / uwu->ray->sext))
 			% (int)uwu->ray->seyt;
 		if (uwu->ray->ra > P2 && uwu->ray->ra < P3)
 			uwu->ray->tx = uwu->ray->sext - 1 - uwu->ray->tx;
