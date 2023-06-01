@@ -148,8 +148,9 @@ typedef struct s_ray
 typedef struct s_cub3d
 {
 	int			i;
-	int			map_s_x;
+	int			map_s;
 	int			map_s_y;
+	int			map_s_x;
 	int			hehe;
 	float		px;
 	float		py;
@@ -180,9 +181,6 @@ int			find_map_width(t_cub3d *uwu);
 
 // collisions.c
 
-int			test_collide(t_cub3d *uwu, int x, int y);
-int			find_x_pos(t_cub3d *uwu, int dx);
-int			find_y_pos(t_cub3d *uwu, int dy);
 void		move_x(t_cub3d *uwu, float dx);
 void		move_y(t_cub3d *uwu, float dy);
 
@@ -318,7 +316,5 @@ void		set_angle(t_cub3d *uwu, char c);
 int			is_player(char c);
 int			get_pp(t_cub3d *uwu);
 int			get_rgba(int r, int g, int b, int a);
-
-// weapon.c
 
 #endif // CUB3D_H

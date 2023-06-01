@@ -60,7 +60,9 @@ int	check_map_closed(t_cub3d *uwu)
 {
 	int	i;
 	int	j;
+	int	max;
 
+	max = find_map_width(uwu);
 	i = -1;
 	while (uwu->map[++i])
 	{
@@ -70,7 +72,7 @@ int	check_map_closed(t_cub3d *uwu)
 			if (uwu->map[i][j] == '0' || is_player(uwu->map[i][j]))
 			{
 				if (i - 1 < 0 || j - 1 < 0
-					|| i + 1 >= uwu->map_s_y || j + 1 >= uwu->map_s_x
+					|| i + 1 >= uwu->map_s_y || j + 1 >= max
 					|| is_etranger(uwu->map[i + 1][j])
 					|| is_etranger(uwu->map[i - 1][j])
 					|| is_etranger(uwu->map[i][j + 1])
