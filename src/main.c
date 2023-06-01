@@ -45,6 +45,7 @@ void	init_(t_cub3d *uwu, char **av)
 	uwu->map_s_x = find_map_width(uwu);
 	uwu->map_s = 32;
 	uwu->m_size = 256 / find_map_width(uwu);
+	uwu->m_size += (uwu->m_size < 1);
 	uwu->m_fix_size = uwu->m_size;
 	uwu->p_size = uwu->m_fix_size / 4;
 	if (!uwu->map)
@@ -71,6 +72,11 @@ int	main(int ac, char **av)
 	init_(uwu, av);
 	init_img(uwu);
 	init_controls(uwu);
+	uwu->cross_text = mlx_load_png("textures/cross.png");
+	uwu->cross = mlx_texture_to_image(uwu->mlx, uwu->cross_text);
+	mlx_delete_texture(uwu->cross_text);
+	mlx_image_to_window(uwu->mlx, uwu->cross, WINW / 2 - uwu->cross->width / 2,
+		WINH / 2 - uwu->cross->height / 2);
 	mlx_key_hook(uwu->mlx, &key_hook, uwu);
 	mlx_loop_hook(uwu->mlx, &controls_hook, uwu);
 	render(uwu);

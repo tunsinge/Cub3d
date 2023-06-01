@@ -73,10 +73,10 @@ int	check_map_closed(t_cub3d *uwu)
 			{
 				if (i - 1 < 0 || j - 1 < 0
 					|| i + 1 >= uwu->map_s_y || j + 1 >= max
-					|| is_etranger(uwu->map[i + 1][j])
-					|| is_etranger(uwu->map[i - 1][j])
-					|| is_etranger(uwu->map[i][j + 1])
-					|| is_etranger(uwu->map[i][j - 1]))
+					|| is_etranger_restrained(uwu->map[i + 1][j])
+					|| is_etranger_restrained(uwu->map[i - 1][j])
+					|| is_etranger_restrained(uwu->map[i][j + 1])
+					|| is_etranger_restrained(uwu->map[i][j - 1]))
 					return (error(NOT_CLOSED_MAP), quit_program(uwu), 0);
 			}
 			j++;

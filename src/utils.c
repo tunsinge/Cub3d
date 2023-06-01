@@ -63,3 +63,10 @@ int	get_rgba(int r, int g, int b, int a)
 {
 	return (r << 24 | g << 16 | b << 8 | a);
 }
+
+int	is_etranger_restrained(char c)
+{
+	if (c == '1' || c == '0' || c == 'N' || c == 'S' || c == 'E' || c == 'W')
+		return (0);
+	return (1);
+}

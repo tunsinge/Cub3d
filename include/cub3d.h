@@ -147,28 +147,30 @@ typedef struct s_ray
 
 typedef struct s_cub3d
 {
-	int			i;
-	int			map_s;
-	int			map_s_y;
-	int			map_s_x;
-	int			hehe;
-	float		px;
-	float		py;
-	float		pa;
-	int			m_size;
-	int			p_size;
-	int			p_color;
-	int			m_fix_size;
-	float		speed;
-	float		jumping;
-	char		**map;
-	mlx_image_t	*player_img;
-	mlx_image_t	*map_img;
-	mlx_image_t	*trwad_img;
-	t_textures	*t;
-	t_ray		*ray;
-	t_keys		keys;
-	mlx_t		*mlx;
+	int				i;
+	int				map_s;
+	int				map_s_y;
+	int				map_s_x;
+	int				hehe;
+	float			px;
+	float			py;
+	float			pa;
+	int				m_size;
+	int				p_size;
+	int				p_color;
+	int				m_fix_size;
+	float			speed;
+	float			jumping;
+	char			**map;
+	mlx_image_t		*player_img;
+	mlx_image_t		*map_img;
+	mlx_image_t		*trwad_img;
+	mlx_image_t		*cross;
+	mlx_texture_t	*cross_text;
+	t_textures		*t;
+	t_ray			*ray;
+	t_keys			keys;
+	mlx_t			*mlx;
 }	t_cub3d;
 
 // check_map.c
@@ -316,5 +318,6 @@ void		set_angle(t_cub3d *uwu, char c);
 int			is_player(char c);
 int			get_pp(t_cub3d *uwu);
 int			get_rgba(int r, int g, int b, int a);
+int			is_etranger_restrained(char c);
 
 #endif // CUB3D_H

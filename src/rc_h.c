@@ -50,7 +50,7 @@ void	horizontal2(t_cub3d *uwu)
 	{
 		n->mx = (int)(n->rx) / 32;
 		n->my = (int)(n->ry) / 32;
-		if (n->mx + n->my * uwu->map_s_x > 0 && n->mx < uwu->map_s_x
+		if (n->mx >= 0 && n->my >= 0 && n->mx < uwu->map_s_x
 			&& n->my < uwu->map_s_y
 			&& uwu->map[n->my][n->mx] == '1')
 		{
