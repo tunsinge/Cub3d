@@ -35,6 +35,7 @@ void	controls_hook(void *param)
 		uwu->speed = S_SPEED;
 	else
 		uwu->speed = N_SPEED;
+	rick_next(uwu);
 	rotate(uwu);
 	move(uwu);
 	render(uwu);

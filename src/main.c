@@ -31,6 +31,7 @@ static void	first_init(t_cub3d *uwu)
 	uwu->hehe = 0;
 	uwu->jumping = 0;
 	uwu->mlx = NULL;
+	rick_load_texture(uwu);
 }
 
 void	init_(t_cub3d *uwu, char **av)

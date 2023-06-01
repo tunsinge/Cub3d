@@ -81,6 +81,8 @@ typedef struct s_textures
 	mlx_texture_t	*text_so;
 	mlx_texture_t	*text_ea;
 	mlx_texture_t	*text_we;
+	mlx_texture_t	*rick_full;
+	uint32_t		current_x;
 }	t_textures;
 
 typedef struct s_keys
@@ -172,6 +174,12 @@ typedef struct s_cub3d
 	t_keys			keys;
 	mlx_t			*mlx;
 }	t_cub3d;
+
+// animations.c
+
+int			rick_pixel_to_color(t_cub3d *uwu, uint32_t x, uint32_t y);
+void		rick_next(t_cub3d *uwu);
+void		rick_load_texture(t_cub3d *uwu);
 
 // check_map.c
 
