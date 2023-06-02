@@ -150,6 +150,7 @@ typedef struct s_ray
 typedef struct s_cub3d
 {
 	int				i;
+	int				face_door;
 	int				map_s;
 	int				map_s_y;
 	int				map_s_x;

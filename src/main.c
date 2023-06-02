@@ -29,6 +29,7 @@ static void	first_init(t_cub3d *uwu)
 	uwu->t->fl = 0;
 	uwu->t->ce = 0;
 	uwu->speed = N_SPEED;
+	uwu->face_door = 0;
 	uwu->hehe = 0;
 	uwu->jumping = 0;
 	uwu->mlx = NULL;
