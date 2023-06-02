@@ -23,6 +23,7 @@ static void	first_init(t_cub3d *uwu)
 	uwu->t->text_so = NULL;
 	uwu->t->text_we = NULL;
 	uwu->t->text_ea = NULL;
+	uwu->t->door = NULL;
 	uwu->ray = malloc(sizeof(t_ray));
 	uwu->map = NULL;
 	uwu->t->fl = 0;

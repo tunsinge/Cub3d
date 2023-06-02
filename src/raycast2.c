@@ -20,7 +20,9 @@ void	orientation(t_cub3d *uwu)
 		uwu->ray->rx = uwu->ray->vx;
 		uwu->ray->ry = uwu->ray->vy;
 		uwu->ray->dist = uwu->ray->dis_v;
-		if (uwu->ray->ra > P2 && uwu->ray->ra < P3)
+		if (uwu->ray->is_door == 1)
+			uwu->ray->t = uwu->t->door;
+		else if (uwu->ray->ra > P2 && uwu->ray->ra < P3)
 			uwu->ray->t = uwu->t->text_we;
 		else
 			uwu->ray->t = uwu->t->text_ea;
@@ -31,7 +33,9 @@ void	orientation(t_cub3d *uwu)
 		uwu->ray->rx = uwu->ray->hx;
 		uwu->ray->ry = uwu->ray->hy;
 		uwu->ray->dist = uwu->ray->dis_h;
-		if (uwu->ray->ra > PI)
+		if (uwu->ray->is_door == 1)
+			uwu->ray->t = uwu->t->door;
+		else if (uwu->ray->ra > PI)
 			uwu->ray->t = uwu->t->text_no;
 		else
 			uwu->ray->t = uwu->t->text_so;

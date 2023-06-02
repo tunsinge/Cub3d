@@ -26,6 +26,9 @@ int	load_textures(t_textures *t)
 	t->text_we = mlx_load_png(t->t_we);
 	if (!t->text_we)
 		return (error(LOADING_TEXTURE_ERROR), 1);
+	t->door = mlx_load_png("./textures/door.png");
+	if (!t->door)
+		return (error(LOADING_TEXTURE_ERROR), 1);
 	return (0);
 }
 
@@ -39,6 +42,8 @@ void	delete_textures(t_textures *t)
 		mlx_delete_texture(t->text_ea);
 	if (t->text_we)
 		mlx_delete_texture(t->text_we);
+	if (t->door)
+		mlx_delete_texture(t->door);
 }
 
 int	pixel_to_color(mlx_texture_t *text, uint32_t x, uint32_t y)
@@ -48,7 +53,7 @@ int	pixel_to_color(mlx_texture_t *text, uint32_t x, uint32_t y)
 
 	if (!text)
 		return (0x000000FF);
-	if (x < 0 || x > text->width || y < 0 || y > text->height)
+	if (x > text->width || y > text->height)
 		return (0x000000FF);
 	pixel = &text->pixels[(y * text->width + x) * text->bytes_per_pixel];
 	color = (pixel[0] << 24) + (pixel[1] << 16) + (pixel[2] << 8) + pixel[3];

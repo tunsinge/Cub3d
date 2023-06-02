@@ -81,6 +81,7 @@ typedef struct s_textures
 	mlx_texture_t	*text_so;
 	mlx_texture_t	*text_ea;
 	mlx_texture_t	*text_we;
+	mlx_texture_t	*door;
 }	t_textures;
 
 typedef struct s_keys
@@ -98,6 +99,7 @@ typedef struct s_keys
 
 typedef struct s_ray
 {
+	int				is_door;
 	float			pdx;
 	float			pdy;
 	float			pdxs;

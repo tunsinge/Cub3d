@@ -52,8 +52,10 @@ void	horizontal2(t_cub3d *uwu)
 		n->my = (int)(n->ry) / 8;
 		if (n->mx >= 0 && n->my >= 0 && n->mx < uwu->map_s_x
 			&& n->my < uwu->map_s_y
-			&& uwu->map[n->my][n->mx] == '1')
+			&& (uwu->map[n->my][n->mx] == '1' || uwu->map[n->my][n->mx] == '4'))
 		{
+			if (uwu->map[n->my][n->mx] == '4')
+				uwu->ray->is_door = 1;
 			n->hx = n->rx;
 			n->hy = n->ry;
 			n->dis_h = dist(n->px, n->py, n->hx, n->hy);
