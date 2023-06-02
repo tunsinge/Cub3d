@@ -40,8 +40,8 @@
 # define P3 4.71238898038
 # define DR 0.0174533
 
-# define WINW 1440
-# define WINH 960
+# define WINW 960
+# define WINH 500
 # define N_SPEED 0.0625
 # define S_SPEED 0.25
 
@@ -101,6 +101,7 @@ typedef struct s_keys
 	int	key_wi;
 	int	key_shift;
 	int	key_jump;
+	int	key_shoot;
 }	t_keys;
 
 typedef struct s_ray

@@ -23,6 +23,7 @@ void	init_controls(t_cub3d *uwu)
 	uwu->keys.key_wi = 0;
 	uwu->keys.key_jump = 0;
 	uwu->keys.key_shift = 0;
+	uwu->keys.key_shoot = 0;
 }
 
 void	controls_hook(void *param)
@@ -39,6 +40,7 @@ void	controls_hook(void *param)
 	rotate(uwu);
 	move(uwu);
 	render(uwu);
+	shoot(uwu);
 }
 
 void	set_key(mlx_key_data_t keydata, keys_t key, int *value)
@@ -67,8 +69,9 @@ void	key_hook(mlx_key_data_t keydata, void *param)
 	if (keydata.key == MLX_KEY_SPACE && keydata.action == MLX_PRESS
 		&& uwu->keys.key_jump == 0)
 		uwu->keys.key_jump = 1;
-	if (keydata.key == MLX_MOUSE_BUTTON_LEFT && keydata.action == MLX_PRESS)
-		shoot(uwu);
+	if (keydata.key == MLX_KEY_R && keydata.action == MLX_PRESS
+		&& uwu->keys.key_shoot == 0)
+		uwu->keys.key_shoot = 1;
 }
 
 void	move(t_cub3d *uwu)

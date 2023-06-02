@@ -55,12 +55,12 @@ SRCS			:=	./src/main.c \
 					./src/collisions.c \
 					./src/animation.c \
 					./src/weapon.c
-INCLUDES		:= -I ./include -I /Users/$$USER/.brew/opt/glfw/include
+INCLUDES		:= -I ./include -I /opt/homebrew/include
 FLAGS			:= -Wall -Wextra -Werror -g -g3
 OBJS			:= ${SRCS:.c=.o}
 SOMETHING		:= 0
 LIBMLX			:= ./MLX42
-LIBGLFW 		:= -L "/Users/$$USER/.brew/opt/glfw/lib/"
+LIBGLFW 		:= -L "/opt/homebrew/lib/"
 LIBS			:= $(LIBMLX)/libmlx42.a -lglfw -lm
 
 #//= Main compiling rules =//#
