@@ -67,6 +67,8 @@ void	key_hook(mlx_key_data_t keydata, void *param)
 	if (keydata.key == MLX_KEY_SPACE && keydata.action == MLX_PRESS
 		&& uwu->keys.key_jump == 0)
 		uwu->keys.key_jump = 1;
+	if (keydata.key == MLX_MOUSE_BUTTON_LEFT && keydata.action == MLX_PRESS)
+		shoot(uwu);
 }
 
 void	move(t_cub3d *uwu)

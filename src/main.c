@@ -32,6 +32,7 @@ static void	first_init(t_cub3d *uwu)
 	uwu->jumping = 0;
 	uwu->mlx = NULL;
 	rick_load_texture(uwu);
+	weapon_load(uwu);
 }
 
 void	init_(t_cub3d *uwu, char **av)

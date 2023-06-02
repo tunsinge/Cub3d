@@ -82,7 +82,7 @@ void	draw(t_cub3d *uwu)
 	uwu->ray->y = -1;
 	while (++uwu->ray->y < uwu->ray->line_h)
 	{
-		uwu->ray->c = pixel_to_color(uwu, uwu->ray->tx, uwu->ray->ty, 1);
+		uwu->ray->c = pixel_to_color(uwu, uwu->ray->tx, uwu->ray->ty, 0);
 		uwu->ray->z = 0;
 		while (uwu->ray->z < uwu->ray->w / uwu->ray->ray_nb)
 			mlx_put_pixel(uwu->trwad_img,

@@ -83,6 +83,11 @@ typedef struct s_textures
 	mlx_texture_t	*text_we;
 	mlx_texture_t	*rick_full;
 	uint32_t		current_x;
+	mlx_texture_t	*weapon_text;
+	mlx_image_t		*weapon_img;
+	uint32_t		weapon_current;
+	uint32_t		weapon_width;
+	uint32_t		weapon_height;
 }	t_textures;
 
 typedef struct s_keys
@@ -327,5 +332,11 @@ int			is_player(char c);
 int			get_pp(t_cub3d *uwu);
 int			get_rgba(int r, int g, int b, int a);
 int			is_etranger_restrained(char c);
+
+// weapon.c
+
+void		shoot(t_cub3d *uwu);
+void		weapon_next_image(t_cub3d *uwu);
+void		weapon_load(t_cub3d *uwu);
 
 #endif // CUB3D_H
