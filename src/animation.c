@@ -12,6 +12,16 @@
 
 #include "cub3d.h"
 
+/*todo
+ * adapter affichage texture pour rick -> changer pixel to color
+ * reduire vitesse animation rick
+ * affichage arme
+ * tirer clic
+ * changement image arme
+ * mise carte a 2 tir
+ * affichage rick sur 2
+ * */
+
 void	rick_load_texture(t_cub3d *uwu)
 {
 	uwu->t->current_x = 0;
@@ -30,7 +40,8 @@ int	rick_pixel_to_color(t_cub3d *uwu, uint32_t x, uint32_t y)
 	wh[1] = 427;
 	if (x > uwu->t->rick_full->width || y > wh[1])
 		return (0x000000FF);
-	pixel = &text->pixels[(y * uwu->t->rick_full->width + x + uwu->t->current_x) * text->bytes_per_pixel];
+	pixel = &text->pixels[(y * uwu->t->rick_full->width + x + uwu->t->current_x)
+		* text->bytes_per_pixel];
 	color = (pixel[0] << 24) + (pixel[1] << 16) + (pixel[2] << 8) + pixel[3];
 	return (color);
 }

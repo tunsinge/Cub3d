@@ -318,7 +318,7 @@ void		fill_img(t_cub3d *uwu, int w, int h, uint32_t color);
 
 int			load_textures(t_textures *textures);
 void		delete_textures(t_textures *textures);
-int			pixel_to_color(mlx_texture_t *text, uint32_t x, uint32_t y);
+int			pixel_to_color(t_cub3d *uwu, uint32_t x, uint32_t y, int rick);
 
 // utils.c
 
