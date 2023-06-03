@@ -24,7 +24,7 @@ RESET			:= \033[0m
 
 #//= Variables =//#
 CC				:= gcc
-NAME			:= cub3d
+NAME			:= cub3D
 PROJECT_NAME	:= CUB3D
 SRCS			:=	./src/main.c \
 					./src/check_map.c \
