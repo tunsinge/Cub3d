@@ -12,6 +12,23 @@
 
 #include "cub3d.h"
 
+int	load_textures2(t_textures *t)
+{
+	t->door_no = mlx_load_png("./textures/door_no.png");
+	if (!t->text_no)
+		return (error(LOADING_TEXTURE_ERROR), 1);
+	t->door_so = mlx_load_png("./textures/door_so.png");
+	if (!t->text_so)
+		return (error(LOADING_TEXTURE_ERROR), 1);
+	t->door_ea = mlx_load_png("./textures/door_ea.png");
+	if (!t->text_ea)
+		return (error(LOADING_TEXTURE_ERROR), 1);
+	t->door_we = mlx_load_png("./textures/door_we.png");
+	if (!t->text_we)
+		return (error(LOADING_TEXTURE_ERROR), 1);
+	return (0);
+}
+
 int	load_textures(t_textures *t)
 {
 	t->text_no = mlx_load_png(t->t_no);
@@ -26,9 +43,6 @@ int	load_textures(t_textures *t)
 	t->text_we = mlx_load_png(t->t_we);
 	if (!t->text_we)
 		return (error(LOADING_TEXTURE_ERROR), 1);
-	t->door = mlx_load_png("./textures/door.png");
-	if (!t->door)
-		return (error(LOADING_TEXTURE_ERROR), 1);
 	return (0);
 }
 
@@ -42,8 +56,14 @@ void	delete_textures(t_textures *t)
 		mlx_delete_texture(t->text_ea);
 	if (t->text_we)
 		mlx_delete_texture(t->text_we);
-	if (t->door)
-		mlx_delete_texture(t->door);
+	if (t->door_no)
+		mlx_delete_texture(t->door_no);
+	if (t->door_so)
+		mlx_delete_texture(t->door_so);
+	if (t->door_ea)
+		mlx_delete_texture(t->door_ea);
+	if (t->door_we)
+		mlx_delete_texture(t->door_we);
 }
 
 int	pixel_to_color(mlx_texture_t *text, uint32_t x, uint32_t y)

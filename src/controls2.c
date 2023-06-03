@@ -100,3 +100,15 @@ void	jump(t_cub3d *uwu)
 		}
 	}
 }
+
+void	open_doors(t_cub3d *uwu)
+{
+	float	nbx;
+	float	nby;
+
+	nbx = uwu->px + (uwu->ray->pdx) * uwu->speed;
+	nby = uwu->py + (uwu->ray->pdy) * uwu->speed;
+	if (uwu->keys.key_e != 0)
+		if (uwu->map[(int)nby / uwu->map_s][(int)nbx / uwu->map_s] == '4')
+			uwu->map[(int)nby / uwu->map_s][(int)nbx / uwu->map_s] = '0';
+}

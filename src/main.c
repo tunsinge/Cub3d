@@ -23,7 +23,10 @@ static void	first_init(t_cub3d *uwu)
 	uwu->t->text_so = NULL;
 	uwu->t->text_we = NULL;
 	uwu->t->text_ea = NULL;
-	uwu->t->door = NULL;
+	uwu->t->door_no = NULL;
+	uwu->t->door_ea = NULL;
+	uwu->t->door_so = NULL;
+	uwu->t->door_we = NULL;
 	uwu->ray = malloc(sizeof(t_ray));
 	uwu->map = NULL;
 	uwu->t->fl = 0;
@@ -49,7 +52,8 @@ void	init_(t_cub3d *uwu, char **av)
 	uwu->m_size = 256 / find_map_width(uwu);
 	uwu->m_size += (uwu->m_size < 1);
 	uwu->m_fix_size = uwu->m_size;
-	uwu->p_size = uwu->m_fix_size / 4;
+	//uwu->p_size = uwu->m_fix_size / 4;
+	uwu->p_size = 1;
 	if (!uwu->map)
 		quit_program(uwu);
 	if (check_map(uwu->map) || !check_map_closed(uwu))
@@ -59,7 +63,7 @@ void	init_(t_cub3d *uwu, char **av)
 	if (get_pp(uwu))
 		quit_program(uwu);
 	uwu->mlx = mlx_init(WINW, WINH, "cub3d", true);
-	if (load_textures(uwu->t))
+	if (load_textures(uwu->t) || load_textures2(uwu->t))
 		return (quit_program(uwu));
 	mlx_set_cursor_mode(uwu->mlx, MLX_MOUSE_HIDDEN);
 }

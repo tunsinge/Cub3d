@@ -40,8 +40,8 @@
 # define P3 4.71238898038
 # define DR 0.0174533
 
-# define WINW 1440
-# define WINH 960
+# define WINW 1440/2
+# define WINH 960/2
 # define N_SPEED 0.0625
 # define S_SPEED 0.25
 
@@ -65,8 +65,10 @@
 # define KEY_BACKWARD MLX_KEY_S
 # define KEY_STRAF_RIGHT MLX_KEY_D
 # define KEY_STRAF_LEFT MLX_KEY_A
+# define KEY_OPEN_DOOR MLX_KEY_E
 # define KEY_ROTATE_RIGHT MLX_KEY_RIGHT
 # define KEY_ROTATE_LEFT MLX_KEY_LEFT
+# define KEY_ZOOM_MAP MLX_KEY_LEFT_CONTROL
 # define KEY_RUN MLX_KEY_LEFT_SHIFT
 
 typedef struct s_textures
@@ -81,7 +83,10 @@ typedef struct s_textures
 	mlx_texture_t	*text_so;
 	mlx_texture_t	*text_ea;
 	mlx_texture_t	*text_we;
-	mlx_texture_t	*door;
+	mlx_texture_t	*door_no;
+	mlx_texture_t	*door_so;
+	mlx_texture_t	*door_ea;
+	mlx_texture_t	*door_we;
 }	t_textures;
 
 typedef struct s_keys
@@ -90,6 +95,7 @@ typedef struct s_keys
 	int	key_a;
 	int	key_s;
 	int	key_d;
+	int	key_e;
 	int	key_r;
 	int	key_l;
 	int	key_wi;
@@ -203,6 +209,7 @@ void		rotate(t_cub3d *uwu);
 void		mouse(t_cub3d *uwu);
 void		map_zoom(t_cub3d *uwu);
 void		jump(t_cub3d *uwu);
+void		open_doors(t_cub3d *uwu);
 
 // error.c
 
@@ -311,6 +318,7 @@ void		fill_img(t_cub3d *uwu, int w, int h, uint32_t color);
 
 // textures.c
 
+int			load_textures2(t_textures *t);
 int			load_textures(t_textures *textures);
 void		delete_textures(t_textures *textures);
 int			pixel_to_color(mlx_texture_t *text, uint32_t x, uint32_t y);

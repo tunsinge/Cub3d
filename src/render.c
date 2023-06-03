@@ -68,7 +68,9 @@ void	init_map(t_cub3d *uwu)
 		{
 			if (uwu->map[i][j] == '1')
 				fill_img(uwu, j * uwu->m_size, i * uwu->m_size, BLA);
-			if (!is_etranger(uwu->map[i][j]) && uwu->map[i][j] != '1')
+			else if (uwu->map[i][j] == '4')
+				fill_img(uwu, j * uwu->m_size, i * uwu->m_size, YEL);
+			else if (!is_etranger(uwu->map[i][j]) && uwu->map[i][j] != '1')
 				fill_img(uwu, j * uwu->m_size, i * uwu->m_size, WHITR);
 			j++;
 		}
