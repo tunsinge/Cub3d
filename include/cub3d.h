@@ -6,7 +6,7 @@
 /*   By: mdoumi <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/02 17:01:31 by ^@^ Foxan ^       #+#    #+#             */
-/*   Updated: 2023/05/30 13:50:16 by mdoumi           ###   ########.fr       */
+/*   Updated: 2023/06/08 10:16:14 by mdoumi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,8 @@
 # define P3 4.71238898038
 # define DR 0.0174533
 
-# define WINW 1440/2
-# define WINH 960/2
+# define WINW 1440
+# define WINH 960
 # define N_SPEED 0.0625
 # define S_SPEED 0.25
 
