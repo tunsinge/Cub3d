@@ -83,6 +83,13 @@ typedef struct s_textures
 	mlx_texture_t	*text_so;
 	mlx_texture_t	*text_ea;
 	mlx_texture_t	*text_we;
+	mlx_texture_t	*rick_full;
+	uint32_t		current_x;
+	mlx_texture_t	*weapon_text;
+	mlx_image_t		*weapon_img;
+	uint32_t		weapon_current;
+	uint32_t		weapon_width;
+	uint32_t		weapon_height;
 	mlx_texture_t	*door_no;
 	mlx_texture_t	*door_so;
 	mlx_texture_t	*door_ea;
@@ -101,6 +108,7 @@ typedef struct s_keys
 	int	key_wi;
 	int	key_shift;
 	int	key_jump;
+	int	key_shoot;
 }	t_keys;
 
 typedef struct s_ray
@@ -181,6 +189,12 @@ typedef struct s_cub3d
 	t_keys			keys;
 	mlx_t			*mlx;
 }	t_cub3d;
+
+// animations.c
+
+int			rick_pixel_to_color(t_cub3d *uwu, uint32_t x, uint32_t y);
+void		rick_next(t_cub3d *uwu);
+void		rick_load_texture(t_cub3d *uwu);
 
 // check_map.c
 
@@ -321,7 +335,7 @@ void		fill_img(t_cub3d *uwu, int w, int h, uint32_t color);
 int			load_textures2(t_textures *t);
 int			load_textures(t_textures *textures);
 void		delete_textures(t_textures *textures);
-int			pixel_to_color(mlx_texture_t *text, uint32_t x, uint32_t y);
+int			pixel_to_color(t_cub3d *uwu, uint32_t x, uint32_t y, int rick);
 
 // utils.c
 
@@ -330,5 +344,11 @@ int			is_player(char c);
 int			get_pp(t_cub3d *uwu);
 int			get_rgba(int r, int g, int b, int a);
 int			is_etranger_restrained(char c);
+
+// weapon.c
+
+void		shoot(t_cub3d *uwu);
+void		weapon_next_image(t_cub3d *uwu);
+void		weapon_load(t_cub3d *uwu);
 
 #endif // CUB3D_H

@@ -21,7 +21,6 @@ int	ft_atoi(char *str)
 	int	i;
 	int	s;
 	int	r;
-	int	d;
 
 	i = 0;
 	while (ft_isspace(str[i]))
@@ -34,13 +33,11 @@ int	ft_atoi(char *str)
 		i++;
 	}
 	r = 0;
-	d = 1;
 	while (ft_isnbr(str[i]))
 	{
 		r *= 10;
 		r += str[i] - '0';
 		i++;
-		d *= 10;
 	}
 	return (r * s);
 }

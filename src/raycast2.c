@@ -66,6 +66,8 @@ void	setup(t_cub3d *uwu)
 	uwu->ray->line_h = (uwu->map_s * uwu->ray->h) / uwu->ray->dist;
 	uwu->ray->sext = uwu->ray->t->width;
 	uwu->ray->seyt = uwu->ray->t->height;
+//	uwu->ray->sext = 498;
+//	uwu->ray->seyt = 427;
 	uwu->ray->ty_step = uwu->ray->seyt / (float)uwu->ray->line_h;
 	uwu->ray->ty_off = 0;
 }
@@ -100,7 +102,7 @@ void	draw(t_cub3d *uwu)
 	uwu->ray->y = -1;
 	while (++uwu->ray->y < uwu->ray->line_h)
 	{
-		uwu->ray->c = pixel_to_color(uwu->ray->t, uwu->ray->tx, uwu->ray->ty);
+		uwu->ray->c = pixel_to_color(uwu, uwu->ray->tx, uwu->ray->ty, 0);
 		uwu->ray->z = 0;
 		while (uwu->ray->z < uwu->ray->w / uwu->ray->ray_nb)
 			mlx_put_pixel(uwu->trwad_img,

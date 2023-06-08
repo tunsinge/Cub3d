@@ -52,7 +52,9 @@ SRCS			:=	./src/main.c \
 					./src/ft_strjoin.c \
 					./src/controls.c \
 					./src/controls2.c \
-					./src/collisions.c
+					./src/collisions.c \
+					./src/animation.c \
+					./src/weapon.c
 INCLUDES		:= -I ./include -I /Users/$$USER/.brew/opt/glfw/include
 FLAGS			:= -Wall -Wextra -Werror -g -g3
 OBJS			:= ${SRCS:.c=.o}

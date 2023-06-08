@@ -66,16 +66,19 @@ void	delete_textures(t_textures *t)
 		mlx_delete_texture(t->door_we);
 }
 
-int	pixel_to_color(mlx_texture_t *text, uint32_t x, uint32_t y)
+int	pixel_to_color(t_cub3d *uwu, uint32_t x, uint32_t y, int rick)
 {
 	uint8_t		*pixel;
 	uint32_t	color;
 
-	if (!text)
+	if (rick)
+		return (rick_pixel_to_color(uwu, x, y));
+	if (!uwu->ray->t)
 		return (0x000000FF);
-	if (x > text->width || y > text->height)
+	if (x > uwu->ray->t->width || y > uwu->ray->t->height)
 		return (0x000000FF);
-	pixel = &text->pixels[(y * text->width + x) * text->bytes_per_pixel];
+	pixel = &uwu->ray->t->pixels[(y * uwu->ray->t->width + x)
+		* uwu->ray->t->bytes_per_pixel];
 	color = (pixel[0] << 24) + (pixel[1] << 16) + (pixel[2] << 8) + pixel[3];
 	return (color);
 }
