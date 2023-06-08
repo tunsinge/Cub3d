@@ -86,14 +86,21 @@ mlx_texture_t	*texture_area_to_texture(mlx_texture_t *texture,
 {
 	mlx_texture_t	*new_texture;
 	int				x;
+	int				y;
 
 	new_texture = malloc(sizeof(mlx_texture_t));
 	new_texture->width = wh[0];
 	new_texture->height = wh[1];
 	new_texture->bytes_per_pixel = 4;
-	new_texture->pixels = malloc(4 * wh[0] * wh[1]);
-	x = -1;
-	while (++x < 4 * wh[0] * wh[1])
-		new_texture->pixels[x] = texture->pixels[xy[0] + (xy[1] * wh[0]) + x];
+	new_texture->pixels = malloc(4 * wh[0] * wh[1] * sizeof(uint8_t));
+	y = -1;
+	(void)xy, (void)texture;
+	while (++y < wh[1])
+	{
+		x = -1;
+		while (++x < 4 * wh[0])
+			new_texture->pixels[y * wh[0] * 4 + x] = texture->pixels[xy[0] * 4
+				+ (xy[1] + y * texture->width * 4) + x];
+	}
 	return (new_texture);
 }

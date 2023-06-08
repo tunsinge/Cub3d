@@ -24,17 +24,18 @@ void	rick_load_texture(t_cub3d *uwu)
 	wh[0] = 498;
 	wh[1] = 427;
 	uwu->t->rick_current = texture_area_to_texture(uwu->t->rick_full, xy, wh);
-	printf("%p\n", uwu->t->rick_current);
-	mlx_image_t *image = mlx_texture_to_image(uwu->mlx, uwu->t->rick_current);
-	printf("%p\n", image);
-	mlx_image_to_window(uwu->mlx, image, 0, 0);
 }
 
 void	rick_next(t_cub3d *uwu)
 {
-	int	xy[2];
-	int	wh[2];
+	static int	i = 0;
+	int			xy[2];
+	int			wh[2];
 
+	i++;
+	if (i < 3)
+		return ;
+	i = 0;
 	uwu->t->current_x += 498;
 	if (uwu->t->current_x > uwu->t->rick_full->width)
 		uwu->t->current_x = 0;

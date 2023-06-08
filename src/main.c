@@ -36,7 +36,6 @@ static void	first_init(t_cub3d *uwu)
 	uwu->hehe = 0;
 	uwu->jumping = 0;
 	uwu->mlx = NULL;
-	rick_load_texture(uwu);
 }
 
 void	init_(t_cub3d *uwu, char **av)
@@ -66,6 +65,7 @@ void	init_(t_cub3d *uwu, char **av)
 	uwu->mlx = mlx_init(WINW, WINH, "cub3d", true);
 	if (load_textures(uwu->t) || load_textures2(uwu->t))
 		return (quit_program(uwu));
+	rick_load_texture(uwu);
 	mlx_set_cursor_mode(uwu->mlx, MLX_MOUSE_HIDDEN);
 }
 
