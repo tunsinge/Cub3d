@@ -87,7 +87,8 @@ void	one_ray(t_cub3d *uwu)
 	check_angle(&rays.ra);
 	rays.ray_nb = 1;
 	rays.r = 0;
-	rays.is_door = 0;
+	rays.is_door[0] = 0;
+	rays.is_door[1] = 0;
 	horizontal(uwu, &rays);
 	vertical(uwu, &rays);
 	orientation(uwu, uwu->ray, 0);

@@ -12,51 +12,42 @@
 
 #include "cub3d.h"
 
-/*todo
- * adapter affichage texture pour rick -> changer pixel to color
- * reduire vitesse animation rick
- * mise carte a 2 tir
- * affichage rick sur 2
- * */
-
 void	rick_load_texture(t_cub3d *uwu)
 {
+	int	xy[2];
+	int	wh[2];
+
 	uwu->t->current_x = 0;
 	uwu->t->rick_full = mlx_load_png("textures/texture.png");
-}
-
-int	rick_pixel_to_color(t_cub3d *uwu, uint32_t x, uint32_t y)
-{
-	uint8_t			*pixel;
-	uint32_t		color;
-	uint32_t		wh[2];
-	mlx_texture_t	*text;
-
-	text = uwu->t->rick_full;
-	wh[0] = 498 + uwu->t->current_x;
+	xy[0] = uwu->t->current_x;
+	xy[1] = 0;
+	wh[0] = 498;
 	wh[1] = 427;
-	if (x > uwu->t->rick_full->width || y > wh[1])
-		return (0x000000FF);
-	pixel = &text->pixels[(y * uwu->t->rick_full->width + x + uwu->t->current_x)
-		* text->bytes_per_pixel];
-	color = (pixel[0] << 24) + (pixel[1] << 16) + (pixel[2] << 8) + pixel[3];
-	return (color);
+	uwu->t->rick_current = texture_area_to_texture(uwu->t->rick_full, xy, wh);
+	printf("%p\n", uwu->t->rick_current);
+	mlx_image_t *image = mlx_texture_to_image(uwu->mlx, uwu->t->rick_current);
+	printf("%p\n", image);
+	mlx_image_to_window(uwu->mlx, image, 0, 0);
 }
 
 void	rick_next(t_cub3d *uwu)
 {
+	int	xy[2];
+	int	wh[2];
+
 	uwu->t->current_x += 498;
 	if (uwu->t->current_x > uwu->t->rick_full->width)
 		uwu->t->current_x = 0;
+	mlx_delete_texture(uwu->t->rick_current);
+	xy[0] = uwu->t->current_x;
+	xy[1] = 0;
+	wh[0] = 498;
+	wh[1] = 427;
+	uwu->t->rick_current = texture_area_to_texture(uwu->t->rick_full, xy, wh);
 }
 
 void	set_texture_size(t_cub3d *uwu)
 {
 	uwu->ray->sext = uwu->ray->t->width;
 	uwu->ray->seyt = uwu->ray->t->height;
-	if (uwu->ray->is_door == 2)
-	{
-		uwu->ray->sext = 498;
-		uwu->ray->seyt = 427;
-	}
 }
