@@ -38,8 +38,8 @@ void	raycaster(t_cub3d *uwu)
 {
 	uwu->ray->w = WINW;
 	uwu->ray->h = WINH;
-	uwu->ray->px = uwu->px + uwu->p_size / 2;
-	uwu->ray->py = uwu->py + uwu->p_size / 2;
+	uwu->ray->px = uwu->px;
+	uwu->ray->py = uwu->py;
 	uwu->ray->ra = uwu->pa - DR * 30;
 	uwu->ray->pa = uwu->pa;
 	check_angle(&uwu->ray->ra);
@@ -47,6 +47,7 @@ void	raycaster(t_cub3d *uwu)
 	uwu->ray->r = 0;
 	while (uwu->ray->r < uwu->ray->ray_nb)
 	{
+		uwu->ray->is_door = 0;
 		horizontal(uwu);
 		vertical(uwu);
 		orientation(uwu);

@@ -20,16 +20,16 @@ void	horizontal(t_cub3d *uwu)
 	((void)0, n->hy = n->py, n->a_tan = -1 / tan(n->ra));
 	if (n->ra > PI)
 	{
-		n->ry = (((int)n->py / 8) * 8) - 0.0001;
+		n->ry = (((int)n->py / uwu->map_s) * uwu->map_s) - 0.0001;
 		n->rx = (n->py - n->ry) * n->a_tan + n->px;
-		n->yo = -8;
+		n->yo = -uwu->map_s;
 		n->xo = -n->yo * n->a_tan;
 	}
 	else if (n->ra < PI)
 	{
-		n->ry = (((int)n->py / 8) * 8) + 8;
+		n->ry = (((int)n->py / uwu->map_s) * uwu->map_s) + uwu->map_s;
 		n->rx = (n->py - n->ry) * n->a_tan + n->px;
-		n->yo = 8;
+		n->yo = uwu->map_s;
 		n->xo = -n->yo * n->a_tan;
 	}
 	else
@@ -48,12 +48,14 @@ void	horizontal2(t_cub3d *uwu)
 	n = uwu->ray;
 	while (n->dof < MAX_DOF)
 	{
-		n->mx = (int)(n->rx) / 8;
-		n->my = (int)(n->ry) / 8;
+		n->mx = (int)(n->rx) / uwu->map_s;
+		n->my = (int)(n->ry) /uwu->map_s;
 		if (n->mx >= 0 && n->my >= 0 && n->mx < uwu->map_s_x
 			&& n->my < uwu->map_s_y
-			&& uwu->map[n->my][n->mx] == '1')
+			&& (uwu->map[n->my][n->mx] == '1' || uwu->map[n->my][n->mx] == '4'))
 		{
+			if (uwu->map[n->my][n->mx] == '4')
+				uwu->ray->is_door = 1;
 			n->hx = n->rx;
 			n->hy = n->ry;
 			n->dis_h = dist(n->px, n->py, n->hx, n->hy);

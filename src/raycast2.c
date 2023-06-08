@@ -12,6 +12,32 @@
 
 #include "cub3d.h"
 
+void	pick_textures(t_cub3d *uwu, int egal, int poop)
+{
+	if (poop == 1)
+	{
+		if (uwu->ray->is_door == 1 && egal)
+			uwu->ray->t = uwu->t->door_we;
+		else if (uwu->ray->is_door == 1)
+			uwu->ray->t = uwu->t->door_ea;
+		else if (egal)
+			uwu->ray->t = uwu->t->text_we;
+		else
+			uwu->ray->t = uwu->t->text_ea;
+	}
+	else
+	{
+		if (uwu->ray->is_door == 1 && egal)
+			uwu->ray->t = uwu->t->door_no;
+		else if (uwu->ray->is_door == 1)
+			uwu->ray->t = uwu->t->door_so;
+		else if (egal)
+			uwu->ray->t = uwu->t->text_no;
+		else
+			uwu->ray->t = uwu->t->text_so;
+	}
+}
+
 void	orientation(t_cub3d *uwu)
 {
 	uwu->ray->shade = 1;
@@ -20,10 +46,7 @@ void	orientation(t_cub3d *uwu)
 		uwu->ray->rx = uwu->ray->vx;
 		uwu->ray->ry = uwu->ray->vy;
 		uwu->ray->dist = uwu->ray->dis_v;
-		if (uwu->ray->ra > P2 && uwu->ray->ra < P3)
-			uwu->ray->t = uwu->t->text_we;
-		else
-			uwu->ray->t = uwu->t->text_ea;
+		pick_textures(uwu, uwu->ray->ra > P2 && uwu->ray->ra < P3, 1);
 	}
 	if (uwu->ray->dis_v >= uwu->ray->dis_h)
 	{
@@ -31,10 +54,7 @@ void	orientation(t_cub3d *uwu)
 		uwu->ray->rx = uwu->ray->hx;
 		uwu->ray->ry = uwu->ray->hy;
 		uwu->ray->dist = uwu->ray->dis_h;
-		if (uwu->ray->ra > PI)
-			uwu->ray->t = uwu->t->text_no;
-		else
-			uwu->ray->t = uwu->t->text_so;
+		pick_textures(uwu, uwu->ray->ra > PI, 0);
 	}
 }
 
@@ -61,14 +81,14 @@ void	calculations(t_cub3d *uwu)
 	uwu->ray->ty = uwu->ray->ty_step * uwu->ray->ty_off;
 	if (uwu->ray->shade != 1)
 	{
-		uwu->ray->tx = (int)(uwu->ray->rx / (8 / uwu->ray->sext))
+		uwu->ray->tx = (int)(uwu->ray->rx / (uwu->map_s / uwu->ray->sext))
 			% (int)uwu->ray->sext;
 		if (uwu->ray->ra < PI)
 			uwu->ray->tx = uwu->ray->sext - 1 - uwu->ray->tx;
 	}
 	else
 	{
-		uwu->ray->tx = (int)(uwu->ray->ry / (8 / uwu->ray->sext))
+		uwu->ray->tx = (int)(uwu->ray->ry / (uwu->map_s / uwu->ray->sext))
 			% (int)uwu->ray->seyt;
 		if (uwu->ray->ra > P2 && uwu->ray->ra < P3)
 			uwu->ray->tx = uwu->ray->sext - 1 - uwu->ray->tx;
