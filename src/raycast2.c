@@ -6,7 +6,7 @@
 /*   By: mdoumi <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 09:37:55 by ^@^ Foxan ^       #+#    #+#             */
-/*   Updated: 2023/05/30 13:54:04 by mdoumi           ###   ########.fr       */
+/*   Updated: 2023/06/08 11:30:29 by mdoumi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,9 @@ void	pick_textures(t_cub3d *uwu, int egal, int poop)
 {
 	if (poop == 1)
 	{
-		if (uwu->ray->is_door == 1 && egal)
+		if (uwu->ray->is_door[1] == 1 && egal)
 			uwu->ray->t = uwu->t->door_we;
-		else if (uwu->ray->is_door == 1)
+		else if (uwu->ray->is_door[1] == 1)
 			uwu->ray->t = uwu->t->door_ea;
 		else if (egal)
 			uwu->ray->t = uwu->t->text_we;
@@ -27,9 +27,9 @@ void	pick_textures(t_cub3d *uwu, int egal, int poop)
 	}
 	else
 	{
-		if (uwu->ray->is_door == 1 && egal)
+		if (uwu->ray->is_door[0] == 1 && egal)
 			uwu->ray->t = uwu->t->door_no;
-		else if (uwu->ray->is_door == 1)
+		else if (uwu->ray->is_door[0] == 1)
 			uwu->ray->t = uwu->t->door_so;
 		else if (egal)
 			uwu->ray->t = uwu->t->text_no;

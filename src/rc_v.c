@@ -43,7 +43,7 @@ void	vertical2(t_cub3d *uwu)
 			&& (uwu->map[n->my][n->mx] == '1' || uwu->map[n->my][n->mx] == '4'))
 		{
 			if (uwu->map[n->my][n->mx] == '4')
-				uwu->ray->is_door = 1;
+				uwu->ray->is_door[1] = 1;
 			n->vx = n->rx;
 			n->vy = n->ry;
 			n->dis_v = dist(n->px, n->py, n->vx, n->vy);

@@ -6,7 +6,7 @@
 /*   By: mdoumi <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/02 17:01:31 by ^@^ Foxan ^       #+#    #+#             */
-/*   Updated: 2023/06/08 10:16:14 by mdoumi           ###   ########.fr       */
+/*   Updated: 2023/06/08 11:26:06 by mdoumi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,7 +105,7 @@ typedef struct s_keys
 
 typedef struct s_ray
 {
-	int				is_door;
+	int				is_door[2];
 	float			pdx;
 	float			pdy;
 	float			pdxs;

@@ -6,7 +6,7 @@
 /*   By: mdoumi <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 19:28:46 by ^@^ Foxan ^       #+#    #+#             */
-/*   Updated: 2023/05/26 12:02:23 by mdoumi           ###   ########.fr       */
+/*   Updated: 2023/06/08 11:26:28 by mdoumi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ void	horizontal2(t_cub3d *uwu)
 			&& (uwu->map[n->my][n->mx] == '1' || uwu->map[n->my][n->mx] == '4'))
 		{
 			if (uwu->map[n->my][n->mx] == '4')
-				uwu->ray->is_door = 1;
+				uwu->ray->is_door[0] = 1;
 			n->hx = n->rx;
 			n->hy = n->ry;
 			n->dis_h = dist(n->px, n->py, n->hx, n->hy);
