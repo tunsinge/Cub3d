@@ -18,6 +18,7 @@ void	init_controls(t_cub3d *uwu)
 	uwu->keys.key_a = 0;
 	uwu->keys.key_s = 0;
 	uwu->keys.key_d = 0;
+	uwu->keys.key_e = 0;
 	uwu->keys.key_r = 0;
 	uwu->keys.key_l = 0;
 	uwu->keys.key_wi = 0;
@@ -62,9 +63,10 @@ void	key_hook(mlx_key_data_t keydata, void *param)
 	set_key(keydata, KEY_BACKWARD, &uwu->keys.key_s);
 	set_key(keydata, KEY_STRAF_RIGHT, &uwu->keys.key_d);
 	set_key(keydata, KEY_STRAF_LEFT, &uwu->keys.key_a);
+	set_key(keydata, KEY_OPEN_DOOR, &uwu->keys.key_e);
 	set_key(keydata, KEY_ROTATE_LEFT, &uwu->keys.key_l);
 	set_key(keydata, KEY_ROTATE_RIGHT, &uwu->keys.key_r);
-	set_key(keydata, MLX_KEY_LEFT_CONTROL, &uwu->keys.key_wi);
+	set_key(keydata, KEY_ZOOM_MAP, &uwu->keys.key_wi);
 	set_key(keydata, KEY_RUN, &uwu->keys.key_shift);
 	if (keydata.key == MLX_KEY_SPACE && keydata.action == MLX_PRESS
 		&& uwu->keys.key_jump == 0)
@@ -96,6 +98,7 @@ void	move(t_cub3d *uwu)
 		move_x(uwu, -uwu->ray->pdxs);
 		move_y(uwu, -uwu->ray->pdys);
 	}
+	open_doors(uwu);
 	map_zoom(uwu);
 	jump(uwu);
 }

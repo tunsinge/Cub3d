@@ -15,7 +15,7 @@
 int	is_etranger(char c)
 {
 	if (c == '1' || c == '0' || c == 'N' || c == 'S' || c == 'E' || c == 'W'
-		|| c == ' ')
+		|| c == ' ' || c == '4')
 		return (0);
 	return (1);
 }

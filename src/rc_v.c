@@ -1,15 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   rc_v.c                                             :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: mdoumi <marvin@42.fr>                      +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/22 19:32:02 by ^@^ Foxan ^       #+#    #+#             */
-/*   Updated: 2023/05/26 12:02:32 by mdoumi           ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include "cub3d.h"
 
 void	vertical(t_cub3d *uwu)
@@ -20,16 +8,16 @@ void	vertical(t_cub3d *uwu)
 	n->ntan = -tan(n->ra);
 	if (n->ra > P2 && n->ra < P3)
 	{
-		n->rx = (((int)n->px / 8) * 8) - 0.0001;
+		n->rx = (((int)n->px / uwu->map_s) * uwu->map_s) - 0.0001;
 		n->ry = (n->px - n->rx) * n->ntan + n->py;
-		n->xo = -8;
+		n->xo = -uwu->map_s;
 		n->yo = -n->xo * n->ntan;
 	}
 	else if (n->ra < P2 || n->ra > P3)
 	{
-		n->rx = (((int)n->px / 8) * 8) + 8;
+		n->rx = (((int)n->px / uwu->map_s) * uwu->map_s) + uwu->map_s;
 		n->ry = (n->px - n->rx) * n->ntan + n->py;
-		n->xo = 8;
+		n->xo = uwu->map_s;
 		n->yo = -n->xo * n->ntan;
 	}
 	else
@@ -48,12 +36,14 @@ void	vertical2(t_cub3d *uwu)
 	n = uwu->ray;
 	while (n->dof < MAX_DOF)
 	{
-		n->mx = (int)(n->rx) / 8;
-		n->my = (int)(n->ry) / 8;
+		n->mx = (int)(n->rx) / uwu->map_s;
+		n->my = (int)(n->ry) / uwu->map_s;
 		if (n->mx >= 0 && n->my >= 0 && n->mx < uwu->map_s_x
 			&& n->my < uwu->map_s_y
-			&& uwu->map[n->my][n->mx] == '1')
+			&& (uwu->map[n->my][n->mx] == '1' || uwu->map[n->my][n->mx] == '4'))
 		{
+			if (uwu->map[n->my][n->mx] == '4')
+				uwu->ray->is_door = 1;
 			n->vx = n->rx;
 			n->vy = n->ry;
 			n->dis_v = dist(n->px, n->py, n->vx, n->vy);
