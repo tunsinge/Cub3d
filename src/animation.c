@@ -15,9 +15,6 @@
 /*todo
  * adapter affichage texture pour rick -> changer pixel to color
  * reduire vitesse animation rick
- * affichage arme
- * tirer clic
- * changement image arme
  * mise carte a 2 tir
  * affichage rick sur 2
  * */
@@ -51,4 +48,15 @@ void	rick_next(t_cub3d *uwu)
 	uwu->t->current_x += 498;
 	if (uwu->t->current_x > uwu->t->rick_full->width)
 		uwu->t->current_x = 0;
+}
+
+void	set_texture_size(t_cub3d *uwu)
+{
+	uwu->ray->sext = uwu->ray->t->width;
+	uwu->ray->seyt = uwu->ray->t->height;
+	if (uwu->ray->is_door == 2)
+	{
+		uwu->ray->sext = 498;
+		uwu->ray->seyt = 427;
+	}
 }

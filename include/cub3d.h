@@ -40,8 +40,8 @@
 # define P3 4.71238898038
 # define DR 0.0174533
 
-# define WINW 1440/2
-# define WINH 960/2
+# define WINW 1440
+# define WINH 960
 # define N_SPEED 0.0625
 # define S_SPEED 0.25
 
@@ -195,6 +195,7 @@ typedef struct s_cub3d
 int			rick_pixel_to_color(t_cub3d *uwu, uint32_t x, uint32_t y);
 void		rick_next(t_cub3d *uwu);
 void		rick_load_texture(t_cub3d *uwu);
+void		set_texture_size(t_cub3d *uwu);
 
 // check_map.c
 
@@ -302,20 +303,20 @@ void		raycaster(t_cub3d *uwu);
 
 // raycast2.c
 
-void		orientation(t_cub3d *uwu);
+void		orientation(t_cub3d *uwu, t_ray *rays, int t);
 void		setup(t_cub3d *uwu);
 void		calculations(t_cub3d *uwu);
 void		draw(t_cub3d *uwu);
 
 // rc_h.c
 
-void		horizontal(t_cub3d *uwu);
-void		horizontal2(t_cub3d *uwu);
+void		horizontal(t_cub3d *uwu, t_ray *rays);
+void		horizontal2(t_cub3d *uwu, t_ray *rays);
 
 // rc_v.c
 
-void		vertical(t_cub3d *uwu);
-void		vertical2(t_cub3d *uwu);
+void		vertical(t_cub3d *uwu, t_ray *rays);
+void		vertical2(t_cub3d *uwu, t_ray *rays);
 
 // render.c
 
@@ -335,7 +336,7 @@ void		fill_img(t_cub3d *uwu, int w, int h, uint32_t color);
 int			load_textures2(t_textures *t);
 int			load_textures(t_textures *textures);
 void		delete_textures(t_textures *textures);
-int			pixel_to_color(t_cub3d *uwu, uint32_t x, uint32_t y, int rick);
+int			pixel_to_color(t_cub3d *uwu, uint32_t x, uint32_t y);
 
 // utils.c
 
@@ -350,5 +351,6 @@ int			is_etranger_restrained(char c);
 void		shoot(t_cub3d *uwu);
 void		weapon_next_image(t_cub3d *uwu);
 void		weapon_load(t_cub3d *uwu);
+void		one_ray(t_cub3d *uwu);
 
 #endif // CUB3D_H

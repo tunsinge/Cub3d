@@ -1,10 +1,22 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   rc_v.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ^@^ Foxan ^@^ <thibaut.unsinger@gmail.com  +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/06/08 09:24:58 by ^@^ Foxan ^@^     #+#    #+#             */
+/*   Updated: 2023/06/08 09:25:00 by ^@^ Foxan ^@^    ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "cub3d.h"
 
-void	vertical(t_cub3d *uwu)
+void	vertical(t_cub3d *uwu, t_ray *rays)
 {
 	t_ray	*n;
 
-	((void)0, n = uwu->ray, n->dof = 0, n->vx = n->px, n->vy = n->py);
+	((void)0, n = rays, n->dof = 0, n->vx = n->px, n->vy = n->py);
 	n->ntan = -tan(n->ra);
 	if (n->ra > P2 && n->ra < P3)
 	{
@@ -26,24 +38,24 @@ void	vertical(t_cub3d *uwu)
 		n->rx = n->px;
 		n->dof = MAX_DOF;
 	}
-	vertical2(uwu);
+	vertical2(uwu, rays);
 }
 
-void	vertical2(t_cub3d *uwu)
+void	vertical2(t_cub3d *uwu, t_ray *rays)
 {
 	t_ray	*n;
 
-	n = uwu->ray;
+	n = rays;
 	while (n->dof < MAX_DOF)
 	{
 		n->mx = (int)(n->rx) / uwu->map_s;
 		n->my = (int)(n->ry) / uwu->map_s;
 		if (n->mx >= 0 && n->my >= 0 && n->mx < uwu->map_s_x
 			&& n->my < uwu->map_s_y
-			&& (uwu->map[n->my][n->mx] == '1' || uwu->map[n->my][n->mx] == '4'))
+			&& (uwu->map[n->my][n->mx] > '0'))
 		{
-			if (uwu->map[n->my][n->mx] == '4')
-				uwu->ray->is_door = 1;
+			rays->is_door = (uwu->map[n->my][n->mx] == '4')
+				+ (uwu->map[n->my][n->mx] == '2') * 2;
 			n->vx = n->rx;
 			n->vy = n->ry;
 			n->dis_v = dist(n->px, n->py, n->vx, n->vy);

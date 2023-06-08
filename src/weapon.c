@@ -51,9 +51,13 @@ void	weapon_next_image(t_cub3d *uwu)
 void	shoot(t_cub3d *uwu)
 {
 	static int	i = 0;
+	static int	s = 0;
 
 	if (uwu->keys.key_shoot)
 	{
+		if (!s)
+			one_ray(uwu);
+		s = 1;
 		if (i != 2)
 			return ((void)i++);
 		i = 0;
@@ -63,6 +67,31 @@ void	shoot(t_cub3d *uwu)
 		{
 			uwu->keys.key_shoot = 0;
 			uwu->t->weapon_current = 0;
+			s = 0;
 		}
 	}
+}
+
+void	one_ray(t_cub3d *uwu)
+{
+	t_ray	rays;
+	int		x;
+	int		y;
+
+	rays.w = WINW;
+	rays.h = WINH;
+	rays.px = uwu->px;
+	rays.py = uwu->py;
+	rays.ra = uwu->pa;
+	rays.pa = uwu->pa;
+	check_angle(&rays.ra);
+	rays.ray_nb = 1;
+	rays.r = 0;
+	rays.is_door = 0;
+	horizontal(uwu, &rays);
+	vertical(uwu, &rays);
+	orientation(uwu, uwu->ray, 0);
+	x = (int)(rays.rx) / uwu->map_s;
+	y = (int)(rays.ry) / uwu->map_s;
+	uwu->map[y][x] = '2';
 }
