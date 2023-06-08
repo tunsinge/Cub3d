@@ -50,12 +50,12 @@ void	weapon_next_image(t_cub3d *uwu)
 
 void	shoot(t_cub3d *uwu)
 {
-	static int i = 0;
+	static int	i = 0;
 
 	if (uwu->keys.key_shoot)
 	{
-		if (i != 4)
-			return (void)i++;
+		if (i != 2)
+			return ((void)i++);
 		i = 0;
 		if (uwu->t->weapon_current <= uwu->t->weapon_text->width)
 			weapon_next_image(uwu);
