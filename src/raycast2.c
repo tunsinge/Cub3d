@@ -94,7 +94,7 @@ void	calculations(t_cub3d *uwu)
 	else
 	{
 		uwu->ray->tx = (int)(uwu->ray->ry / (uwu->map_s / uwu->ray->sext))
-			% (int)uwu->ray->seyt;
+			% (int)uwu->ray->sext;
 		if (uwu->ray->ra > P2 && uwu->ray->ra < P3)
 			uwu->ray->tx = uwu->ray->sext - 1 - uwu->ray->tx;
 	}
