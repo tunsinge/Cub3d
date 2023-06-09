@@ -6,7 +6,7 @@
 /*   By: mdoumi <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 20:33:42 by mdoumi            #+#    #+#             */
-/*   Updated: 2023/05/24 20:34:13 by mdoumi           ###   ########.fr       */
+/*   Updated: 2023/06/09 15:05:53 by mdoumi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,10 +80,10 @@ void	one_ray(t_cub3d *uwu)
 
 	rays.w = WINW;
 	rays.h = WINH;
-	rays.px = uwu->px;
-	rays.py = uwu->py;
-	rays.ra = uwu->pa;
-	rays.pa = uwu->pa;
+	rays.px = uwu->ray->px;
+	rays.py = uwu->ray->py;
+	rays.ra = uwu->ray->pa;
+	rays.pa = uwu->ray->pa;
 	check_angle(&rays.ra);
 	rays.ray_nb = 1;
 	rays.r = 0;
@@ -91,7 +91,7 @@ void	one_ray(t_cub3d *uwu)
 	rays.is_door[1] = 0;
 	horizontal(uwu, &rays);
 	vertical(uwu, &rays);
-	orientation(uwu, uwu->ray, 0);
+	orientation(uwu, &rays, 0);
 	x = (int)(rays.rx) / uwu->map_s;
 	y = (int)(rays.ry) / uwu->map_s;
 	uwu->map[y][x] = '2';
