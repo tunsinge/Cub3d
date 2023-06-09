@@ -12,11 +12,11 @@
 
 #include "cub3d.h"
 
-void	horizontal(t_cub3d *uwu)
+void	horizontal(t_cub3d *uwu, t_ray *rays)
 {
 	t_ray	*n;
 
-	((void)0, n = uwu->ray, n->dof = 0, n->hx = n->px);
+	((void)0, n = rays, n->dof = 0, n->hx = n->px);
 	((void)0, n->hy = n->py, n->a_tan = -1 / tan(n->ra));
 	if (n->ra > PI)
 	{
@@ -38,14 +38,14 @@ void	horizontal(t_cub3d *uwu)
 		n->rx = n->px;
 		n->dof = MAX_DOF;
 	}
-	horizontal2(uwu);
+	horizontal2(uwu, rays);
 }
 
-void	horizontal2(t_cub3d *uwu)
+void	horizontal2(t_cub3d *uwu, t_ray *rays)
 {
 	t_ray	*n;
 
-	n = uwu->ray;
+	n = rays;
 	while (n->dof < MAX_DOF)
 	{
 		n->mx = (int)(n->rx) / uwu->map_s;
@@ -54,9 +54,9 @@ void	horizontal2(t_cub3d *uwu)
 			&& n->my < uwu->map_s_y
 			&& !is_transparent(uwu->map[n->my][n->mx]))
 		{
-			if (uwu->map[n->my][n->mx] == '4')
-				uwu->ray->is_door[0] = 1;
 			(void)0, n->hx = n->rx, n->hy = n->ry;
+			rays->is_door[0] = (uwu->map[n->my][n->mx] == '4')
+				+ (uwu->map[n->my][n->mx] == '2') * 2;
 			n->dis_h = dist(n->px, n->py, n->hx, n->hy);
 			n->dof = MAX_DOF;
 		}

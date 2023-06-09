@@ -1,22 +1,12 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   rc_v.c                                             :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: mdoumi <marvin@42.fr>                      +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/06/08 12:18:38 by mdoumi            #+#    #+#             */
-/*   Updated: 2023/06/08 13:04:16 by mdoumi           ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
+
 
 #include "cub3d.h"
 
-void	vertical(t_cub3d *uwu)
+void	vertical(t_cub3d *uwu, t_ray *rays)
 {
 	t_ray	*n;
 
-	((void)0, n = uwu->ray, n->dof = 0, n->vx = n->px, n->vy = n->py);
+	((void)0, n = rays, n->dof = 0, n->vx = n->px, n->vy = n->py);
 	n->ntan = -tan(n->ra);
 	if (n->ra > P2 && n->ra < P3)
 	{
@@ -38,14 +28,14 @@ void	vertical(t_cub3d *uwu)
 		n->rx = n->px;
 		n->dof = MAX_DOF;
 	}
-	vertical2(uwu);
+	vertical2(uwu, rays);
 }
 
-void	vertical2(t_cub3d *uwu)
+void	vertical2(t_cub3d *uwu, t_ray *rays)
 {
 	t_ray	*n;
 
-	n = uwu->ray;
+	n = rays;
 	while (n->dof < MAX_DOF)
 	{
 		n->mx = (int)(n->rx) / uwu->map_s;
@@ -54,9 +44,9 @@ void	vertical2(t_cub3d *uwu)
 			&& n->my < uwu->map_s_y
 			&& !is_transparent(uwu->map[n->my][n->mx]))
 		{
-			if (uwu->map[n->my][n->mx] == '4')
-				uwu->ray->is_door[1] = 1;
 			(void)0,n->vx = n->rx,n->vy = n->ry,n->dof = MAX_DOF;
+			rays->is_door[1] = (uwu->map[n->my][n->mx] == '4')
+				+ (uwu->map[n->my][n->mx] == '2') * 2;
 			n->dis_v = dist(n->px, n->py, n->vx, n->vy);
 		}
 		else

@@ -84,6 +84,14 @@ typedef struct s_textures
 	mlx_texture_t	*text_so;
 	mlx_texture_t	*text_ea;
 	mlx_texture_t	*text_we;
+	mlx_texture_t	*rick_full;
+	mlx_texture_t	*rick_current;
+	uint32_t		current_x;
+	mlx_texture_t	*weapon_text;
+	mlx_image_t		*weapon_img;
+	uint32_t		weapon_current;
+	uint32_t		weapon_width;
+	uint32_t		weapon_height;
 	mlx_texture_t	*door_no;
 	mlx_texture_t	*door_so;
 	mlx_texture_t	*door_ea;
@@ -102,6 +110,7 @@ typedef struct s_keys
 	int	key_wi;
 	int	key_shift;
 	int	key_jump;
+	int	key_shoot;
 }	t_keys;
 
 typedef struct s_ray
@@ -183,134 +192,141 @@ typedef struct s_cub3d
 	mlx_t			*mlx;
 }	t_cub3d;
 
+// animations.c
+
+int				rick_pixel_to_color(t_cub3d *uwu, uint32_t x, uint32_t y);
+void			rick_next(t_cub3d *uwu);
+void			rick_load_texture(t_cub3d *uwu);
+void			set_texture_size(t_cub3d *uwu);
+
 // check_map.c
 
-int			is_etranger(char c);
-int			check_map(char **map);
-int			check_map_path(char **av);
-int			check_map_closed(t_cub3d *uwu);
-int			find_map_width(t_cub3d *uwu);
+int				is_etranger(char c);
+int				check_map(char **map);
+int				check_map_path(char **av);
+int				check_map_closed(t_cub3d *uwu);
+int				find_map_width(t_cub3d *uwu);
 
 // collisions.c
 
-void		move_x(t_cub3d *uwu, float dx);
-void		move_y(t_cub3d *uwu, float dy);
+void			move_x(t_cub3d *uwu, float dx);
+void			move_y(t_cub3d *uwu, float dy);
 
 // controls.c
 
-void		init_controls(t_cub3d *uwu);
-void		controls_hook(void *param);
-void		set_key(mlx_key_data_t keydata, keys_t key, int *value);
-void		key_hook(mlx_key_data_t keydata, void *param);
-void		move(t_cub3d *uwu);
+void			init_controls(t_cub3d *uwu);
+void			controls_hook(void *param);
+void			set_key(mlx_key_data_t keydata, keys_t key, int *value);
+void			key_hook(mlx_key_data_t keydata, void *param);
+void			move(t_cub3d *uwu);
 
 // controls2.c
 
-void		rotate(t_cub3d *uwu);
-void		mouse(t_cub3d *uwu);
-void		map_zoom(t_cub3d *uwu);
-void		jump(t_cub3d *uwu);
-void		open_doors(t_cub3d *uwu);
+void			rotate(t_cub3d *uwu);
+void			mouse(t_cub3d *uwu);
+void			map_zoom(t_cub3d *uwu);
+void			jump(t_cub3d *uwu);
+void			open_doors(t_cub3d *uwu);
 
 // error.c
 
-void		*error(char *code);
+void			*error(char *code);
 
 // fill.c
 
-void		print_map(t_cub3d *uwu);
-void		fill_map(t_cub3d *uwu);
-int			max_width(t_cub3d *uwu);
+void			print_map(t_cub3d *uwu);
+void			fill_map(t_cub3d *uwu);
+int				max_width(t_cub3d *uwu);
 
 // ft_atoi.c
 
-int			ft_atoi(char *str);
+int				ft_atoi(char *str);
 
 // ft_split.c
 
-char		**ft_split(char const *s, char c);
+char			**ft_split(char const *s, char c);
 
 // ft_strcmp.c
 
-int			ft_strcmp(char *s1, char *s2);
+int				ft_strcmp(char *s1, char *s2);
 
 // ft_strdup.c
 
-char		*ft_strdup(char *s1);
-char		**ft_strrdup(char **s1);
-char		**ft_strrldup(char **s1, int l);
-char		*ft_strdupnonl(char *s1);
-char		*ft_strldup(char *s1, int l);
+char			*ft_strdup(char *s1);
+char			**ft_strrdup(char **s1);
+char			**ft_strrldup(char **s1, int l);
+char			*ft_strdupnonl(char *s1);
+char			*ft_strldup(char *s1, int l);
 
 // ft_strjoin.c
 
-char		*ft_strjoinn(char *s1, char **str2);
-char		*ft_strjoin(char const *s1, char const *s2);
-char		*ft_strjoinfree(char **s1, char const *s2);
-char		*ft_strjoinnfree(char **s1, char **str2, char *sep);
+char			*ft_strjoinn(char *s1, char **str2);
+char			*ft_strjoin(char const *s1, char const *s2);
+char			*ft_strjoinfree(char **s1, char const *s2);
+char			*ft_strjoinnfree(char **s1, char **str2, char *sep);
 
 // ft_strlen.c
 
-int			ft_strlen(char *str);
-int			ft_strrlen(char **str);
+int				ft_strlen(char *str);
+int				ft_strrlen(char **str);
 
 // ft_substr.c
 
-char		*ft_substr(char *s, int start, int len);
+char			*ft_substr(char *s, int start, int len);
 
 // main.c
 
-void		init_(t_cub3d *uwu, char **av);
+void			init_(t_cub3d *uwu, char **av);
 
 // parsing_utils.c
 
-void		free_s(char **str);
-int			is_num(char *num);
-int			store_color(t_cub3d *uwu, char **fields);
-int			store_texture(t_cub3d *uwu, char **fields);
-int			verify_texture(char *texture, int *pb);
+void			free_s(char **str);
+int				is_num(char *num);
+int				store_color(t_cub3d *uwu, char **fields);
+int				store_texture(t_cub3d *uwu, char **fields);
+int				verify_texture(char *texture, int *pb);
 
 // parsing.c
 
-char		**parse_map(t_cub3d *uwu, char *path);
-char		**append_to_map(char *line, char **map);
-int			parse_textures(t_cub3d *uwu, int fd);
+char			**parse_map(t_cub3d *uwu, char *path);
+char			**append_to_map(char *line, char **map);
+int				parse_textures(t_cub3d *uwu, int fd);
 
 // quit.c
 
-void		quit_program(t_cub3d *uwu);
+void			quit_program(t_cub3d *uwu);
 
 // raycast.c
 
-void		draw_col(mlx_image_t *img, int xy[2], int x, int color);
-float		dist(float ax, float ay, float bx, float by);
-void		check_angle(float *ra);
-void		raycaster(t_cub3d *uwu);
+void			draw_col(mlx_image_t *img, int xy[2], int x, int color);
+float			dist(float ax, float ay, float bx, float by);
+void			check_angle(float *ra);
+void			raycaster(t_cub3d *uwu);
 
 // raycast2.c
 
-void		orientation(t_cub3d *uwu);
-void		setup(t_cub3d *uwu);
-void		calculations(t_cub3d *uwu);
-void		draw(t_cub3d *uwu);
+void			orientation(t_cub3d *uwu, t_ray *rays, int t);
+void			setup(t_cub3d *uwu);
+void			calculations(t_cub3d *uwu);
+void			draw(t_cub3d *uwu);
 
 // rc_h.c
 
-void		horizontal(t_cub3d *uwu);
-void		horizontal2(t_cub3d *uwu);
+void			horizontal(t_cub3d *uwu, t_ray *rays);
+void			horizontal2(t_cub3d *uwu, t_ray *rays);
 
 // rc_v.c
 
-void		vertical(t_cub3d *uwu);
-void		vertical2(t_cub3d *uwu);
+void			vertical(t_cub3d *uwu, t_ray *rays);
+void			vertical2(t_cub3d *uwu, t_ray *rays);
 
 // render.c
 
-void		init_img(t_cub3d *uwu);
-void		render(t_cub3d *uwu);
-void		render_player(t_cub3d *uwu);
-void		init_player(t_cub3d *uwu);
-void		init_map(t_cub3d *uwu);
+void			init_img(t_cub3d *uwu);
+void			render(t_cub3d *uwu);
+void			render_player(t_cub3d *uwu);
+void			init_player(t_cub3d *uwu);
+void			init_map(t_cub3d *uwu);
 
 // render2.c
 
@@ -320,17 +336,28 @@ int			is_transparent(char c);
 
 // textures.c
 
-int			load_textures2(t_textures *t);
-int			load_textures(t_textures *textures);
-void		delete_textures(t_textures *textures);
-int			pixel_to_color(mlx_texture_t *text, uint32_t x, uint32_t y);
+int				load_textures2(t_textures *t);
+int				load_textures(t_textures *textures);
+void			delete_textures(t_textures *textures);
+int				pixel_to_color(t_cub3d *uwu, uint32_t x, uint32_t y);
+mlx_texture_t	*texture_area_to_texture(mlx_texture_t *texture,
+					int xy[2], int wh[2]);
 
 // utils.c
 
-void		set_angle(t_cub3d *uwu, char c);
-int			is_player(char c);
-int			get_pp(t_cub3d *uwu);
-int			get_rgba(int r, int g, int b, int a);
-int			is_etranger_restrained(char c);
+void			set_angle(t_cub3d *uwu, char c);
+int				is_player(char c);
+int				get_pp(t_cub3d *uwu);
+int				get_rgba(int r, int g, int b, int a);
+int				is_etranger_restrained(char c);
+
+// weapon.c
+
+void			shoot(t_cub3d *uwu);
+void			weapon_next_image(t_cub3d *uwu);
+void			weapon_load(t_cub3d *uwu);
+void			one_ray(t_cub3d *uwu);
+
+void			draw_line(mlx_image_t *img, int x0, int y0, int x1, int y1, int color);
 
 #endif // CUB3D_H

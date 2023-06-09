@@ -64,6 +64,7 @@ void	init_(t_cub3d *uwu, char **av)
 	uwu->mlx = mlx_init(WINW, WINH, "cub3d", true);
 	if (load_textures(uwu->t) || load_textures2(uwu->t))
 		return (quit_program(uwu));
+	rick_load_texture(uwu);
 	mlx_set_cursor_mode(uwu->mlx, MLX_MOUSE_HIDDEN);
 }
 
@@ -82,6 +83,7 @@ int	main(int ac, char **av)
 	mlx_delete_texture(uwu->cross_text);
 	mlx_image_to_window(uwu->mlx, uwu->cross, WINW / 2 - uwu->cross->width / 2,
 		WINH / 2 - uwu->cross->height / 2);
+	weapon_load(uwu);
 	mlx_key_hook(uwu->mlx, &key_hook, uwu);
 	mlx_loop_hook(uwu->mlx, &controls_hook, uwu);
 	render(uwu);

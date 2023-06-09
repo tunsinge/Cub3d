@@ -51,7 +51,7 @@ void	raycaster(t_cub3d *uwu)
 		horizontal(uwu);
 		uwu->ray->is_door[1] = 0;
 		vertical(uwu);
-		orientation(uwu);
+		orientation(uwu, uwu->ray, 1);
 		setup(uwu);
 		calculations(uwu);
 		draw(uwu);
