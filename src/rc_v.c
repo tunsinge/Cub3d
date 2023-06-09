@@ -1,14 +1,4 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   rc_v.c                                             :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: ^@^ Foxan ^@^ <thibaut.unsinger@gmail.com  +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/06/08 09:24:58 by ^@^ Foxan ^@^     #+#    #+#             */
-/*   Updated: 2023/06/08 09:25:00 by ^@^ Foxan ^@^    ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
+
 
 #include "cub3d.h"
 
@@ -52,21 +42,14 @@ void	vertical2(t_cub3d *uwu, t_ray *rays)
 		n->my = (int)(n->ry) / uwu->map_s;
 		if (n->mx >= 0 && n->my >= 0 && n->mx < uwu->map_s_x
 			&& n->my < uwu->map_s_y
-			&& uwu->map[n->my][n->mx] > '0' && uwu->map[n->my][n->mx] < '9')
+			&& !is_transparent(uwu->map[n->my][n->mx]))
 		{
+			(void)0,n->vx = n->rx,n->vy = n->ry,n->dof = MAX_DOF;
 			rays->is_door[1] = (uwu->map[n->my][n->mx] == '4')
 				+ (uwu->map[n->my][n->mx] == '2') * 2;
-			n->vx = n->rx;
-			n->vy = n->ry;
 			n->dis_v = dist(n->px, n->py, n->vx, n->vy);
-			n->dof = MAX_DOF;
 		}
 		else
-		{
-			n->rx += n->xo;
-			n->ry += n->yo;
-			n->dis_v = 1000000;
-			n->dof++;
-		}
+			(void)0,n->rx += n->xo,n->ry += n->yo,n->dis_v=B,n->dof++;
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: mdoumi <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 12:16:49 by mdoumi            #+#    #+#             */
-/*   Updated: 2023/05/26 12:06:05 by mdoumi           ###   ########.fr       */
+/*   Updated: 2023/06/08 12:51:10 by mdoumi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ void	init_map(t_cub3d *uwu)
 		{
 			if (uwu->map[i][j] == '1')
 				fill_img(uwu, j * uwu->m_size, i * uwu->m_size, BLA);
-			else if (uwu->map[i][j] == '4')
+			else if (uwu->map[i][j] == '4' || uwu->map[i][j] == '3')
 				fill_img(uwu, j * uwu->m_size, i * uwu->m_size, YEL);
 			else if (!is_etranger(uwu->map[i][j]) && uwu->map[i][j] != '1')
 				fill_img(uwu, j * uwu->m_size, i * uwu->m_size, WHITR);

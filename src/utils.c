@@ -6,7 +6,7 @@
 /*   By: mdoumi <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 12:18:28 by mdoumi            #+#    #+#             */
-/*   Updated: 2023/05/18 15:04:49 by mdoumi           ###   ########.fr       */
+/*   Updated: 2023/06/08 12:55:01 by mdoumi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,8 @@ int	get_rgba(int r, int g, int b, int a)
 
 int	is_etranger_restrained(char c)
 {
-	if (c == '1' || c == '0' || c == 'N' || c == 'S' || c == 'E' || c == 'W' || c == '4')
+	if (c == '1' || c == '0' || c == 'N' || c == 'S' || c == 'E'
+		|| c == 'W' || c == '4' || c == '3')
 		return (0);
 	return (1);
 }

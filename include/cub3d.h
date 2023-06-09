@@ -6,7 +6,7 @@
 /*   By: mdoumi <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/02 17:01:31 by ^@^ Foxan ^       #+#    #+#             */
-/*   Updated: 2023/05/30 13:50:16 by mdoumi           ###   ########.fr       */
+/*   Updated: 2023/06/08 12:59:39 by mdoumi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@
 
 # define WINW 1440
 # define WINH 960
+# define B 1000000
 # define N_SPEED 0.0625
 # define S_SPEED 0.25
 
@@ -329,8 +330,9 @@ void			init_map(t_cub3d *uwu);
 
 // render2.c
 
-mlx_image_t		*fill(mlx_t *mlx, int w, int h, uint32_t color);
-void			fill_img(t_cub3d *uwu, int w, int h, uint32_t color);
+mlx_image_t	*fill(mlx_t *mlx, int w, int h, uint32_t color);
+void		fill_img(t_cub3d *uwu, int w, int h, uint32_t color);
+int			is_transparent(char c);
 
 // textures.c
 

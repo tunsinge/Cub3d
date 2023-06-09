@@ -6,7 +6,7 @@
 /*   By: mdoumi <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 20:41:06 by mdoumi            #+#    #+#             */
-/*   Updated: 2023/05/30 13:45:59 by mdoumi           ###   ########.fr       */
+/*   Updated: 2023/06/08 12:05:36 by mdoumi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,6 @@ void	init_(t_cub3d *uwu, char **av)
 	uwu->m_size = 256 / find_map_width(uwu);
 	uwu->m_size += (uwu->m_size < 1);
 	uwu->m_fix_size = uwu->m_size;
-	//uwu->p_size = uwu->m_fix_size / 4;
 	uwu->p_size = 1;
 	if (!uwu->map)
 		quit_program(uwu);

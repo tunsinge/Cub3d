@@ -6,7 +6,7 @@
 /*   By: mdoumi <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 19:28:46 by ^@^ Foxan ^       #+#    #+#             */
-/*   Updated: 2023/05/26 12:02:23 by mdoumi           ###   ########.fr       */
+/*   Updated: 2023/06/08 13:04:08 by mdoumi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,21 +52,15 @@ void	horizontal2(t_cub3d *uwu, t_ray *rays)
 		n->my = (int)(n->ry) / uwu->map_s;
 		if (n->mx >= 0 && n->my >= 0 && n->mx < uwu->map_s_x
 			&& n->my < uwu->map_s_y
-			&& uwu->map[n->my][n->mx] > '0' && uwu->map[n->my][n->mx] < '9')
+			&& !is_transparent(uwu->map[n->my][n->mx]))
 		{
+			(void)0, n->hx = n->rx, n->hy = n->ry;
 			rays->is_door[0] = (uwu->map[n->my][n->mx] == '4')
 				+ (uwu->map[n->my][n->mx] == '2') * 2;
-			n->hx = n->rx;
-			n->hy = n->ry;
 			n->dis_h = dist(n->px, n->py, n->hx, n->hy);
 			n->dof = MAX_DOF;
 		}
 		else
-		{
-			n->rx += n->xo;
-			n->ry += n->yo;
-			n->dis_h = 1000000;
-			n->dof++;
-		}
+			(void)0, n->rx += n->xo, n->ry += n->yo, n->dis_h = B, n->dof++;
 	}
 }

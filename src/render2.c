@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render2.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ^@^ Foxan ^@^ <thibaut.unsinger@gmail.com  +#+  +:+       +#+        */
+/*   By: mdoumi <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/22 19:16:33 by ^@^ Foxan ^@^     #+#    #+#             */
-/*   Updated: 2023/05/22 19:16:36 by ^@^ Foxan ^@^    ###   ########.fr       */
+/*   Created: 2023/05/22 19:16:33 by ^@^ Foxan ^       #+#    #+#             */
+/*   Updated: 2023/06/08 14:12:59 by mdoumi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,4 +49,12 @@ void	fill_img(t_cub3d *uwu, int w, int h, uint32_t color)
 		}
 		x++;
 	}
+}
+
+int	is_transparent(char c)
+{
+	if (c == '0' || c == '3' || c == 'N' || c == 'S'
+		|| c == 'E' || c == 'W')
+		return (1);
+	return (0);
 }

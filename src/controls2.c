@@ -6,7 +6,7 @@
 /*   By: mdoumi <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 20:42:55 by mdoumi            #+#    #+#             */
-/*   Updated: 2023/05/30 13:05:44 by mdoumi           ###   ########.fr       */
+/*   Updated: 2023/06/08 13:24:01 by mdoumi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,9 +106,14 @@ void	open_doors(t_cub3d *uwu)
 	float	nbx;
 	float	nby;
 
-	nbx = uwu->px + (uwu->ray->pdx) * uwu->speed;
-	nby = uwu->py + (uwu->ray->pdy) * uwu->speed;
+	nbx = uwu->px + uwu->ray->pdx * uwu->speed * 27;
+	nby = uwu->py + uwu->ray->pdy * uwu->speed * 27;
 	if (uwu->keys.key_e != 0)
+	{
 		if (uwu->map[(int)nby / uwu->map_s][(int)nbx / uwu->map_s] == '4')
-			uwu->map[(int)nby / uwu->map_s][(int)nbx / uwu->map_s] = '0';
+			uwu->map[(int)nby / uwu->map_s][(int)nbx / uwu->map_s] = '3';
+		else if (uwu->map[(int)nby / uwu->map_s][(int)nbx / uwu->map_s] == '3')
+			uwu->map[(int)nby / uwu->map_s][(int)nbx / uwu->map_s] = '4';
+		uwu->keys.key_e = 0;
+	}
 }
