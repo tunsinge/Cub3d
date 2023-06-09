@@ -18,11 +18,11 @@ void	rick_load_texture(t_cub3d *uwu)
 	int	wh[2];
 
 	uwu->t->current_x = 0;
-	uwu->t->rick_full = mlx_load_png("textures/texture.png");
+	uwu->t->rick_full = mlx_load_png("textures/texture2.png");
 	xy[0] = uwu->t->current_x;
 	xy[1] = 0;
-	wh[0] = 498;
-	wh[1] = 427;
+	wh[0] = 480;
+	wh[1] = 360;
 	uwu->t->rick_current = texture_area_to_texture(uwu->t->rick_full, xy, wh);
 }
 
@@ -33,17 +33,17 @@ void	rick_next(t_cub3d *uwu)
 	int			wh[2];
 
 	i++;
-	if (i < 3)
+	if (i < 6)
 		return ;
 	i = 0;
-	uwu->t->current_x += 498;
+	uwu->t->current_x += 480;
 	if (uwu->t->current_x > uwu->t->rick_full->width)
 		uwu->t->current_x = 0;
 	mlx_delete_texture(uwu->t->rick_current);
 	xy[0] = uwu->t->current_x;
 	xy[1] = 0;
-	wh[0] = 498;
-	wh[1] = 427;
+	wh[0] = 480;
+	wh[1] = 360;
 	uwu->t->rick_current = texture_area_to_texture(uwu->t->rick_full, xy, wh);
 }
 

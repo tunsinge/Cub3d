@@ -22,7 +22,7 @@ void	move_x(t_cub3d *uwu, float dx)
 		uwu->py += dx * uwu->speed;
 	else if (uwu->map[(int)uwu->py / uwu->map_s][(int)nb / uwu->map_s] == '1')
 		return ;
-	else if (uwu->map[(int)nb / uwu->map_s][(int)uwu->px / uwu->map_s] == '2')
+	else if (uwu->map[(int)uwu->py / uwu->map_s][(int)nb / uwu->map_s] == '2')
 		return ;
 	else if (uwu->map[(int)uwu->py / uwu->map_s][(int)nb / uwu->map_s] == '4')
 		return ;
