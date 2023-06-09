@@ -6,7 +6,7 @@
 /*   By: mdoumi <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/18 02:13:02 by mdoumi            #+#    #+#             */
-/*   Updated: 2023/06/08 11:26:15 by mdoumi           ###   ########.fr       */
+/*   Updated: 2023/06/09 14:13:42 by mdoumi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,9 +48,9 @@ void	raycaster(t_cub3d *uwu)
 	while (uwu->ray->r < uwu->ray->ray_nb)
 	{
 		uwu->ray->is_door[0] = 0;
-		horizontal(uwu);
+		horizontal(uwu, uwu->ray);
 		uwu->ray->is_door[1] = 0;
-		vertical(uwu);
+		vertical(uwu, uwu->ray);
 		orientation(uwu, uwu->ray, 1);
 		setup(uwu);
 		calculations(uwu);
