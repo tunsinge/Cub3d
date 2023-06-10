@@ -68,12 +68,14 @@ void	key_hook(mlx_key_data_t keydata, void *param)
 	set_key(keydata, KEY_ROTATE_RIGHT, &uwu->keys.key_r);
 	set_key(keydata, KEY_ZOOM_MAP, &uwu->keys.key_wi);
 	set_key(keydata, KEY_RUN, &uwu->keys.key_shift);
-	if (keydata.key == MLX_KEY_SPACE && keydata.action == MLX_PRESS
+	if (keydata.key == KEY_JUMP && keydata.action == MLX_PRESS
 		&& uwu->keys.key_jump == 0)
 		uwu->keys.key_jump = 1;
-	if (keydata.key == MLX_KEY_R && keydata.action == MLX_PRESS
+	if (keydata.key == KEY_SHOOT && keydata.action == MLX_PRESS
 		&& uwu->keys.key_shoot == 0)
 		uwu->keys.key_shoot = 1;
+	if (keydata.key == KEY_SWAP && keydata.action == MLX_PRESS)
+		change_weapon(uwu);
 }
 
 void	move(t_cub3d *uwu)

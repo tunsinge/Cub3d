@@ -55,6 +55,7 @@ SRCS			:=	./src/main.c \
 					./src/collisions.c \
 					./src/animation.c \
 					./src/weapon.c \
+					./src/weapon2.c \
 					./src/textures2.c
 INCLUDES		:= -I ./include -I /Users/$$USER/.brew/opt/glfw/include
 FLAGS			:= -Wall -Wextra -Werror -g -g3

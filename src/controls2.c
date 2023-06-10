@@ -110,6 +110,11 @@ void	open_doors(t_cub3d *uwu)
 	nby = uwu->py + uwu->ray->pdy * uwu->speed * 27;
 	if (uwu->keys.key_e != 0)
 	{
+		if ((int)nby / uwu->map_s >= uwu->map_s_y - 1
+			|| (int)nbx / uwu->map_s >= uwu->map_s_x - 1
+			|| (int)nby / uwu->map_s <= 0
+			|| (int)nbx / uwu->map_s <= 0)
+			return ;
 		if (uwu->map[(int)nby / uwu->map_s][(int)nbx / uwu->map_s] == '4')
 			uwu->map[(int)nby / uwu->map_s][(int)nbx / uwu->map_s] = '3';
 		else if (uwu->map[(int)nby / uwu->map_s][(int)nbx / uwu->map_s] == '3')

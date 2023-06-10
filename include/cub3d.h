@@ -72,6 +72,9 @@
 # define KEY_ROTATE_LEFT MLX_KEY_LEFT
 # define KEY_ZOOM_MAP MLX_KEY_LEFT_CONTROL
 # define KEY_RUN MLX_KEY_LEFT_SHIFT
+# define KEY_SWAP MLX_KEY_Q
+# define KEY_JUMP MLX_KEY_SPACE
+# define KEY_SHOOT MLX_KEY_R
 
 typedef struct s_rick
 {
@@ -100,6 +103,9 @@ typedef struct s_textures
 	uint32_t		weapon_current;
 	uint32_t		weapon_width;
 	uint32_t		weapon_height;
+	mlx_texture_t	*portal_text;
+	mlx_image_t		*portal_img;
+	int				current_weapon;
 	mlx_texture_t	*door_no;
 	mlx_texture_t	*door_so;
 	mlx_texture_t	*door_ea;
@@ -369,11 +375,16 @@ int				is_etranger_restrained(char c);
 
 // weapon.c
 
-void			shoot(t_cub3d *uwu);
-void			weapon_next_image(t_cub3d *uwu);
+void			load_weapons(t_cub3d *uwu);
 void			weapon_load(t_cub3d *uwu);
+void			weapon_next_image(t_cub3d *uwu);
+void			shoot(t_cub3d *uwu);
 void			one_ray(t_cub3d *uwu);
 
-void			draw_line(mlx_image_t *img, int x0, int y0, int x1, int y1, int color);
+// weapon2.c
+
+void			portal_load(t_cub3d *uwu);
+void			display_weapon(t_cub3d *uwu);
+void			change_weapon(t_cub3d *uwu);
 
 #endif // CUB3D_H

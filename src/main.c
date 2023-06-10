@@ -81,7 +81,7 @@ int	main(int ac, char **av)
 	mlx_delete_texture(uwu->cross_text);
 	mlx_image_to_window(uwu->mlx, uwu->cross, WINW / 2 - uwu->cross->width / 2,
 		WINH / 2 - uwu->cross->height / 2);
-	weapon_load(uwu);
+	load_weapons(uwu);
 	mlx_key_hook(uwu->mlx, &key_hook, uwu);
 	mlx_loop_hook(uwu->mlx, &controls_hook, uwu);
 	render(uwu);
