@@ -15,6 +15,7 @@
 static void	first_init(t_cub3d *uwu)
 {
 	uwu->t = malloc(sizeof(t_textures));
+	rick_init(uwu);
 	uwu->t->t_no = NULL;
 	uwu->t->t_so = NULL;
 	uwu->t->t_we = NULL;
@@ -64,7 +65,6 @@ void	init_(t_cub3d *uwu, char **av)
 	uwu->mlx = mlx_init(WINW, WINH, "cub3d", true);
 	if (load_textures(uwu->t) || load_textures2(uwu->t))
 		return (quit_program(uwu));
-	rick_init(uwu);
 	mlx_set_cursor_mode(uwu->mlx, MLX_MOUSE_HIDDEN);
 }
 

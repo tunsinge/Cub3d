@@ -73,9 +73,12 @@ void	rick_delete(t_cub3d *uwu)
 	while (i < uwu->rick_nb)
 	{
 		cu_rick = uwu->ricks[i];
-		mlx_delete_texture(cu_rick->full);
-		mlx_delete_texture(cu_rick->current);
-		free(cu_rick);
+		if (cu_rick && cu_rick->full)
+			mlx_delete_texture(cu_rick->full);
+		if (cu_rick && cu_rick->current)
+			mlx_delete_texture(cu_rick->current);
+		if (cu_rick)
+			free(cu_rick);
 		i++;
 	}
 }
