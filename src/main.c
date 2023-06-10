@@ -45,7 +45,7 @@ void	init_(t_cub3d *uwu, char **av)
 {
 	first_init(uwu);
 	if (check_map_path(av))
-		quit_program(uwu, 0);
+		quit_program(uwu, 1);
 	uwu->map = parse_map(uwu, av[1]);
 	if (!uwu->map || !uwu->map[0])
 		(error(INVALID_LINE), quit_program(uwu, 1));
@@ -57,14 +57,14 @@ void	init_(t_cub3d *uwu, char **av)
 	uwu->m_fix_size = uwu->m_size;
 	uwu->p_size = 1;
 	if (check_map(uwu->map) || !check_map_closed(uwu))
-		quit_program(uwu, 0);
+		quit_program(uwu, 1);
 	fill_map(uwu);
 	uwu->p_color = CYA;
 	if (get_pp(uwu))
-		quit_program(uwu, 0);
+		quit_program(uwu, 1);
 	uwu->mlx = mlx_init(WINW, WINH, "cub3d", true);
 	if (load_textures(uwu->t) || load_textures2(uwu->t))
-		return (quit_program(uwu, 0));
+		return (quit_program(uwu, 1));
 	mlx_set_cursor_mode(uwu->mlx, MLX_MOUSE_HIDDEN);
 }
 
@@ -88,5 +88,5 @@ int	main(int ac, char **av)
 	mlx_loop_hook(uwu->mlx, &controls_hook, uwu);
 	render(uwu);
 	mlx_loop(uwu->mlx);
-	quit_program(uwu, 0);
+	quit_program(uwu, 1);
 }

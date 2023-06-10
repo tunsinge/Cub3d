@@ -45,9 +45,9 @@ int	store_color(t_cub3d *uwu, char **fields)
 
 	color = ft_split(fields[1], ',');
 	if (ft_strrlen(color) != 3)
-		return (error(INVALID_COLOR_FORMAT), quit_program(uwu, 0), 1);
+		return (error(INVALID_COLOR_FORMAT), quit_program(uwu, 1), 1);
 	if (!is_num(color[0]) || !is_num(color[1]) || !is_num(color[2]))
-		return (error(INVALID_COLOR_RGB_VALUE), quit_program(uwu, 0), 1);
+		return (error(INVALID_COLOR_RGB_VALUE), quit_program(uwu, 1), 1);
 	if (ft_strcmp(fields[0], "F") == 0 && !uwu->t->fl)
 		uwu->t->fl = get_rgba(ft_atoi(color[0]), ft_atoi(color[1]),
 				ft_atoi(color[2]), 255);
@@ -57,7 +57,7 @@ int	store_color(t_cub3d *uwu, char **fields)
 	else
 	{
 		free_s(color);
-		return (error(INVALID_TEXTURES_CODE), quit_program(uwu, 0), 1);
+		return (error(INVALID_TEXTURES_CODE), quit_program(uwu, 1), 1);
 	}
 	free_s(color);
 	return (0);
