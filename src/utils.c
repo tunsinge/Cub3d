@@ -35,27 +35,28 @@ int	get_pp(t_cub3d *uwu)
 {
 	int	i;
 	int	j;
+	int	k;
 
-	i = 0;
-	uwu->px = -1;
-	uwu->py = -1;
-	while (uwu->map[i])
+	i = -1;
+	k = 0;
+	while (uwu->map[++i])
 	{
-		j = 0;
-		while (uwu->map[i][j])
+		j = -1;
+		while (uwu->map[i][++j])
 		{
 			if (is_player(uwu->map[i][j]))
 			{
 				set_angle(uwu, uwu->map[i][j]);
 				uwu->px = j;
 				uwu->py = i;
+				k++;
 			}
-			j++;
 		}
-		i++;
 	}
-	if (uwu->px == -1 || uwu->py == -1)
+	if (k < 1)
 		return (error(NO_START_ERROR), 1);
+	else if (k > 1)
+		return (error(MUL_START_ERROR), 1);
 	return (0);
 }
 

@@ -12,37 +12,6 @@
 
 #include "cub3d.h"
 
-void	pick_textures(t_cub3d *uwu, int egal, int type)
-{
-	if (type == 1)
-	{
-		if (uwu->ray->is_door[1] == 2)
-			uwu->ray->t = uwu->ricks[0]->current;
-		else if (uwu->ray->is_door[1] == 1 && egal)
-			uwu->ray->t = uwu->t->door_we;
-		else if (uwu->ray->is_door[1] == 1)
-			uwu->ray->t = uwu->t->door_ea;
-		else if (egal)
-			uwu->ray->t = uwu->t->text_we;
-		else
-			uwu->ray->t = uwu->t->text_ea;
-	}
-	else
-	{
-		if (uwu->ray->is_door[0] == 2)
-			uwu->ray->t = uwu->ricks[1]->current;
-		else if (uwu->ray->is_door[0] == 1 && egal)
-			uwu->ray->t = uwu->t->door_no;
-		else if (uwu->ray->is_door[0] == 1)
-			uwu->ray->t = uwu->t->door_so;
-		else if (egal)
-			uwu->ray->t = uwu->t->text_no;
-		else
-			uwu->ray->t = uwu->t->text_so;
-	}
-	set_texture_size(uwu);
-}
-
 void	orientation(t_cub3d *uwu, t_ray *rays, int t)
 {
 	rays->shade = 1;

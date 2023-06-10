@@ -64,8 +64,18 @@ void	rick_next(t_cub3d *uwu)
 	}
 }
 
-void	set_texture_size(t_cub3d *uwu)
+void	rick_delete(t_cub3d *uwu)
 {
-	uwu->ray->sext = uwu->ray->t->width;
-	uwu->ray->seyt = uwu->ray->t->height;
+	int		i;
+	t_rick	*cu_rick;
+
+	i = 0;
+	while (i < uwu->rick_nb)
+	{
+		cu_rick = uwu->ricks[i];
+		mlx_delete_texture(cu_rick->full);
+		mlx_delete_texture(cu_rick->current);
+		free(cu_rick);
+		i++;
+	}
 }

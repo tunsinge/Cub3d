@@ -59,6 +59,7 @@
 # define INVALID_TEXTURE_FORMAT "Error\nInvalid texture format\n"
 # define INVALID_PATH "Error\nMap is not valid. It must end with .cub.\n"
 # define NO_START_ERROR "Error\nNo start for the player in the map\n"
+# define MUL_START_ERROR "Error\nMultiple starts for the player in the map\n"
 # define LOADING_TEXTURE_ERROR "Error\nError while trying to load a texture\n"
 # define FILE_EMPTY "Error\nError file is empty\n"
 
@@ -206,7 +207,7 @@ typedef struct s_cub3d
 void			rick_init(t_cub3d *uwu);
 void			rick_next(t_cub3d *uwu);
 t_rick			*rick_load_texture(char *path, int width, int height);
-void			set_texture_size(t_cub3d *uwu);
+void			rick_delete(t_cub3d *uwu);
 
 // check_map.c
 
@@ -351,6 +352,12 @@ void			delete_textures(t_textures *textures);
 int				pixel_to_color(t_cub3d *uwu, uint32_t x, uint32_t y);
 mlx_texture_t	*texture_area_to_texture(mlx_texture_t *texture,
 					int xy[2], int wh[2]);
+
+// textures2.c
+
+void			set_texture_size(t_cub3d *uwu);
+void			pick_textures(t_cub3d *uwu, int egal, int type);
+void			pick_textures2(t_cub3d *uwu, int egal);
 
 // utils.c
 

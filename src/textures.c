@@ -12,23 +12,6 @@
 
 #include "cub3d.h"
 
-int	load_textures2(t_textures *t)
-{
-	t->door_no = mlx_load_png("./textures/door_no.png");
-	if (!t->text_no)
-		return (error(LOADING_TEXTURE_ERROR), 1);
-	t->door_so = mlx_load_png("./textures/door_so.png");
-	if (!t->text_so)
-		return (error(LOADING_TEXTURE_ERROR), 1);
-	t->door_ea = mlx_load_png("./textures/door_ea.png");
-	if (!t->text_ea)
-		return (error(LOADING_TEXTURE_ERROR), 1);
-	t->door_we = mlx_load_png("./textures/door_we.png");
-	if (!t->text_we)
-		return (error(LOADING_TEXTURE_ERROR), 1);
-	return (0);
-}
-
 int	load_textures(t_textures *t)
 {
 	t->text_no = mlx_load_png(t->t_no);
@@ -41,6 +24,23 @@ int	load_textures(t_textures *t)
 	if (!t->text_ea)
 		return (error(LOADING_TEXTURE_ERROR), 1);
 	t->text_we = mlx_load_png(t->t_we);
+	if (!t->text_we)
+		return (error(LOADING_TEXTURE_ERROR), 1);
+	return (0);
+}
+
+int	load_textures2(t_textures *t)
+{
+	t->door_no = mlx_load_png("./textures/door_no.png");
+	if (!t->text_no)
+		return (error(LOADING_TEXTURE_ERROR), 1);
+	t->door_so = mlx_load_png("./textures/door_so.png");
+	if (!t->text_so)
+		return (error(LOADING_TEXTURE_ERROR), 1);
+	t->door_ea = mlx_load_png("./textures/door_ea.png");
+	if (!t->text_ea)
+		return (error(LOADING_TEXTURE_ERROR), 1);
+	t->door_we = mlx_load_png("./textures/door_we.png");
 	if (!t->text_we)
 		return (error(LOADING_TEXTURE_ERROR), 1);
 	return (0);

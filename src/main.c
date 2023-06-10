@@ -53,8 +53,6 @@ void	init_(t_cub3d *uwu, char **av)
 	uwu->m_size += (uwu->m_size < 1);
 	uwu->m_fix_size = uwu->m_size;
 	uwu->p_size = 1;
-	if (!uwu->map)
-		quit_program(uwu);
 	if (check_map(uwu->map) || !check_map_closed(uwu))
 		quit_program(uwu);
 	fill_map(uwu);

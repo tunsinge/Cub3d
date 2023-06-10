@@ -55,6 +55,8 @@ void	shoot(t_cub3d *uwu)
 
 	if (uwu->keys.key_shoot)
 	{
+		mlx_delete_image(uwu->mlx, uwu->map_img);
+		init_map(uwu);
 		if (!s)
 			one_ray(uwu);
 		s = 1;
