@@ -16,6 +16,7 @@ void	quit_program(t_cub3d *uwu)
 {
 	delete_textures(uwu->t);
 	rick_delete(uwu);
+	delete_weapons(uwu);
 	if (uwu->t->t_ea)
 		free(uwu->t->t_ea);
 	if (uwu->t->t_no)

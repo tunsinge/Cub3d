@@ -386,5 +386,6 @@ void			one_ray(t_cub3d *uwu);
 void			portal_load(t_cub3d *uwu);
 void			display_weapon(t_cub3d *uwu);
 void			change_weapon(t_cub3d *uwu);
+void			delete_weapons(t_cub3d *uwu);
 
 #endif // CUB3D_H
