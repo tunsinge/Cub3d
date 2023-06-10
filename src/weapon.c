@@ -58,7 +58,7 @@ void	shoot(t_cub3d *uwu)
 		if (!s)
 			one_ray(uwu);
 		s = 1;
-		if (i != 2)
+		if (i != 1)
 			return ((void)i++);
 		i = 0;
 		if (uwu->t->weapon_current <= uwu->t->weapon_text->width)

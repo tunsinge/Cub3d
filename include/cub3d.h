@@ -72,6 +72,16 @@
 # define KEY_ZOOM_MAP MLX_KEY_LEFT_CONTROL
 # define KEY_RUN MLX_KEY_LEFT_SHIFT
 
+typedef struct s_rick
+{
+	int				f_width;
+	int				f_height;
+	int				f_wh[2];
+	uint32_t		f_nb;
+	mlx_texture_t	*full;
+	mlx_texture_t	*current;
+}	t_rick;
+
 typedef struct s_textures
 {
 	char			*t_no;
@@ -84,9 +94,6 @@ typedef struct s_textures
 	mlx_texture_t	*text_so;
 	mlx_texture_t	*text_ea;
 	mlx_texture_t	*text_we;
-	mlx_texture_t	*rick_full;
-	mlx_texture_t	*rick_current;
-	uint32_t		current_x;
 	mlx_texture_t	*weapon_text;
 	mlx_image_t		*weapon_img;
 	uint32_t		weapon_current;
@@ -190,13 +197,15 @@ typedef struct s_cub3d
 	t_ray			*ray;
 	t_keys			keys;
 	mlx_t			*mlx;
+	t_rick			*ricks[2];
+	int				rick_nb;
 }	t_cub3d;
 
 // animations.c
 
-int				rick_pixel_to_color(t_cub3d *uwu, uint32_t x, uint32_t y);
+void			rick_init(t_cub3d *uwu);
 void			rick_next(t_cub3d *uwu);
-void			rick_load_texture(t_cub3d *uwu);
+t_rick			*rick_load_texture(char *path, int width, int height);
 void			set_texture_size(t_cub3d *uwu);
 
 // check_map.c

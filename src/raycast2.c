@@ -17,7 +17,7 @@ void	pick_textures(t_cub3d *uwu, int egal, int type)
 	if (type == 1)
 	{
 		if (uwu->ray->is_door[1] == 2)
-			uwu->ray->t = uwu->t->rick_current;
+			uwu->ray->t = uwu->ricks[0]->current;
 		else if (uwu->ray->is_door[1] == 1 && egal)
 			uwu->ray->t = uwu->t->door_we;
 		else if (uwu->ray->is_door[1] == 1)
@@ -30,7 +30,7 @@ void	pick_textures(t_cub3d *uwu, int egal, int type)
 	else
 	{
 		if (uwu->ray->is_door[0] == 2)
-			uwu->ray->t = uwu->t->rick_current;
+			uwu->ray->t = uwu->ricks[1]->current;
 		else if (uwu->ray->is_door[0] == 1 && egal)
 			uwu->ray->t = uwu->t->door_no;
 		else if (uwu->ray->is_door[0] == 1)
