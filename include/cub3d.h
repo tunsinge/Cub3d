@@ -330,9 +330,9 @@ void			init_map(t_cub3d *uwu);
 
 // render2.c
 
-mlx_image_t	*fill(mlx_t *mlx, int w, int h, uint32_t color);
-void		fill_img(t_cub3d *uwu, int w, int h, uint32_t color);
-int			is_transparent(char c);
+mlx_image_t		*fill(mlx_t *mlx, int w, int h, uint32_t color);
+void			fill_img(t_cub3d *uwu, int w, int h, uint32_t color);
+int				is_transparent(char c);
 
 // textures.c
 
