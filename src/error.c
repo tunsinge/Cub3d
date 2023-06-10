@@ -14,6 +14,6 @@
 
 void	*error(char *code)
 {
-	write(1, code, ft_strlen(code));
+	write(2, code, ft_strlen(code));
 	return (NULL);
 }
