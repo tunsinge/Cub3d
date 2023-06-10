@@ -27,6 +27,8 @@ static void	first_init(t_cub3d *uwu)
 	uwu->t->door_ea = NULL;
 	uwu->t->door_so = NULL;
 	uwu->t->door_we = NULL;
+	uwu->t->weapon_text = NULL;
+	uwu->t->portal_text = NULL;
 	uwu->ray = malloc(sizeof(t_ray));
 	uwu->map = NULL;
 	uwu->t->fl = 0;
