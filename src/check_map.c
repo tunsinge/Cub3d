@@ -78,7 +78,7 @@ int	check_map_closed(t_cub3d *uwu)
 					|| is_etranger_restrained(uwu->map[i - 1][j])
 					|| is_etranger_restrained(uwu->map[i][j + 1])
 					|| is_etranger_restrained(uwu->map[i][j - 1]))
-					return (error(NOT_CLOSED_MAP), quit_program(uwu), 0);
+					return (error(NOT_CLOSED_MAP), quit_program(uwu, 1), 0);
 			}
 		}
 	}

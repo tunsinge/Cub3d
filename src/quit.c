@@ -12,7 +12,7 @@
 
 #include "cub3d.h"
 
-void	quit_program(t_cub3d *uwu)
+void	quit_program(t_cub3d *uwu, int err)
 {
 	delete_textures(uwu->t);
 	rick_delete(uwu);
@@ -32,5 +32,5 @@ void	quit_program(t_cub3d *uwu)
 	if (uwu->mlx)
 		mlx_terminate(uwu->mlx);
 	free(uwu);
-	exit(0);
+	exit(err);
 }

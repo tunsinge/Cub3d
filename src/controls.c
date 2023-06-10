@@ -58,7 +58,7 @@ void	key_hook(mlx_key_data_t keydata, void *param)
 
 	uwu = param;
 	if (keydata.key == MLX_KEY_ESCAPE)
-		quit_program(uwu);
+		quit_program(uwu, 0);
 	set_key(keydata, KEY_FORWARD, &uwu->keys.key_w);
 	set_key(keydata, KEY_BACKWARD, &uwu->keys.key_s);
 	set_key(keydata, KEY_STRAF_RIGHT, &uwu->keys.key_d);

@@ -310,7 +310,7 @@ int				parse_textures(t_cub3d *uwu, int fd);
 
 // quit.c
 
-void			quit_program(t_cub3d *uwu);
+void			quit_program(t_cub3d *uwu, int err);
 
 // raycast.c
 

@@ -69,13 +69,13 @@ int	parse_textures(t_cub3d *uwu, int fd)
 	{
 		line = get_next_line(fd);
 		if (!line)
-			return (error(INVALID_LINE), quit_program(uwu), 1);
+			return (error(INVALID_LINE), quit_program(uwu, 0), 1);
 		if (line[0] != '\n')
 		{
 			line_nonl = ft_strdupnonl(line);
 			fields = ft_split(line_nonl, ' ');
 			if (ft_strrlen(fields) != 2)
-				return (error(INVALID_LINE), quit_program(uwu), 1);
+				return (error(INVALID_LINE), quit_program(uwu, 0), 1);
 			if (store_texture(uwu, fields))
 				return (1);
 			nb_parsed++;
