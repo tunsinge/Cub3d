@@ -6,7 +6,7 @@
 /*   By: mdoumi <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 20:41:06 by mdoumi            #+#    #+#             */
-/*   Updated: 2023/06/08 12:05:36 by mdoumi           ###   ########.fr       */
+/*   Updated: 2023/06/10 14:23:01 by mdoumi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,5 +88,5 @@ int	main(int ac, char **av)
 	mlx_loop_hook(uwu->mlx, &controls_hook, uwu);
 	render(uwu);
 	mlx_loop(uwu->mlx);
-	quit_program(uwu, 1);
+	quit_program(uwu, 0);
 }

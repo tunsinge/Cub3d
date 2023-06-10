@@ -6,7 +6,7 @@
 /*   By: mdoumi <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/02 18:56:18 by mdoumi            #+#    #+#             */
-/*   Updated: 2023/05/30 13:35:22 by mdoumi           ###   ########.fr       */
+/*   Updated: 2023/06/10 14:22:47 by mdoumi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 void	quit_program(t_cub3d *uwu, int err)
 {
+	(void)err;
 	delete_textures(uwu->t);
 	rick_delete(uwu);
 	delete_weapons(uwu);
