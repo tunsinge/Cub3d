@@ -66,16 +66,41 @@ void	delete_textures(t_textures *t)
 		mlx_delete_texture(t->door_we);
 }
 
-int	pixel_to_color(mlx_texture_t *text, uint32_t x, uint32_t y)
+int	pixel_to_color(t_cub3d *uwu, uint32_t x, uint32_t y)
 {
 	uint8_t		*pixel;
 	uint32_t	color;
 
-	if (!text)
+	if (!uwu->ray->t)
 		return (0x000000FF);
-	if (x > text->width || y > text->height)
+	if (x > uwu->ray->t->width || y > uwu->ray->t->height)
 		return (0x000000FF);
-	pixel = &text->pixels[(y * text->width + x) * text->bytes_per_pixel];
+	pixel = &uwu->ray->t->pixels[(y * uwu->ray->t->width + x)
+		* uwu->ray->t->bytes_per_pixel];
 	color = (pixel[0] << 24) + (pixel[1] << 16) + (pixel[2] << 8) + pixel[3];
 	return (color);
+}
+
+mlx_texture_t	*texture_area_to_texture(mlx_texture_t *texture,
+			int xy[2], int wh[2])
+{
+	mlx_texture_t	*new_texture;
+	int				x;
+	int				y;
+
+	new_texture = malloc(sizeof(mlx_texture_t));
+	new_texture->width = wh[0];
+	new_texture->height = wh[1];
+	new_texture->bytes_per_pixel = 4;
+	new_texture->pixels = malloc(4 * wh[0] * wh[1] * sizeof(uint8_t));
+	y = -1;
+	(void)xy, (void)texture;
+	while (++y < wh[1])
+	{
+		x = -1;
+		while (++x < 4 * wh[0])
+			new_texture->pixels[y * wh[0] * 4 + x] = texture->pixels[xy[0] * 4
+				+ (xy[1] + y * texture->width * 4) + x];
+	}
+	return (new_texture);
 }

@@ -22,6 +22,8 @@ void	move_x(t_cub3d *uwu, float dx)
 		uwu->py += dx * uwu->speed;
 	else if (uwu->map[(int)uwu->py / uwu->map_s][(int)nb / uwu->map_s] == '1')
 		return ;
+	else if (uwu->map[(int)uwu->py / uwu->map_s][(int)nb / uwu->map_s] == '2')
+		return ;
 	else if (uwu->map[(int)uwu->py / uwu->map_s][(int)nb / uwu->map_s] == '4')
 		return ;
 	uwu->px += dx * uwu->speed;
@@ -36,6 +38,8 @@ void	move_y(t_cub3d *uwu, float dy)
 		|| uwu->px / uwu->map_s < 0 || uwu->px / uwu->map_s >= uwu->map_s_x)
 		uwu->py += dy * uwu->speed;
 	else if (uwu->map[(int)nb / uwu->map_s][(int)uwu->px / uwu->map_s] == '1')
+		return ;
+	else if (uwu->map[(int)nb / uwu->map_s][(int)uwu->px / uwu->map_s] == '2')
 		return ;
 	else if (uwu->map[(int)nb / uwu->map_s][(int)uwu->px / uwu->map_s] == '4')
 		return ;
