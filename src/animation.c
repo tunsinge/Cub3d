@@ -12,43 +12,70 @@
 
 #include "cub3d.h"
 
-void	rick_load_texture(t_cub3d *uwu)
+void	rick_init(t_cub3d *uwu)
 {
-	int	xy[2];
-	int	wh[2];
+	uwu->rick_nb = 2;
+	uwu->ricks[0] = rick_load_texture("textures/texture.png", 498, 427);
+	uwu->ricks[1] = rick_load_texture("textures/texture2.png", 480, 360);
+}
 
-	uwu->t->current_x = 0;
-	uwu->t->rick_full = mlx_load_png("textures/texture2.png");
-	xy[0] = uwu->t->current_x;
+t_rick	*rick_load_texture(char *path, int width, int height)
+{
+	t_rick	*rick;
+	int		xy[2];
+
+	rick = malloc(sizeof(t_rick));
+	rick->f_nb = 0;
+	rick->f_width = width;
+	rick->f_height = height;
+	rick->f_wh[0] = width;
+	rick->f_wh[1] = height;
+	rick->full = mlx_load_png(path);
+	xy[0] = 0;
 	xy[1] = 0;
-	wh[0] = 480;
-	wh[1] = 360;
-	uwu->t->rick_current = texture_area_to_texture(uwu->t->rick_full, xy, wh);
+	rick->current = texture_area_to_texture(rick->full, xy, rick->f_wh);
+	return (rick);
 }
 
 void	rick_next(t_cub3d *uwu)
 {
 	static int	i = 0;
+	int			j;
 	int			xy[2];
-	int			wh[2];
+	t_rick		*cu_rick;
 
 	i++;
-	if (i < 6)
+	if (i < 3)
 		return ;
 	i = 0;
-	uwu->t->current_x += 480;
-	if (uwu->t->current_x > uwu->t->rick_full->width)
-		uwu->t->current_x = 0;
-	mlx_delete_texture(uwu->t->rick_current);
-	xy[0] = uwu->t->current_x;
-	xy[1] = 0;
-	wh[0] = 480;
-	wh[1] = 360;
-	uwu->t->rick_current = texture_area_to_texture(uwu->t->rick_full, xy, wh);
+	j = 0;
+	while (j < uwu->rick_nb)
+	{
+		cu_rick = uwu->ricks[j];
+		cu_rick->f_nb += cu_rick->f_width;
+		if (cu_rick->f_nb > cu_rick->full->width)
+			cu_rick->f_nb = 0;
+		mlx_delete_texture(cu_rick->current);
+		xy[0] = cu_rick->f_nb;
+		xy[1] = 0;
+		cu_rick->current = texture_area_to_texture(cu_rick->full,
+				xy, cu_rick->f_wh);
+		j++;
+	}
 }
 
-void	set_texture_size(t_cub3d *uwu)
+void	rick_delete(t_cub3d *uwu)
 {
-	uwu->ray->sext = uwu->ray->t->width;
-	uwu->ray->seyt = uwu->ray->t->height;
+	int		i;
+	t_rick	*cu_rick;
+
+	i = 0;
+	while (i < uwu->rick_nb)
+	{
+		cu_rick = uwu->ricks[i];
+		mlx_delete_texture(cu_rick->full);
+		mlx_delete_texture(cu_rick->current);
+		free(cu_rick);
+		i++;
+	}
 }

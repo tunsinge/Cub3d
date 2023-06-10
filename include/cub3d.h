@@ -59,6 +59,7 @@
 # define INVALID_TEXTURE_FORMAT "Error\nInvalid texture format\n"
 # define INVALID_PATH "Error\nMap is not valid. It must end with .cub.\n"
 # define NO_START_ERROR "Error\nNo start for the player in the map\n"
+# define MUL_START_ERROR "Error\nMultiple starts for the player in the map\n"
 # define LOADING_TEXTURE_ERROR "Error\nError while trying to load a texture\n"
 # define FILE_EMPTY "Error\nError file is empty\n"
 
@@ -71,6 +72,19 @@
 # define KEY_ROTATE_LEFT MLX_KEY_LEFT
 # define KEY_ZOOM_MAP MLX_KEY_LEFT_CONTROL
 # define KEY_RUN MLX_KEY_LEFT_SHIFT
+# define KEY_SWAP MLX_KEY_Q
+# define KEY_JUMP MLX_KEY_SPACE
+# define KEY_SHOOT MLX_KEY_R
+
+typedef struct s_rick
+{
+	int				f_width;
+	int				f_height;
+	int				f_wh[2];
+	uint32_t		f_nb;
+	mlx_texture_t	*full;
+	mlx_texture_t	*current;
+}	t_rick;
 
 typedef struct s_textures
 {
@@ -84,14 +98,14 @@ typedef struct s_textures
 	mlx_texture_t	*text_so;
 	mlx_texture_t	*text_ea;
 	mlx_texture_t	*text_we;
-	mlx_texture_t	*rick_full;
-	mlx_texture_t	*rick_current;
-	uint32_t		current_x;
 	mlx_texture_t	*weapon_text;
 	mlx_image_t		*weapon_img;
 	uint32_t		weapon_current;
 	uint32_t		weapon_width;
 	uint32_t		weapon_height;
+	mlx_texture_t	*portal_text;
+	mlx_image_t		*portal_img;
+	int				current_weapon;
 	mlx_texture_t	*door_no;
 	mlx_texture_t	*door_so;
 	mlx_texture_t	*door_ea;
@@ -190,14 +204,16 @@ typedef struct s_cub3d
 	t_ray			*ray;
 	t_keys			keys;
 	mlx_t			*mlx;
+	t_rick			*ricks[2];
+	int				rick_nb;
 }	t_cub3d;
 
 // animations.c
 
-int				rick_pixel_to_color(t_cub3d *uwu, uint32_t x, uint32_t y);
+void			rick_init(t_cub3d *uwu);
 void			rick_next(t_cub3d *uwu);
-void			rick_load_texture(t_cub3d *uwu);
-void			set_texture_size(t_cub3d *uwu);
+t_rick			*rick_load_texture(char *path, int width, int height);
+void			rick_delete(t_cub3d *uwu);
 
 // check_map.c
 
@@ -343,6 +359,12 @@ int				pixel_to_color(t_cub3d *uwu, uint32_t x, uint32_t y);
 mlx_texture_t	*texture_area_to_texture(mlx_texture_t *texture,
 					int xy[2], int wh[2]);
 
+// textures2.c
+
+void			set_texture_size(t_cub3d *uwu);
+void			pick_textures(t_cub3d *uwu, int egal, int type);
+void			pick_textures2(t_cub3d *uwu, int egal);
+
 // utils.c
 
 void			set_angle(t_cub3d *uwu, char c);
@@ -353,11 +375,16 @@ int				is_etranger_restrained(char c);
 
 // weapon.c
 
-void			shoot(t_cub3d *uwu);
-void			weapon_next_image(t_cub3d *uwu);
+void			load_weapons(t_cub3d *uwu);
 void			weapon_load(t_cub3d *uwu);
+void			weapon_next_image(t_cub3d *uwu);
+void			shoot(t_cub3d *uwu);
 void			one_ray(t_cub3d *uwu);
 
-void			draw_line(mlx_image_t *img, int x0, int y0, int x1, int y1, int color);
+// weapon2.c
+
+void			portal_load(t_cub3d *uwu);
+void			display_weapon(t_cub3d *uwu);
+void			change_weapon(t_cub3d *uwu);
 
 #endif // CUB3D_H

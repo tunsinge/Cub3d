@@ -12,6 +12,14 @@
 
 #include "cub3d.h"
 
+void	load_weapons(t_cub3d *uwu)
+{
+	uwu->t->current_weapon = 2;
+	weapon_load(uwu);
+	portal_load(uwu);
+	display_weapon(uwu);
+}
+
 void	weapon_load(t_cub3d *uwu)
 {
 	uint32_t	xy[2];
@@ -27,8 +35,6 @@ void	weapon_load(t_cub3d *uwu)
 	wh[1] = uwu->t->weapon_height;
 	uwu->t->weapon_img = mlx_texture_area_to_image(uwu->mlx,
 			uwu->t->weapon_text, xy, wh);
-	mlx_image_to_window(uwu->mlx, uwu->t->weapon_img,
-		WINW - wh[0] - 250, WINH - wh[1]);
 }
 
 void	weapon_next_image(t_cub3d *uwu)
@@ -40,12 +46,12 @@ void	weapon_next_image(t_cub3d *uwu)
 	xy[1] = 0;
 	wh[0] = uwu->t->weapon_width;
 	wh[1] = uwu->t->weapon_height;
-	mlx_delete_image(uwu->mlx, uwu->t->weapon_img);
+	if (uwu->t->weapon_img)
+		mlx_delete_image(uwu->mlx, uwu->t->weapon_img);
 	uwu->t->weapon_img = mlx_texture_area_to_image(uwu->mlx,
 			uwu->t->weapon_text, xy, wh);
-	mlx_image_to_window(uwu->mlx, uwu->t->weapon_img,
-		WINW - wh[0] - 250, WINH - wh[1]);
 	uwu->t->weapon_current += uwu->t->weapon_width;
+	display_weapon(uwu);
 }
 
 void	shoot(t_cub3d *uwu)
@@ -58,7 +64,7 @@ void	shoot(t_cub3d *uwu)
 		if (!s)
 			one_ray(uwu);
 		s = 1;
-		if (i != 2)
+		if (i != 1)
 			return ((void)i++);
 		i = 0;
 		if (uwu->t->weapon_current <= uwu->t->weapon_text->width)
@@ -69,6 +75,8 @@ void	shoot(t_cub3d *uwu)
 			uwu->t->weapon_current = 0;
 			s = 0;
 		}
+		mlx_delete_image(uwu->mlx, uwu->map_img);
+		init_map(uwu);
 	}
 }
 
@@ -94,5 +102,5 @@ void	one_ray(t_cub3d *uwu)
 	orientation(uwu, &rays, 0);
 	x = (int)(rays.rx) / uwu->map_s;
 	y = (int)(rays.ry) / uwu->map_s;
-	uwu->map[y][x] = '2';
+	uwu->map[y][x] = '0' + uwu->t->current_weapon;
 }

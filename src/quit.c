@@ -15,6 +15,7 @@
 void	quit_program(t_cub3d *uwu)
 {
 	delete_textures(uwu->t);
+	rick_delete(uwu);
 	if (uwu->t->t_ea)
 		free(uwu->t->t_ea);
 	if (uwu->t->t_no)
@@ -27,8 +28,8 @@ void	quit_program(t_cub3d *uwu)
 	free(uwu->ray);
 	if (uwu->map)
 		free_s(uwu->map);
-	free(uwu);
 	if (uwu->mlx)
 		mlx_terminate(uwu->mlx);
+	free(uwu);
 	exit(0);
 }
