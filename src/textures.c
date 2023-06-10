@@ -73,7 +73,7 @@ int	pixel_to_color(t_cub3d *uwu, uint32_t x, uint32_t y)
 
 	if (!uwu->ray->t)
 		return (0x000000FF);
-	if (x > uwu->ray->t->width || y > uwu->ray->t->height)
+	if (x >= uwu->ray->t->width || y >= uwu->ray->t->height)
 		return (0x000000FF);
 	pixel = &uwu->ray->t->pixels[(y * uwu->ray->t->width + x)
 		* uwu->ray->t->bytes_per_pixel];
